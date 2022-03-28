@@ -14,8 +14,9 @@ const height = 650 - margin.top - margin.bottom;
 Line chart (chart 1) set up and initialization
 */ 
 // Append svg object to the body of the page to house linechart1
-const svg1 = d3.select("#vis-holder")
+const svg1 = d3.select("body")
                 .append("svg")
+                .attr("class", "vis-holder")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
                 .attr("viewBox", [0, 0, width, height]); 
