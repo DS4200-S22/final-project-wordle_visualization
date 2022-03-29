@@ -253,9 +253,21 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                             .attr("id", (d) => d.wordle_id)
                             .attr("x", (d,i) => x1(parseTime(d[xKey1])))
                             .attr("y", (d) => yScale2(d[yKey2]))
-                            .attr("width", 20)
+                            .attr("width", 15)
                             .attr("height", (d) => (height - margin.bottom) - yScale2(d[yKey2]))
                             .style("opacity", 1)
+                            .style("fill", function(d){ 
+                              if (d[yKey2] <= 4.413630118) {
+                                return 'red' 
+                              } else if (d[yKey2] >= 4.432132964 && d[yKey2] < 5.510370517) {
+                                return 'yellow'
+                              } else if (d[yKey2] >= 5.53633218 && d[yKey2] < 6.218866798) {
+                                return 'orange'
+                              } else {
+                                return 'green'
+                              }
+
+                            })
                             .on("mouseover", mouseover) 
                             .on("mousemove", mousemove)
                             .on("mouseleave", mouseleave);
