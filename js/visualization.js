@@ -239,34 +239,26 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
   tooltip.style("opacity", 0);
   };
 
+// Create x scale
+ let barWidth = d3.scaleBand()
+            .domain(d3.range(data.length))
+            .range([margin.left, width - margin.right])
+            .padding(0.1); 
   // Add points
-  myLine2 = svg2.selectAll(".bar")
+  let myLine2 = svg2.selectAll(".bar")
                           .data(data)
                           .enter()
                             .append("rect")
                             .attr("class", "bar")
                             .attr("id", (d) => d.wordle_id)
-                            .attr("x", (d,i) => xScale2(i))
+                            .attr("x", (d,i) => x1(parseTime(d[xKey1])))
                             .attr("y", (d) => yScale2(d[yKey2]))
-                            .attr("width", (d) => 0.01)
+                            .attr("width", 20)
                             .attr("height", (d) => (height - margin.bottom) - yScale2(d[yKey2]))
                             .style("opacity", 1)
                             .on("mouseover", mouseover) 
                             .on("mousemove", mousemove)
                             .on("mouseleave", mouseleave);
-
-  var line = d3.line()
-  .x((d) => x1(parseTime(d[xKey2]))) 
-  .y((d) => y1(d[yKey2])) 
-  .curve(d3.curveMonotoneX)
-  
-  svg2.append("path")
-  .datum(data) 
-  .attr("class", "line") 
-  .attr("d", line)
-  .style("fill", "none")
-  .style("stroke", "#0000FF")
-  .style("stroke-width", "2");
 
 }
 
