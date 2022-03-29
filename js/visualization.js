@@ -258,16 +258,14 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                             .style("opacity", 1)
                             .style("fill", function(d){ 
                               if (d[yKey2] <= 4.413630118) {
-                                return 'red' 
+                                return 'black' 
                               } else if (d[yKey2] >= 4.432132964 && d[yKey2] < 5.510370517) {
-                                return 'yellow'
+                                return '#787c7e'
                               } else if (d[yKey2] >= 5.53633218 && d[yKey2] < 6.218866798) {
-                                return 'orange'
+                                return '#cab558'
                               } else {
-                                return 'green'
-                              }
-
-                            })
+                                return '#6aaa64'
+                              }})
                             .on("mouseover", mouseover) 
                             .on("mousemove", mousemove)
                             .on("mouseleave", mouseleave);
