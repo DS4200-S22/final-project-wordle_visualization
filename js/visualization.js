@@ -7,16 +7,16 @@
 
 // Set margins and dimensions 
 const margin = { top: 50, right: 50, bottom: 50, left: 200 };
-const width = 900 - margin.left - margin.right;
+const width = 1250 - margin.left - margin.right;
 const height = 650 - margin.top - margin.bottom;
 
 /*
 Line chart (chart 1) set up and initialization
 */ 
 // Append svg object to the body of the page to house linechart1
-const svg1 = d3.select("body")
+const svg1 = d3.select("#vis-container")
                 .append("svg")
-                .attr("class", "vis-holder")
+                .attr("class", "charts")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
                 .attr("viewBox", [0, 0, width, height]); 
@@ -47,17 +47,20 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     yKey1 = "number_of_players";
 
     // Find max x
-    let maxX1 = d3.max(data, (d) => { return d[xKey1]; });
+    var parseTime = d3.timeParse("%m/%d/%Y");
+    let maxX1 = d3.max(data, (d) => { return parseTime(d[xKey1]); });
+    let minX1 = d3.min(data, (d) => { return parseTime(d[xKey1]); });
 
     // Create X scale
     x1 = d3.scaleLinear()
-                .domain([0,maxX1])
-                .range([margin.left, width-margin.right]); 
-    
+            .domain([minX1,maxX1])
+            .range([margin.left, width-margin.right]);
+        
     // Add x axis 
     svg1.append("g")
         .attr("transform", `translate(0,${height - margin.bottom})`) 
-        .call(d3.axisBottom(x1))   
+        .call(d3.axisBottom(x1)   
+          .tickFormat(d3.timeFormat("%m/%d")))
         .attr("font-size", '20px')
         .call((g) => g.append("text")
                       .attr("x", width - margin.right)
@@ -68,12 +71,19 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
       );
 
     // Finx max y 
-    maxY1 = d3.max(data, (d) => { return d[yKey1]; });
+    // var maxY1 = d3.max(data, (d) => { return d.number_of_players; });
+    // var minY1 = d3.min(data, function(d){ return d.number_of_players; });
+    // ext = d3.extent(data, (d) => {return d[yKey1]});
+    // console.log("key1:" + ext);
+    // console.log(maxY1);
+    // console.log(minY1);
+    maxY1 = 18000;
+    minY1 = 0;
 
     // Create Y scale
     y1 = d3.scaleLinear()
-                .domain([0, maxY1])
-                .range([height - margin.bottom, margin.top]); 
+                .domain([minY1, maxY1])
+                .range([height - margin.bottom, margin.top]);
 
     // Add y axis 
     svg1.append("g")
@@ -82,23 +92,63 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         .attr("font-size", '20px') 
         .call((g) => g.append("text")
                       .attr("x", 0)
-                      .attr("y", margin.top)
+                      .attr("y", margin.top - 20)
                       .attr("fill", "black")
                       .attr("text-anchor", "end")
                       .text(yKey1)
       );
+
+    const yTooltipOffset = 15; 
+
+    // Adds a tooltip with the information
+    let tooltip = d3.select("#vis-container") 
+                    .append("div3") 
+                    .attr('id', "tooltip3") 
+                    .style("opacity", 0) 
+                    .attr("class", "tooltip");
+
+    // Mouseover event handler
+    let mouseover = function(event, d) {
+    tooltip.html("Date: " + d[xKey1] + "<br> Number of Players: " + d[yKey1] + "<br>")
+            .style("opacity", 1);
+    };
+
+    // Mouse moving event handler
+    let mousemove = function(event) {
+    tooltip.style("left", (event.pageX)+"px") 
+            .style("top", (event.pageY + yTooltipOffset) +"px");
+    };
+
+    // Mouseout event handler
+    let mouseleave = function() { 
+    tooltip.style("opacity", 0);
+    };
 
     // Add points
     myLine1 = svg1.selectAll("circle")
                             .data(data)
                             .enter()
                               .append("circle")
-                              .attr("id", (d) => d.id)
-                              .attr("cx", (d) => x1(d[xKey1]))
+                              .attr("id", (d) => d.wordle_id)
+                              .attr("cx", (d) => x1(parseTime(d[xKey1])))
                               .attr("cy", (d) => y1(d[yKey1]))
                               .attr("r", 8)
-                              .style("fill", (d) => color(d.Species))
-                              .style("opacity", 0.5);
-}
-}
-)
+                              .style("opacity", 1)
+                              .on("mouseover", mouseover) 
+                              .on("mousemove", mousemove)
+                              .on("mouseleave", mouseleave);
+
+    var line = d3.line()
+    .x((d) => x1(parseTime(d[xKey1]))) 
+    .y((d) => y1(d[yKey1])) 
+    .curve(d3.curveMonotoneX)
+    
+    svg1.append("path")
+    .datum(data) 
+    .attr("class", "line") 
+    .attr("d", line)
+    .style("fill", "none")
+    .style("stroke", "#0000FF")
+    .style("stroke-width", "2");
+
+}})
