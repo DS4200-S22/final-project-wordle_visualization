@@ -210,7 +210,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                     .attr("y", margin.top - 20)
                     .attr("fill", "black")
                     .attr("text-anchor", "end")
-                    .text(yKey2)
+                    .text("Performance")
     );
 
   const yTooltipOffset = 15; 
@@ -224,7 +224,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
   // Mouseover event handler
   let mouseover = function(event, d) {
-  tooltip.html("Date: " + d[xKey2] + "<br> Number of Players: " + d[yKey2] + "<br>")
+  tooltip.html("Date: " + d[xKey2] + "<br> Performance: " + d[yKey2] + "<br>")
           .style("opacity", 1);
   };
 
