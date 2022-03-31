@@ -48,11 +48,14 @@
  
 <!-- Visualization -->   
 <h1>Visualization</h1>
-  
-<div class='vis-holder' id="vis-container">
-<div class='vis-holder' id="vis2-container"></div>
 
-</div>
+  <div class='vis-holder' id="vis-container">
+    <p>Current scatter plot that user will be able to selectively highlight a range of dates from to model on the other views. This scatter plot shows number of players every day.</p>
+  </div>
+  
+  <div class='vis-holder' id="vis2-container">
+    <p>Current bar chart that user will be able to choose to model word rarity or user performance every day. This current view shows the bars by performance, measured by (1/# of tries)^2 * 100. </p>
+  </div>
   
   
 <!-- More writeup -->
@@ -64,17 +67,20 @@
     Embed an MP4 demo video using the HTML5 &lt;video&gt; tag. For example, below is a screen recording Prof. Cody Dunne made of Mike Bostock's flexible transitions in D3. <strong>Be sure to delete this filler text before your final submission!</strong> 
   </p>
   
-  <video controls width='100%'>
+  <!-- <video controls width='100%'>
     <source src='http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4' type='video/mp4'>
     <p>Your browser doesn't support HTML5 video. Here is
      a <a href='http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4'>link to the video</a> instead.</p>
-  </video>
+  </video> -->
 
   <h1>Visualization Explanation</h1>
   
   <p>
-    Replace with an explanation of your visualization and linked presentation slides. <strong>Be sure to delete this filler text before your final submission!</strong>
+    TODO: link presentation slides.
   </p>
+  <p>Our final visualization tool contains a word cloud, a temporal bar graph including daily breakdowns of what proportion of people won in each level, and the ability to specify a range of dates to model. A user can choose what the word cloud and bar graph will each model, between word rarity and performance. The word cloud would model the words by size based on the specified metric, such as by rarity, but doubly model the other metric by the secondary channel, the color scale. Likewise for the bar graph, the height of the bar being the most prominent part of a bar graph would model the specified metric, such as performance, but doubly model the other metric by its secondary channel, the color scale. The bar graph shows information about the word there, such as part of speech, average number of tries, etc. Each bar is also broken down into the distribution for the number of tries. The number of bars and words shown depends on the date range. The user can choose the range of time to display for the visualization. There is also the ability to hover, which highlights the word in the word map, and also highlights the word on the graph. If the mouse were to hover over the graph, they would also both highlight. 
+  </p>
+  
   
   <h1>Acknowledgments</h1>
 

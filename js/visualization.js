@@ -159,7 +159,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
  {
   // initializing the x and y axes keys
   xKey2 = "date";
-  yKey2 = "performance";
+  yKey2 = "(1/#tries)^2 *100";
 
   // Find max x
   var parseTime = d3.timeParse("%m/%d/%Y");
