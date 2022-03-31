@@ -210,7 +210,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                     .attr("y", margin.top - 20)
                     .attr("fill", "black")
                     .attr("text-anchor", "end")
-                    .text("Performance")
+                    .text("Performance (1/avr # tries)^2 * 100")
     );
 
   const yTooltipOffset = 15; 
