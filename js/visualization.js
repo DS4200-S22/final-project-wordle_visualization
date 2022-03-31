@@ -24,6 +24,10 @@ const svg2 = d3.select("#vis2-container")
                 .attr("height", height - margin.top - margin.bottom)
                 .attr("viewBox", [0, 0, width, height]); 
 
+// Define color scale
+// const color = d3.scaleOrdinal()
+//                 .domain(["setosa", "versicolor", "virginica"])
+//                 .range(["#FF7F50", "#21908dff", "#fde725ff"]);
 
 // Plotting 
 d3.csv("data/composite_wordle_data.csv").then((data) => {
@@ -66,7 +70,14 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                       .text(xKey1)
       );
 
-    maxY1 = 18000; // TODO: get rid of hard coding
+    // Finx max y 
+    // var maxY1 = d3.max(data, (d) => { return d.number_of_players; });
+    // var minY1 = d3.min(data, function(d){ return d.number_of_players; });
+    // ext = d3.extent(data, (d) => {return d[yKey1]});
+    // console.log("key1:" + ext);
+    // console.log(maxY1);
+    // console.log(minY1);
+    maxY1 = 18000;
     minY1 = 0;
 
     // Create Y scale
@@ -99,9 +110,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     // Mouseover event handler
     let mouseover = function(event, d) {
     tooltip.html("Date: " + d[xKey1] + "<br> Number of Players: " + d[yKey1] + "<br>")
-            .style("opacity", 1);
-
-    tooltip.html("test")
             .style("opacity", 1);
     };
 
@@ -177,11 +185,13 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                     .text(xKey2)
     );
 
-  // Find max y
+  // Finx max y 
   // var maxY1 = d3.max(data, (d) => { return d.number_of_players; });
   // var minY1 = d3.min(data, function(d){ return d.number_of_players; });
   // ext = d3.extent(data, (d) => {return d[yKey1]});
-
+  // console.log("key1:" + ext);
+  // console.log(maxY1);
+  // console.log(minY1);
   maxY2 = 8.5;
   minY2 = 4.0;
 
@@ -212,21 +222,9 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                   .style("opacity", 0) 
                   .attr("class", "tooltip");
 
-
-  let rarity = "word_rarity"
-  let word = "word"
-  let numPlayers = "number_of_players"
-  let partOfSpeech = "part_of_speech"
-  let averageNumTries = "avg_num_of_tries"
   // Mouseover event handler
   let mouseover = function(event, d) {
-  tooltip.html("Date: " + d[xKey2] 
-  + "<br> Average # of Tries: " + d[averageNumTries] 
-  + "<br> Word: " + d[wordr]
-  + "<br> Word Rarity: " + d[rarity]
-  + "<br> Part of Speech: " + d[partOfSpeech]
-  + "<br> Total Number of Players " + d[numPlayers]
-  + "<br>")
+  tooltip.html("Date: " + d[xKey2] + "<br> Performance: " + d[yKey2] + "<br>")
           .style("opacity", 1);
   };
 
@@ -258,9 +256,9 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                             .attr("width", 15)
                             .attr("height", (d) => (height - margin.bottom) - yScale2(d[yKey2]))
                             .style("opacity", 1)
-                            .style("fill", function(d){ // TODO: make gradient in each bar
+                            .style("fill", function(d){ 
                               if (d[yKey2] <= 4.413630118) {
-                                return 'black' // TODO: change to Wordle blue
+                                return 'black' 
                               } else if (d[yKey2] >= 4.432132964 && d[yKey2] < 5.510370517) {
                                 return '#787c7e'
                               } else if (d[yKey2] >= 5.53633218 && d[yKey2] < 6.218866798) {
