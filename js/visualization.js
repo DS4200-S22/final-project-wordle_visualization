@@ -32,6 +32,8 @@ let myLine1;
 // Plotting 
 d3.csv("data/composite_wordle_data.csv").then((data) => {
   
+  console.table(data);
+  
   // So that the scales for all of the following charts are global
   let x1, y1, x2, y2, x3, y3;  
 
