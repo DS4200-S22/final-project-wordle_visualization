@@ -32,9 +32,9 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         size: data[i].rarity * 10});
   }
 
-  /*
-  Line chart plotting
-  */
+///////////////////////////////////////////////////////////////////////////
+//////////////////////////* LINE CHART *///////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
   {
     // Append svg object to the body of the page to house linechart1
     const svg = d3.select("#vis1-container")
@@ -151,9 +151,9 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
   }
 
 
-  /*
-  BarChart
-  */
+///////////////////////////////////////////////////////////////////////////
+//////////////////////////* BAR CHART *////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
   {
     // attach a new svg canvas to the respective div
     const svg = d3.select("#vis4-container")
@@ -190,13 +190,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                       .attr("text-anchor", "end")
                       .text(xKey2));
 
-    // Finx max y 
-    // var maxY1 = d3.max(data, (d) => { return d.number_of_players; });
-    // var minY1 = d3.min(data, function(d){ return d.number_of_players; });
-    // ext = d3.extent(data, (d) => {return d[yKey1]});
-    // console.log("key1:" + ext);
-    // console.log(maxY1);
-    // console.log(minY1);
     maxY2 = 8.5;
     minY2 = 4.0;
 
@@ -243,40 +236,37 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     tooltip.style("opacity", 0);
     };
 
-    // Create x scale
-    let barWidth = d3.scaleBand()
-              .domain(d3.range(data.length))
-              .range([margin.left, width - margin.right])
-              .padding(0.1); 
-
     // Add points
     let myLine2 = svg.selectAll(".bar")
-                            .data(data)
-                            .enter()
-                              .append("rect")
-                              .attr("class", "bar")
-                              .attr("id", (d) => d.wordle_id)
-                              .attr("x", (d,i) => x1(parseTime(d[xKey1])))
-                              .attr("y", (d) => yScale2(d[yKey2]))
-                              .attr("width", 15)
-                              .attr("height", (d) => (height - margin.bottom) - yScale2(d[yKey2]))
-                              .style("opacity", 1)
-                              .style("fill", function(d){ 
-                                if (d[yKey2] <= 4.413630118) {
-                                  return 'black' 
-                                } else if (d[yKey2] >= 4.432132964 && d[yKey2] < 5.510370517) {
-                                  return '#787c7e'
-                                } else if (d[yKey2] >= 5.53633218 && d[yKey2] < 6.218866798) {
-                                  return '#cab558'
-                                } else {
-                                  return '#6aaa64'
-                                }})
-                              .on("mouseover", mouseover) 
-                              .on("mousemove", mousemove)
-                              .on("mouseleave", mouseleave);
+                      .data(data)
+                      .enter()
+                      .append("rect")
+                      .attr("class", "bar")
+                      .attr("id", (d) => d.wordle_id)
+                      .attr("x", (d,i) => x1(parseTime(d[xKey1])))
+                      .attr("y", (d) => yScale2(d[yKey2]))
+                      .attr("width", 15)
+                      .attr("height", (d) => (height - margin.bottom) - yScale2(d[yKey2]))
+                      .style("opacity", 1)
+                      .style("fill", function(d){ 
+                        if (d[yKey2] <= 4.413630118) {
+                          return 'black'; 
+                        } else if (d[yKey2] >= 4.432132964 && d[yKey2] < 5.510370517) {
+                          return '#787c7e';
+                        } else if (d[yKey2] >= 5.53633218 && d[yKey2] < 6.218866798) {
+                          return '#cab558';
+                        } else {
+                          return '#6aaa64';
+                        }})
+                      .on("mouseover", mouseover) 
+                      .on("mousemove", mousemove)
+                      .on("mouseleave", mouseleave);
   }
 
-  /* WORD CLOUD */
+///////////////////////////////////////////////////////////////////////////
+//////////////////////////* WORD CLOUD *///////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
   {
 
     let words = []
@@ -318,7 +308,16 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         .data(words)
         .enter().append("text")
         .style("font-size", function(d) {return d.size;})
-        .style("fill", "#69b3a2")
+        .style("fill", function(d,i){ 
+          console.log(data[i].rarity);
+          if (data[i].rarity == 1) {
+            return '#000000'; 
+          } else if (data[i].rarity == 2) {
+            return '#cab558';
+          } else {
+            return '#6aaa64';
+          }
+        })
         .attr("text-anchor", "middle")
         .style("font-family", "Open Sans")
         .attr("transform", function(d) {
@@ -328,7 +327,10 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     }
   }
 
-  /* STACKED BAR CHART */
+///////////////////////////////////////////////////////////////////////////
+///////////////////////* STACKED BAR CHART *///////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
   {
     // Dimensions and Margins of the graph
     let margin = {top: 10, right: 10, bottom: 10, left: 10};
@@ -338,12 +340,90 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     // append the svg canvas to the page
     let svg = d3.select("#vis5-container")
         .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-              `translate(${margin.left},${margin.top})`);
-    
-    
+        .attr("class", "charts")
+        .attr("width", width - margin.left - margin.right)
+        .attr("height", height - margin.top - margin.bottom)
+        .attr("viewBox", [0, 0, width, height]);
+
+              
+
+    // Parse the Data
+    d3.csv("data/bar_gradient_data.csv").then( function(data) {
+
+      // List of subgroups = header of the csv files = soil condition here
+      const subgroups = data.columns.slice(1)
+      subgroups.slice(7);
+
+      // List of groups = species here = value of the first column called group -> I show them on the X axis
+      const groups = data.map(d => (d.date))
+
+      // Add X axis
+      const x = d3.scaleBand()
+        .domain(groups)
+        .range([0, width])
+        .padding([0.2])
+      svg.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x).tickSizeOuter(0));
+
+      // Add Y axis
+      const y = d3.scaleLinear()
+      .domain([0, 10])
+      .range([ height, 0 ]);
+      svg.append("g")
+      .call(d3.axisLeft(y));
+
+
+      let counter = 0
+      function colorBar(d,i) {
+        counter++;
+        console.log("counter is", counter);
+        let averageScore = (1*d[34].proportion_for_1) + (2*d[34].proportion_for_2) + (3*d[34].proportion_for_3) + (4*d[34].proportion_for_4) + (5*d[34].proportion_for_5) + (6*d[34].proportion_for_6)
+        console.log("average score is", averageScore);
+        console.log("d is", d[i].data.proportion_for_3);
+        if (averageScore <= 23.5) {
+          return blackColor(d.key);
+        } else if (performance > 23.5 && performance <= 25) {
+          return yellowColor(d.key);
+        } else {
+          return greenColor(d.key);
+        }
+        // return greenColor(d.key);
+      }
+
+      // color palettes = one color per subgroup
+      const greenColor = d3.scaleOrdinal()
+      .domain(subgroups)
+      .range(['#6aaa64','#88bb82','#a6cca0', '#c4ddbf', '#e1eedf', '#ffffff'])
+
+      const yellowColor = d3.scaleOrdinal()
+      .domain(subgroups)
+      .range(['#cab558','#d7c379','#e2d29a', '#ede1bb', '#f7f0dd', '#ffffff'])
+
+      const blackColor = d3.scaleOrdinal()
+      .domain(subgroups)
+      .range(['#000000','#303030','#5e5e5e', '#919191', '#c6c6c6', '#ffffff'])
+
+      //stack the data? --> stack per subgroup
+      const stackedData = d3.stack()
+      .keys(subgroups)
+      (data)
+
+      // Show the bars
+      svg.append("g")
+      .selectAll("g")
+      // Enter in the stack data = loop key per key = group per group
+      .data(stackedData)
+      .join("g")
+      .attr("fill", (d,i) => colorBar(d,i))
+      .selectAll("rect")
+      // enter a second time = loop subgroup per subgroup to add all rectangles
+      .data(d => d)
+      .join("rect")
+      .attr("x", d => x(d.data.date))
+      .attr("y", d => y(d[1]))
+      .attr("height", d => y(d[0]) - y(d[1]))
+      .attr("width",x.bandwidth())
+    })  
   }
 });
