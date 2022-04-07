@@ -10,7 +10,17 @@
   
   <!-- CSS Styling -->
   <link rel='stylesheet' href='style.css'>
+
+  <!--  -->
   <script src='lib/d3.v6.1.1/d3.min.js'></script>
+
+  <!-- Load d3-cloud -->
+  <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&display=swap" rel="stylesheet">
 
 </head>
 
@@ -55,6 +65,10 @@
   
   <div class='vis-holder' id="vis2-container">
     <p>Current bar chart that user will be able to choose to model word rarity or user performance every day. This current view shows the bars by performance, measured by (1/# of tries)^2 * 100. </p>
+  </div>
+
+  <div class='vis-holder' id="vis3-container">
+    <p>Current word cloud that the user can choose to model word rarity or user performance for all the selected worlde days.</p>
   </div>
   
   

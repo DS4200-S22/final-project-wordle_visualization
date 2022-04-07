@@ -33,6 +33,9 @@ const svg2 = d3.select("#vis2-container")
 d3.csv("data/composite_wordle_data.csv").then((data) => {
   
   console.table(data);
+
+  // console.log("hi");
+  console.log(data[0].date);
   
   // So that the scales for all of the following charts are global
   let x1, y1, x2, y2, x3, y3;  
@@ -69,8 +72,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                       .attr("y", margin.bottom - 4)
                       .attr("fill", "black")
                       .attr("text-anchor", "end")
-                      .text(xKey1)
-      );
+                      .text(xKey1));
 
     // Finx max y 
     // var maxY1 = d3.max(data, (d) => { return d.number_of_players; });
@@ -97,8 +99,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                       .attr("y", margin.top - 20)
                       .attr("fill", "black")
                       .attr("text-anchor", "end")
-                      .text(yKey1)
-      );
+                      .text(yKey1));
 
     const yTooltipOffset = 15; 
 
@@ -152,13 +153,12 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     .style("fill", "none")
     .style("stroke", "#0000FF")
     .style("stroke-width", "2");
-
-}
+  }
 
   /*
   BarChart
   */
- {
+  {
   // initializing the x and y axes keys
   xKey2 = "date";
   yKey2 = "(1/#tries)^2 *100";
@@ -184,8 +184,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                     .attr("y", margin.bottom - 4)
                     .attr("fill", "black")
                     .attr("text-anchor", "end")
-                    .text(xKey2)
-    );
+                    .text(xKey2));
 
   // Finx max y 
   // var maxY1 = d3.max(data, (d) => { return d.number_of_players; });
@@ -212,8 +211,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                     .attr("y", margin.top - 20)
                     .attr("fill", "black")
                     .attr("text-anchor", "end")
-                    .text("Performance")
-    );
+                    .text("Performance"));
 
   const yTooltipOffset = 15; 
 
@@ -241,11 +239,12 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
   tooltip.style("opacity", 0);
   };
 
-// Create x scale
- let barWidth = d3.scaleBand()
+  // Create x scale
+  let barWidth = d3.scaleBand()
             .domain(d3.range(data.length))
             .range([margin.left, width - margin.right])
             .padding(0.1); 
+
   // Add points
   let myLine2 = svg2.selectAll(".bar")
                           .data(data)
@@ -271,9 +270,51 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                             .on("mouseover", mouseover) 
                             .on("mousemove", mousemove)
                             .on("mouseleave", mouseleave);
+  }
 
-}
+  /* Word Cloud */
+  {
+    // List of words
+    let myWords = [{word: "Running", size: "10"}, {word: "Surfing", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"} ]
+    
+    // Dimensions and Margins of the graph
+    let margin = {top: 10, right: 10, bottom: 10, left: 10};
+    let width = 450 - margin.left - margin.right;
+    let height = 450 - margin.top - margin.bottom;
+    
+    // append the svg object to the page
+    let svg = d3.select("#vis3-container")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+              `translate(${margin.left},${margin.top})`);
 
+    let layout = d3.layout.cloud()
+        .size([width,height])
+        .words(myWords.map(function(d) { return {text: d.word, size:d.size}; }))
+        .padding(5)
+        .rotate(function() { return 0;})
+        .fontSize(function(d) { return d.size; })
+        .on("end", draw);
 
+    layout.start();
 
-})
+    function draw(words) {
+      svg.append("g")
+        .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+        .selectAll("text")
+        .data(words)
+        .enter().append("text")
+        .style("font-size", function(d) {return d.size;})
+        .style("fill", "#69b3a2")
+        .attr("text-anchor", "middle")
+        .style("font-family", "Open Sans")
+        .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+        })
+        .text(function(d) {return d.text});
+    }
+  }
+});
