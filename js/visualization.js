@@ -1,12 +1,19 @@
+/*
+Margin set up with width and height
+*/
 // Set margins and dimensions 
 const margin = { top: 50, right: 50, bottom: 50, left: 200 };
 const width = 1250 - margin.left - margin.right;
 const height = 650 - margin.top - margin.bottom;
 
+/* 
+Set up and initialization
+*/
+
 /*
 Line chart (chart 1) set up and initialization
-*/ 
-// Append svg object to the body of the page to house linechart1
+Append svg object to the body of the page to house linechart
+*/
 const svg1 = d3.select("#vis1-container")
                 .append("svg")
                 .attr("class", "charts")
@@ -14,22 +21,34 @@ const svg1 = d3.select("#vis1-container")
                 .attr("height", height - margin.top - margin.bottom)
                 .attr("viewBox", [0, 0, width, height]); 
 
-// Initialize brush for linechart1 and points. So that they are global. 
-let myLine1; 
+/*
+Word cloud (chart 2) set up and initialization
+Append the svg object to the page
+*/
+let svg3 = d3.select("#vis3-container")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                  `translate(${margin.left},${margin.top})`);
 
-const svg2 = d3.select("#vis5-container")
+/*
+Bar chart (chart 3) set up and initalization
+Append svg object to the body of the page to house barchart
+*/ 
+const svg5 = d3.select("#vis5-container")
                 .append("svg")
                 .attr("class", "charts")
                 .attr("width", width - margin.left - margin.right)
                 .attr("height", height - margin.top - margin.bottom)
-                .attr("viewBox", [0, 0, width, height]); 
+                .attr("viewBox", [0, 0, width, height]);
 
-// Define color scale
-// const color = d3.scaleOrdinal()
-//                 .domain(["setosa", "versicolor", "virginica"])
-//                 .range(["#FF7F50", "#21908dff", "#fde725ff"]);
+            
+/*
+Gaining and plotting the data
+*/
 
-// Plotting 
 d3.csv("data/composite_wordle_data.csv").then((data) => {
   
   console.table(data);
@@ -174,7 +193,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
           .range([margin.left, width-margin.right]);
       
   // Add x axis 
-  svg2.append("g")
+  svg5.append("g")
       .attr("transform", `translate(0,${height - margin.bottom})`) 
       .call(d3.axisBottom(xScale2)   
         .tickFormat(d3.timeFormat("%m/%d")))
@@ -202,7 +221,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
               .range([height - margin.bottom, margin.top]);
 
   // Add y axis 
-  svg2.append("g")
+  svg5.append("g")
       .attr("transform", `translate(${margin.left}, 0)`) 
       .call(d3.axisLeft(yScale2)) 
       .attr("font-size", '20px') 
@@ -246,7 +265,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
             .padding(0.1); 
 
   // Add points
-  let myLine2 = svg2.selectAll(".bar")
+  let myLine2 = svg5.selectAll(".bar")
                           .data(data)
                           .enter()
                             .append("rect")
@@ -283,20 +302,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
           size: data[i].rarity * 10});
     }
 
-    // Dimensions and Margins of the graph
-    let margin = {top: 10, right: 10, bottom: 10, left: 10};
-    let width = 450 - margin.left - margin.right;
-    let height = 450 - margin.top - margin.bottom;
-    
-    // append the svg object to the page
-    let svg = d3.select("#vis3-container")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-              `translate(${margin.left},${margin.top})`);
-
     let layout = d3.layout.cloud()
         .size([width,height])
         .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
@@ -308,7 +313,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     layout.start();
 
     function draw(words) {
-      svg.append("g")
+      svg3.append("g")
         .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
         .selectAll("text")
         .data(words)
