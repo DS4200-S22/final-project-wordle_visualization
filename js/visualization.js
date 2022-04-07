@@ -241,10 +241,8 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                       .attr("height", (d) => (height - margin.bottom) - yScale2(d[yKey2]))
                       .style("opacity", 1)
                       .style("fill", function(d){ 
-                        if (d[yKey2] <= 4.413630118) {
+                        if (d[yKey2] <= 5.510370517) {
                           return 'black'; 
-                        } else if (d[yKey2] >= 4.432132964 && d[yKey2] < 5.510370517) {
-                          return '#787c7e';
                         } else if (d[yKey2] >= 5.53633218 && d[yKey2] < 6.218866798) {
                           return '#cab558';
                         } else {
@@ -268,7 +266,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
           word: data[i].word,
           size: data[i].rarity * 10});
     }
-    
+
     // append the svg object to the page
     let svg = d3.select("#vis3-container")
         .append("svg")
