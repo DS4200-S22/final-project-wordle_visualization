@@ -274,9 +274,15 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
   /* Word Cloud */
   {
-    // List of words
-    let myWords = [{word: "Running", size: "10"}, {word: "Surfing", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"} ]
-    
+
+    let words = []
+
+    for(let i = 0; i < data.length; i++) {
+        words.push({
+          word: data[i].word,
+          size: data[i].rarity * 10});
+    }
+
     // Dimensions and Margins of the graph
     let margin = {top: 10, right: 10, bottom: 10, left: 10};
     let width = 450 - margin.left - margin.right;
@@ -293,7 +299,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
     let layout = d3.layout.cloud()
         .size([width,height])
-        .words(myWords.map(function(d) { return {text: d.word, size:d.size}; }))
+        .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
         .padding(5)
         .rotate(function() { return 0;})
         .fontSize(function(d) { return d.size; })
