@@ -99,7 +99,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
     // Adds a tooltip with the information
     let tooltip1 = d3.select("#vis1-container") 
-                    .append("div3") 
+                    .append("div") 
                     .attr('id', "tooltip") 
                     .style("opacity", 0) 
                     .attr("class", "tooltip");
