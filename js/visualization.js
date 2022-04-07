@@ -2,21 +2,14 @@
 Margin set up with width and height
 */
 // Set margins and dimensions 
-const margin = { top: 50, right: 50, bottom: 50, left: 200 };
-const width = 1250 - margin.left - margin.right;
-const height = 650 - margin.top - margin.bottom;
+const margin = { top: 50, right: 50, bottom: 50, left: 50 };
+const width = 1650 - margin.left - margin.right;
+const height = 500 - margin.top - margin.bottom;
 
 // Initialize brush for linechart1 and points. So that they are global. 
 let myLine1; 
 
-// Define color scale
-// const color = d3.scaleOrdinal()
-//                 .domain(["setosa", "versicolor", "virginica"])
-//                 .range(["#FF7F50", "#21908dff", "#fde725ff"]);
-
 d3.csv("data/composite_wordle_data.csv").then((data) => {
-  
-  console.table(data);
   
   // So that the scales for all of the following charts are global
   let x1, y1;  
@@ -26,15 +19,16 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
   
   let words = []
 
+  // stores words with their font size based on rarity
   for(let i = 0; i < data.length; i++) {
       words.push({
         word: data[i].word,
         size: data[i].rarity * 10});
   }
 
-///////////////////////////////////////////////////////////////////////////
-//////////////////////////* LINE CHART *///////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////
+ /////////////////////////* LINE CHART *///////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////
   {
     // Append svg object to the body of the page to house linechart1
     const svg = d3.select("#vis1-container")
@@ -49,7 +43,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     yKey1 = "number_of_players";
 
     // Find max and min x
-    var parseTime = d3.timeParse("%m/%d/%Y");
+    let parseTime = d3.timeParse("%m/%d/%Y");
     let maxX1 = d3.max(data, (d) => { return parseTime(d[xKey1]); });
     let minX1 = d3.min(data, (d) => { return parseTime(d[xKey1]); });
 
@@ -70,10 +64,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                       .attr("fill", "black")
                       .attr("text-anchor", "end")
                       .text(xKey1));
-
-    // Finx max y (hardcoded for now but tried to work on the function)
-    // var maxY1 = d3.max(data, (d) => { return d.number_of_players; });
-    // var minY1 = d3.min(data, function(d){ return d.number_of_players; });
+    // TODO: get rid of hard coding                  
     maxY1 = 18000;
     minY1 = 0;
 
@@ -129,14 +120,14 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                               .attr("id", (d) => d.wordle_id)
                               .attr("cx", (d) => x1(parseTime(d[xKey1])))
                               .attr("cy", (d) => y1(d[yKey1]))
-                              .attr("r", 4)
+                              .attr("r", 1)
                               .style("opacity", 1)
                               .on("mouseover", mouseover) 
                               .on("mousemove", mousemove)
                               .on("mouseleave", mouseleave);
 
     // adding a line's curve to the line chart
-    var line = d3.line()
+    let line = d3.line()
                   .x((d) => x1(parseTime(d[xKey1]))) 
                   .y((d) => y1(d[yKey1])) 
                   .curve(d3.curveMonotoneX)
@@ -151,9 +142,9 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
   }
 
 
-///////////////////////////////////////////////////////////////////////////
-//////////////////////////* BAR CHART *////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////
+ /////////////////////////* BAR CHART *////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////
   {
     // attach a new svg canvas to the respective div
     const svg = d3.select("#vis4-container")
@@ -168,7 +159,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     yKey2 = "performance";
 
     // Find max x
-    var parseTime = d3.timeParse("%m/%d/%Y");
+    let parseTime = d3.timeParse("%m/%d/%Y");
     let maxX2 = d3.max(data, (d) => { return parseTime(d[xKey2]); });
     let minX2 = d3.min(data, (d) => { return parseTime(d[xKey2]); });
 
@@ -190,6 +181,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                       .attr("text-anchor", "end")
                       .text(xKey2));
 
+    // TODO: get rid of hard coding
     maxY2 = 8.5;
     minY2 = 4.0;
 
@@ -245,7 +237,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                       .attr("id", (d) => d.wordle_id)
                       .attr("x", (d,i) => x1(parseTime(d[xKey1])))
                       .attr("y", (d) => yScale2(d[yKey2]))
-                      .attr("width", 15)
+                      .attr("width", 30)
                       .attr("height", (d) => (height - margin.bottom) - yScale2(d[yKey2]))
                       .style("opacity", 1)
                       .style("fill", function(d){ 
@@ -263,9 +255,9 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                       .on("mouseleave", mouseleave);
   }
 
-///////////////////////////////////////////////////////////////////////////
-//////////////////////////* WORD CLOUD *///////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////
+ /////////////////////////* WORD CLOUD *///////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////
 
   {
 
@@ -276,17 +268,14 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
           word: data[i].word,
           size: data[i].rarity * 10});
     }
-
-    // Dimensions and Margins of the graph
-    let margin = {top: 10, right: 10, bottom: 10, left: 10};
-    let width = 600 - margin.left - margin.right;
-    let height = 600 - margin.top - margin.bottom;
     
     // append the svg object to the page
     let svg = d3.select("#vis3-container")
         .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        
+        .attr("width", width - margin.left - margin.right)
+        .attr("height", height - margin.top - margin.bottom)
+        .attr("viewBox", [0, 0, width, height])
         .append("g")
         .attr("transform",
               `translate(${margin.left},${margin.top})`);
@@ -309,7 +298,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         .enter().append("text")
         .style("font-size", function(d) {return d.size;})
         .style("fill", function(d,i){ 
-          console.log(data[i].rarity);
           if (data[i].rarity == 1) {
             return '#000000'; 
           } else if (data[i].rarity == 2) {
@@ -327,25 +315,18 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     }
   }
 
-///////////////////////////////////////////////////////////////////////////
-///////////////////////* STACKED BAR CHART *///////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////
+ //////////////////////* STACKED BAR CHART *///////////////////////////////
+ //////////////////////////////////////////////////////////////////////////
 
   {
-    // Dimensions and Margins of the graph
-    let margin = {top: 10, right: 10, bottom: 10, left: 10};
-    let width = 600 - margin.left - margin.right;
-    let height = 600 - margin.top - margin.bottom;
-    
     // append the svg canvas to the page
     let svg = d3.select("#vis5-container")
         .append("svg")
         .attr("class", "charts")
         .attr("width", width - margin.left - margin.right)
         .attr("height", height - margin.top - margin.bottom)
-        .attr("viewBox", [0, 0, width, height]);
-
-              
+        .attr("viewBox", [0, 0, width, height]); 
 
     // Parse the Data
     d3.csv("data/bar_gradient_data.csv").then( function(data) {
@@ -364,25 +345,21 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         .padding([0.2])
       svg.append("g")
       .attr("transform", `translate(0, ${height})`)
-      .call(d3.axisBottom(x).tickSizeOuter(0));
+      .call(d3.axisBottom(x).tickSizeOuter(0))
+      .text("Date");
 
       // Add Y axis
       const y = d3.scaleLinear()
       .domain([0, 10])
       .range([ height, 0 ]);
       svg.append("g")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(y))
+      .text("Performance");
 
 
-      let counter = 0
+      // TODO: properly map each indivivdual rect to its proper color
       function colorBar(d,i) {
-        console.log("d is", d);
-        console.log("i is", i);
-        console.log("counter is", counter);
-        counter++;
         let averageScore = (1*d[i].proportion_for_1) + (2*d[i].proportion_for_2) + (3*d[i].proportion_for_3) + (4*d[i].proportion_for_4) + (5*d[i].proportion_for_5) + (6*d[i].proportion_for_6)
-        console.log("average score is", averageScore);
-        // console.log("d is", d[i].data.proportion_for_3);
         if (averageScore <= 23.5) {
           return blackColor(d.key);
         } else if (performance > 23.5 && performance <= 25) {
@@ -405,7 +382,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
       .domain(subgroups)
       .range(['#000000','#303030','#5e5e5e', '#919191', '#c6c6c6', '#ffffff'])
 
-      //stack the data? --> stack per subgroup
+      // stack the data per subgroup
       const stackedData = d3.stack()
       .keys(subgroups)
       (data)
@@ -424,7 +401,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
       .attr("x", d => x(d.data.date))
       .attr("y", d => y(d[1]))
       .attr("height", d => y(d[0]) - y(d[1]))
-      .attr("width",x.bandwidth())
+      .attr("width", x.bandwidth())
     })  
   }
 });
