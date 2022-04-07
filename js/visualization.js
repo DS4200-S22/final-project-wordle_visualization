@@ -17,7 +17,7 @@ const svg1 = d3.select("#vis1-container")
 // Initialize brush for linechart1 and points. So that they are global. 
 let myLine1; 
 
-const svg2 = d3.select("#vis4-container")
+const svg2 = d3.select("#vis5-container")
                 .append("svg")
                 .attr("class", "charts")
                 .attr("width", width - margin.left - margin.right)
@@ -216,7 +216,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
   const yTooltipOffset = 15; 
 
   // Adds a tooltip with the information
-  let tooltip = d3.select("#vis4-container") 
+  let tooltip = d3.select("#vis5-container") 
                   .append("div3") 
                   .attr('id', "tooltip3") 
                   .style("opacity", 0) 
