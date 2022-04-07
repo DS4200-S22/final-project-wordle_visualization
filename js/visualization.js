@@ -311,7 +311,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                             .attr("height", (d) => (height - margin.bottom) - yScale5(d[yKey5]))
                             .style("opacity", 1)
                             .style("fill", function(d){ 
-                              if (d[yKey2] <= 4.413630118) {
+                              if (d[yKey5] <= 4.413630118) {
                                 return 'black' 
                               } else if (d[yKey5] >= 4.432132964 && d[yKey5] < 5.510370517) {
                                 return '#787c7e'
