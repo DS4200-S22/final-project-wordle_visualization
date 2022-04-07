@@ -129,7 +129,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                               .attr("id", (d) => d.wordle_id)
                               .attr("cx", (d) => x1(parseTime(d[xKey1])))
                               .attr("cy", (d) => y1(d[yKey1]))
-                              .attr("r", 8)
+                              .attr("r", 4)
                               .style("opacity", 1)
                               .on("mouseover", mouseover) 
                               .on("mousemove", mousemove)
@@ -146,7 +146,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     .attr("class", "line") 
     .attr("d", line)
     .style("fill", "none")
-    .style("stroke", "#0000FF")
+    .style("stroke", "#000000")
     .style("stroke-width", "2");
   }
 
@@ -376,11 +376,13 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
       let counter = 0
       function colorBar(d,i) {
-        counter++;
+        console.log("d is", d);
+        console.log("i is", i);
         console.log("counter is", counter);
-        let averageScore = (1*d[34].proportion_for_1) + (2*d[34].proportion_for_2) + (3*d[34].proportion_for_3) + (4*d[34].proportion_for_4) + (5*d[34].proportion_for_5) + (6*d[34].proportion_for_6)
+        counter++;
+        let averageScore = (1*d[i].proportion_for_1) + (2*d[i].proportion_for_2) + (3*d[i].proportion_for_3) + (4*d[i].proportion_for_4) + (5*d[i].proportion_for_5) + (6*d[i].proportion_for_6)
         console.log("average score is", averageScore);
-        console.log("d is", d[i].data.proportion_for_3);
+        // console.log("d is", d[i].data.proportion_for_3);
         if (averageScore <= 23.5) {
           return blackColor(d.key);
         } else if (performance > 23.5 && performance <= 25) {
@@ -388,7 +390,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         } else {
           return greenColor(d.key);
         }
-        // return greenColor(d.key);
       }
 
       // color palettes = one color per subgroup
