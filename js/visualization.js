@@ -130,7 +130,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
     // Adds a tooltip with the information
     let tooltip1 = d3.select("#vis1-container") 
-                    .append("div3") 
+                    .append("div") 
                     .attr('id', "tooltip") 
                     .style("opacity", 0) 
                     .attr("class", "tooltip");
@@ -153,7 +153,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     };
 
     // Add points to the line chart
-    myLine1 = svg1.selectAll("circle")
+    myLine1 = svg1.selectAll(".circle")
                             .data(data)
                             .enter()
                               .append("circle")
@@ -270,7 +270,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
   // Adds a tooltip with the information
   let tooltip5 = d3.select("#vis5-container") 
-                  .append("div3") 
+                  .append("div") 
                   .attr('id', "tooltip") 
                   .style("opacity", 0) 
                   .attr("class", "tooltip");
