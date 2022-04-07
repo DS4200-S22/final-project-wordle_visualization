@@ -1,3 +1,6 @@
+/*
+Margin set up with width and height
+*/
 // Set margins and dimensions 
 const margin = { top: 50, right: 50, bottom: 50, left: 200 };
 const width = 1250 - margin.left - margin.right;
@@ -11,19 +14,26 @@ let myLine1;
 //                 .domain(["setosa", "versicolor", "virginica"])
 //                 .range(["#FF7F50", "#21908dff", "#fde725ff"]);
 
-// Plotting 
 d3.csv("data/composite_wordle_data.csv").then((data) => {
   
   console.table(data);
   
   // So that the scales for all of the following charts are global
-  let x1, y1, x2, y2, x3, y3;  
+  let x1, y1;  
 
   // So that the keys are global
-  let xKey1, yKey1, xKey2, yKey2, xKey3, yKey3;
+  let xKey1, yKey1, xKey5, yKey5;
+  
+  let words = []
+
+  for(let i = 0; i < data.length; i++) {
+      words.push({
+        word: data[i].word,
+        size: data[i].rarity * 10});
+  }
 
   /*
-  Scatterplot1
+  Line chart plotting
   */
   {
     // Append svg object to the body of the page to house linechart1
@@ -38,7 +48,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     xKey1 = "date";
     yKey1 = "number_of_players";
 
-    // Find max x
+    // Find max and min x
     var parseTime = d3.timeParse("%m/%d/%Y");
     let maxX1 = d3.max(data, (d) => { return parseTime(d[xKey1]); });
     let minX1 = d3.min(data, (d) => { return parseTime(d[xKey1]); });
@@ -61,20 +71,16 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                       .attr("text-anchor", "end")
                       .text(xKey1));
 
-    // Finx max y 
+    // Finx max y (hardcoded for now but tried to work on the function)
     // var maxY1 = d3.max(data, (d) => { return d.number_of_players; });
     // var minY1 = d3.min(data, function(d){ return d.number_of_players; });
-    // ext = d3.extent(data, (d) => {return d[yKey1]});
-    // console.log("key1:" + ext);
-    // console.log(maxY1);
-    // console.log(minY1);
     maxY1 = 18000;
     minY1 = 0;
 
     // Create Y scale
     y1 = d3.scaleLinear()
-                .domain([minY1, maxY1])
-                .range([height - margin.bottom, margin.top]);
+            .domain([minY1, maxY1])
+            .range([height - margin.bottom, margin.top]);
 
     // Add y axis 
     svg.append("g")
@@ -88,30 +94,31 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                       .attr("text-anchor", "end")
                       .text(yKey1));
 
-    const yTooltipOffset = 15; 
+    // to make sure there is an offset with the tooltip
+    const yTooltipOffset1 = 15; 
 
     // Adds a tooltip with the information
-    let tooltip = d3.select("#vis1-container") 
+    let tooltip1 = d3.select("#vis1-container") 
                     .append("div3") 
-                    .attr('id', "tooltip3") 
+                    .attr('id', "tooltip") 
                     .style("opacity", 0) 
                     .attr("class", "tooltip");
 
     // Mouseover event handler
     let mouseover = function(event, d) {
-    tooltip.html("Date: " + d[xKey1] + "<br> Number of Players: " + d[yKey1] + "<br>")
+    tooltip1.html("Date: " + d[xKey1] + "<br> Number of Players: " + d[yKey1] + "<br>")
             .style("opacity", 1);
     };
 
     // Mouse moving event handler
     let mousemove = function(event) {
-    tooltip.style("left", (event.pageX)+"px") 
-            .style("top", (event.pageY + yTooltipOffset) +"px");
+    tooltip1.style("left", (event.pageX)+"px") 
+            .style("top", (event.pageY + yTooltipOffset1) +"px");
     };
 
     // Mouseout event handler
     let mouseleave = function() { 
-    tooltip.style("opacity", 0);
+    tooltip1.style("opacity", 0);
     };
 
     // Add points
@@ -128,10 +135,11 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                               .on("mousemove", mousemove)
                               .on("mouseleave", mouseleave);
 
+    // adding a line's curve to the line chart
     var line = d3.line()
-    .x((d) => x1(parseTime(d[xKey1]))) 
-    .y((d) => y1(d[yKey1])) 
-    .curve(d3.curveMonotoneX)
+                  .x((d) => x1(parseTime(d[xKey1]))) 
+                  .y((d) => y1(d[yKey1])) 
+                  .curve(d3.curveMonotoneX)
     
     svg.append("path")
     .datum(data) 
