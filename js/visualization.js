@@ -330,20 +330,111 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
   /* STACKED BAR CHART */
   {
-    // Dimensions and Margins of the graph
-    let margin = {top: 10, right: 10, bottom: 10, left: 10};
-    let width = 600 - margin.left - margin.right;
-    let height = 600 - margin.top - margin.bottom;
-    
-    // append the svg canvas to the page
-    let svg = d3.select("#vis5-container")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-              `translate(${margin.left},${margin.top})`);
-    
-    
+  // initializing the x and y axes keys
+  xKey5 = "date";
+  yKey5 = "performance";
+
+  // Find max x
+  var parseTime = d3.timeParse("%m/%d/%Y");
+  let maxX5 = d3.max(data, (d) => { return parseTime(d[xKey5]); });
+  let minX5 = d3.min(data, (d) => { return parseTime(d[xKey5]); });
+
+  // Create X scale
+  let xScale5 = d3.scaleLinear()
+          .domain([minX5,maxX5])
+          .range([margin.left, width-margin.right]);
+      
+  // Add x axis 
+  svg5.append("g")
+      .attr("transform", `translate(0,${height - margin.bottom})`) 
+      .call(d3.axisBottom(xScale5)   
+        .tickFormat(d3.timeFormat("%m/%d")))
+      .attr("font-size", '20px')
+      .call((g) => g.append("text")
+                    .attr("x", width - margin.right)
+                    .attr("y", margin.bottom - 4)
+                    .attr("fill", "black")
+                    .attr("text-anchor", "end")
+                    .text(xKey5));
+
+  // Finx max y 
+  maxY5 = 8.5;
+  minY5 = 4.0;
+
+  // Create Y scale
+  let yScale5 = d3.scaleLinear()
+              .domain([minY5, maxY5])
+              .range([height - margin.bottom, margin.top]);
+
+  // Add y axis 
+  svg5.append("g")
+      .attr("transform", `translate(${margin.left}, 0)`) 
+      .call(d3.axisLeft(yScale5)) 
+      .attr("font-size", '20px') 
+      .call((g) => g.append("text")
+                    .attr("x", 0)
+                    .attr("y", margin.top - 20)
+                    .attr("fill", "black")
+                    .attr("text-anchor", "end")
+                    .text("Performance"));
+  
+  // to make sure there is an offset with the tooltip
+  const yTooltipOffset5 = 15; 
+
+  // Adds a tooltip with the information
+  let tooltip5 = d3.select("#vis5-container") 
+                  .append("div") 
+                  .attr('id', "tooltip") 
+                  .style("opacity", 0) 
+                  .attr("class", "tooltip");
+
+  // Mouseover event handler
+  let mouseover = function(event, d) {
+  tooltip5.html("Date: " + d[xKey5] + "<br> Performance: " + d[yKey5] + "<br>")
+          .style("opacity", 1);
+  };
+
+  // Mouse moving event handler
+  let mousemove = function(event) {
+  tooltip5.style("left", (event.pageX)+"px") 
+          .style("top", (event.pageY + yTooltipOffset5) +"px");
+  };
+
+  // Mouseout event handler
+  let mouseleave = function() { 
+  tooltip5.style("opacity", 0);
+  };
+
+  // Create x scale
+  let barWidth = d3.scaleBand()
+            .domain(d3.range(data.length))
+            .range([margin.left, width - margin.right])
+            .padding(0.1); 
+
+  // Add points
+  let myLine2 = svg5.selectAll(".bar")
+                          .data(data)
+                          .enter()
+                            .append("rect")
+                            .attr("class", "bar")
+                            .attr("id", (d) => d.wordle_id)
+                            .attr("x", (d,i) => x1(parseTime(d[xKey1])))
+                            .attr("y", (d) => yScale5(d[yKey5]))
+                            .attr("width", 15)
+                            .attr("height", (d) => (height - margin.bottom) - yScale5(d[yKey5]))
+                            .style("opacity", 1)
+                            .style("fill", function(d){ 
+                              if (d[yKey5] <= 4.413630118) {
+                                return 'black' 
+                              } else if (d[yKey5] >= 4.432132964 && d[yKey5] < 5.510370517) {
+                                return '#787c7e'
+                              } else if (d[yKey5] >= 5.53633218 && d[yKey5] < 6.218866798) {
+                                return '#cab558'
+                              } else {
+                                return '#6aaa64'
+                              }})
+                            .on("mouseover", mouseover) 
+                            .on("mousemove", mousemove)
+                            .on("mouseleave", mouseleave);
   }
 });
