@@ -327,9 +327,24 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         .text(function(d) {return d.text});
     }
   }
-
+ 
   /* STACKED BAR CHART */
   {
+
+    // Dimensions and Margins of the graph
+    let margin = {top: 10, right: 10, bottom: 10, left: 10};
+    let width = 600 - margin.left - margin.right;
+    let height = 600 - margin.top - margin.bottom;
+    
+    // append the svg object to the page
+    let svg5 = d3.select("#vis5-container")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+              `translate(${margin.left},${margin.top})`);
+
   // initializing the x and y axes keys
   xKey5 = "date";
   yKey5 = "performance";
