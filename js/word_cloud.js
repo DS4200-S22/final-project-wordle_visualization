@@ -1,7 +1,7 @@
 var activeWord;
 d3.csv("data/composite_wordle_data.csv").then((data) => {
     {
-        const height = 1000 - margin.top - margin.bottom;
+        const height = 800 - margin.top - margin.bottom;
         let words = []
     
         for(let i = 0; i < data.length; i++) {
@@ -25,10 +25,8 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
           activeWord = d.text
           tooltip.html("Word: " + activeWord)
                   .style("opacity", 1);
-          d3.selectAll("."+activeWord)
-          .transition().style('opacity',function () {
-            return (this === activeWord) ? 1.0 : 0.0;
-        });
+          d3.selectAll(".bar_"+activeWord)
+          .transition().style('outline','solid')
         };
 
         // Mouse moving event handler
@@ -41,7 +39,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         let mouseleave = function() { 
         tooltip.style("opacity", 0);
         d3.selectAll(".bar_"+activeWord)
-          .style('opacity', 1)
+        .transition().style('outline','none')
         };
 
     
@@ -71,7 +69,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
             .selectAll("text")
             .data(words)
             .enter().append("text")
-            .attr("class", (d) =>  d.word)
+            .attr("class", (d) => "word_" + d.text)
             .style("font-size", (d) => d.size)
             .style("fill", function(d,i){ 
               if (data[i].rarity == 1) {

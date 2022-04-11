@@ -1,7 +1,6 @@
 d3.csv("data/composite_wordle_data.csv").then((data) => {
     {
-    
-        const height = 800 - margin.top - margin.bottom;
+        const height = 500 - margin.top - margin.bottom;
         
         // attach a new svg canvas to the respective div
         const svg = d3.select("#bar-chart")
@@ -78,8 +77,8 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         + "<br> Part of Speech: " + d["part_of_speech"])
                 .style("opacity", 1);
 
-                d3.selectAll("."+activeWord)
-          .transition().style('opacity', 1.0);
+                d3.selectAll(".word_"+activeWord)
+                .transition().style('outline','solid');
                 
         }
 
@@ -92,6 +91,8 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         // Mouseout event handler
         let mouseleave = function() { 
         tooltip.style("opacity", 0);
+        d3.selectAll(".word_"+activeWord)
+        .transition().style('outline','none');
         };
 
         // Add points
@@ -99,8 +100,8 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         .data(data)
                         .enter()
                         .append("rect")
-                        .attr("class", (d) => d["word"])
-                        .attr("id", (d) => d.wordle_id)
+                        .attr("class", (d) => "bar_" + d["word"])
+                        // .attr("id", (d) => d.wordle_id)
                         .attr("x", (d,i) => x1(parseTime(d[xKey1])))
                         .attr("y", (d) => yScale2(d[yKey2]))
                         .attr("width", 28)

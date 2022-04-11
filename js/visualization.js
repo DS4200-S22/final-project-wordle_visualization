@@ -13,66 +13,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
   
 
  //////////////////////////////////////////////////////////////////////////
- /////////////////////////* WORD CLOUD *///////////////////////////////////
- //////////////////////////////////////////////////////////////////////////
-
-  // {
-  //   const height = 1000 - margin.top - margin.bottom;
-  //   let words = []
-
-  //   for(let i = 0; i < data.length; i++) {
-  //       words.push({
-  //         word: data[i].word,
-  //         size: data[i].rarity * 20});
-  //   }
-
-  //   // append the svg object to the page
-  //   let svg = d3.select("#vis3-container")
-  //       .append("svg")
-        
-  //       .attr("width", width - margin.left - margin.right)
-  //       .attr("height", height - margin.top - margin.bottom)
-  //       .attr("viewBox", [0, 0, width, height])
-  //       .append("g")
-  //       .attr("transform",
-  //             `translate(${margin.left},${margin.top})`);
-
-  //   let layout = d3.layout.cloud()
-  //       .size([width,height])
-  //       .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
-  //       .padding(5)
-  //       .rotate(function() { return 0;})
-  //       .fontSize(function(d) { return d.size; })
-  //       .on("end", draw);
-
-  //   layout.start();
-
-  //   function draw(words) {
-  //     svg.append("g")
-  //       .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
-  //       .selectAll("text")
-  //       .data(words)
-  //       .enter().append("text")
-  //       .style("font-size", function(d) {return d.size;})
-  //       .style("fill", function(d,i){ 
-  //         if (data[i].rarity == 1) {
-  //           return '#000000'; 
-  //         } else if (data[i].rarity == 2) {
-  //           return '#cab558';
-  //         } else {
-  //           return '#6aaa64';
-  //         }
-  //       })
-  //       .attr("text-anchor", "middle")
-  //       .style("font-family", "Open Sans")
-  //       .attr("transform", function(d) {
-  //         return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-  //       })
-  //       .text(function(d) {return d.text});
-  //   }
-  // }
-
- //////////////////////////////////////////////////////////////////////////
  //////////////////////* STACKED BAR CHART *///////////////////////////////
  //////////////////////////////////////////////////////////////////////////
 

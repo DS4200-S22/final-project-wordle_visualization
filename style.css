@@ -13,6 +13,10 @@ h3 {
   line-height: 1.2;
 }
 
+p {
+  align-content: center;
+}
+
 /* Narrow Column */
 .content-column {
   max-width: 65%;
