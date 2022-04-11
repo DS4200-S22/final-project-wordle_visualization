@@ -97,6 +97,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
     // Mouseover event handler
     let mouseover = function(event, d) {
+    let rarity = "word_rarity"
     tooltip1.html("Date: " + d[xKey1] + "<br> Number of Players: " + d[yKey1] + "<br>")
             .style("opacity", 1);
     };
@@ -213,8 +214,12 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
     // Mouseover event handler
     let mouseover = function(event, d) {
-    tooltip.html("Date: " + d[xKey2] + "<br> Performance: " + d[yKey2] + "<br>")
-            .style("opacity", 1);
+      tooltip.html("Word: " + d["word"]
+      + "<br> Date: " + d[xKey2] 
+      + "<br> Average Number of Tries: " + d["avg_num_of_tries"] 
+      + "<br> Rarity: " + d["word_rarity"] 
+      + "<br> Part of Speech: " + d["part_of_speech"])
+              .style("opacity", 1);
     };
 
     // Mouse moving event handler
