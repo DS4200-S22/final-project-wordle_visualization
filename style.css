@@ -25,6 +25,11 @@ h3 {
   height: 100%;
 }
 
+.word-highlighted {
+  outline: 2px;
+  outline-color: aqua;
+}
+
 #charts {
   width: 100%;
 }
