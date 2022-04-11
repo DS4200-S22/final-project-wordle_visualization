@@ -2,7 +2,7 @@
 Margin set up with width and height
 */
 // Set margins and dimensions 
-const margin = { top: 50, right: 50, bottom: 50, left: 50 };
+const margin = { top: 50, right: 50, bottom: 50, left: 120 };
 const width = 1650 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
 
@@ -11,312 +11,66 @@ let myLine1;
 
 d3.csv("data/composite_wordle_data.csv").then((data) => {
   
-  // So that the scales for all of the following charts are global
-  let x1, y1;  
-
-  // So that the keys are global
-  let xKey1, yKey1, xKey5, yKey5;
-  
-  let words = []
-
-  // stores words with their font size based on rarity
-  for(let i = 0; i < data.length; i++) {
-      words.push({
-        word: data[i].word,
-        size: data[i].rarity * 10});
-  }
-
- //////////////////////////////////////////////////////////////////////////
- /////////////////////////* LINE CHART *///////////////////////////////////
- //////////////////////////////////////////////////////////////////////////
-  {
-    // Append svg object to the body of the page to house linechart1
-    const svg = d3.select("#vis1-container")
-      .append("svg")
-      .attr("class", "charts")
-      .attr("width", width - margin.left - margin.right)
-      .attr("height", height - margin.top - margin.bottom)
-      .attr("viewBox", [0, 0, width, height]); 
-
-    // initializing the x and y axes keys
-    xKey1 = "date";
-    yKey1 = "number_of_players";
-
-    // Find max and min x
-    let parseTime = d3.timeParse("%m/%d/%Y");
-    let maxX1 = d3.max(data, (d) => { return parseTime(d[xKey1]); });
-    let minX1 = d3.min(data, (d) => { return parseTime(d[xKey1]); });
-
-    // Create X scale
-    x1 = d3.scaleLinear()
-            .domain([minX1,maxX1])
-            .range([margin.left, width-margin.right]);
-        
-    // Add x axis 
-    svg.append("g")
-        .attr("transform", `translate(0,${height - margin.bottom})`) 
-        .call(d3.axisBottom(x1)   
-          .tickFormat(d3.timeFormat("%m/%d")))
-        .attr("font-size", '20px')
-        .call((g) => g.append("text")
-                      .attr("x", width - margin.right)
-                      .attr("y", margin.bottom - 4)
-                      .attr("fill", "black")
-                      .attr("text-anchor", "end")
-                      .text(xKey1));
-    // TODO: get rid of hard coding                  
-    maxY1 = 18000;
-    minY1 = 0;
-
-    // Create Y scale
-    y1 = d3.scaleLinear()
-            .domain([minY1, maxY1])
-            .range([height - margin.bottom, margin.top]);
-
-    // Add y axis 
-    svg.append("g")
-        .attr("transform", `translate(${margin.left}, 0)`) 
-        .call(d3.axisLeft(y1)) 
-        .attr("font-size", '20px') 
-        .call((g) => g.append("text")
-                      .attr("x", 0)
-                      .attr("y", margin.top - 20)
-                      .attr("fill", "black")
-                      .attr("text-anchor", "end")
-                      .text(yKey1));
-
-    // to make sure there is an offset with the tooltip
-    const yTooltipOffset1 = 15; 
-
-    // Adds a tooltip with the information
-    let tooltip1 = d3.select("#vis1-container") 
-                    .append("div") 
-                    .attr('id', "tooltip") 
-                    .style("opacity", 0) 
-                    .attr("class", "tooltip");
-
-    // Mouseover event handler
-    let mouseover = function(event, d) {
-    let rarity = "word_rarity"
-    tooltip1.html("Date: " + d[xKey1] + "<br> Number of Players: " + d[yKey1] + "<br>")
-            .style("opacity", 1);
-    };
-
-    // Mouse moving event handler
-    let mousemove = function(event) {
-    tooltip1.style("left", (event.pageX)+"px") 
-            .style("top", (event.pageY + yTooltipOffset1) +"px");
-    };
-
-    // Mouseout event handler
-    let mouseleave = function() { 
-    tooltip1.style("opacity", 0);
-    };
-
-    // Add points
-    myLine1 = svg.selectAll("circle")
-                            .data(data)
-                            .enter()
-                              .append("circle")
-                              .attr("id", (d) => d.wordle_id)
-                              .attr("cx", (d) => x1(parseTime(d[xKey1])))
-                              .attr("cy", (d) => y1(d[yKey1]))
-                              .attr("r", 1)
-                              .style("opacity", 1)
-                              .on("mouseover", mouseover) 
-                              .on("mousemove", mousemove)
-                              .on("mouseleave", mouseleave);
-
-    // adding a line's curve to the line chart
-    let line = d3.line()
-                  .x((d) => x1(parseTime(d[xKey1]))) 
-                  .y((d) => y1(d[yKey1])) 
-                  .curve(d3.curveMonotoneX)
-    
-    svg.append("path")
-    .datum(data) 
-    .attr("class", "line") 
-    .attr("d", line)
-    .style("fill", "none")
-    .style("stroke", "#000000")
-    .style("stroke-width", "2");
-  }
-
-
- //////////////////////////////////////////////////////////////////////////
- /////////////////////////* BAR CHART *////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////
-  {
-    // attach a new svg canvas to the respective div
-    const svg = d3.select("#vis4-container")
-                .append("svg")
-                .attr("class", "charts")
-                .attr("width", width - margin.left - margin.right)
-                .attr("height", height - margin.top - margin.bottom)
-                .attr("viewBox", [0, 0, width, height]); 
-
-    // initializing the x and y axes keys
-    xKey2 = "date";
-    yKey2 = "performance";
-
-    // Find max x
-    let parseTime = d3.timeParse("%m/%d/%Y");
-    let maxX2 = d3.max(data, (d) => { return parseTime(d[xKey2]); });
-    let minX2 = d3.min(data, (d) => { return parseTime(d[xKey2]); });
-
-    // Create X scale
-    let xScale2 = d3.scaleLinear()
-            .domain([minX2,maxX2])
-            .range([margin.left, width-margin.right]);
-        
-    // Add x axis 
-    svg.append("g")
-        .attr("transform", `translate(0,${height - margin.bottom})`) 
-        .call(d3.axisBottom(xScale2)   
-          .tickFormat(d3.timeFormat("%m/%d")))
-        .attr("font-size", '20px')
-        .call((g) => g.append("text")
-                      .attr("x", width - margin.right)
-                      .attr("y", margin.bottom - 4)
-                      .attr("fill", "black")
-                      .attr("text-anchor", "end")
-                      .text(xKey2));
-
-    // TODO: get rid of hard coding
-    maxY2 = 8.5;
-    minY2 = 4.0;
-
-    // Create Y scale
-    let yScale2 = d3.scaleLinear()
-                .domain([minY2, maxY2])
-                .range([height - margin.bottom, margin.top]);
-
-    // Add y axis 
-    svg.append("g")
-        .attr("transform", `translate(${margin.left}, 0)`) 
-        .call(d3.axisLeft(yScale2)) 
-        .attr("font-size", '20px') 
-        .call((g) => g.append("text")
-                      .attr("x", 0)
-                      .attr("y", margin.top - 20)
-                      .attr("fill", "black")
-                      .attr("text-anchor", "end")
-                      .text("Performance"));
-
-    const yTooltipOffset = 15; 
-
-    // Adds a tooltip with the information
-    let tooltip = d3.select("#vis4-container") 
-                    .append("div3") 
-                    .attr('id', "tooltip3") 
-                    .style("opacity", 0) 
-                    .attr("class", "tooltip");
-
-    // Mouseover event handler
-    let mouseover = function(event, d) {
-      tooltip.html("Word: " + d["word"]
-      + "<br> Date: " + d[xKey2] 
-      + "<br> Average Number of Tries: " + d["avg_num_of_tries"] 
-      + "<br> Rarity: " + d["word_rarity"] 
-      + "<br> Part of Speech: " + d["part_of_speech"])
-              .style("opacity", 1);
-    };
-
-    // Mouse moving event handler
-    let mousemove = function(event) {
-    tooltip.style("left", (event.pageX)+"px") 
-            .style("top", (event.pageY + yTooltipOffset) +"px");
-    };
-
-    // Mouseout event handler
-    let mouseleave = function() { 
-    tooltip.style("opacity", 0);
-    };
-
-    // Add points
-    let myLine2 = svg.selectAll(".bar")
-                      .data(data)
-                      .enter()
-                      .append("rect")
-                      .attr("class", "bar")
-                      .attr("id", (d) => d.wordle_id)
-                      .attr("x", (d,i) => x1(parseTime(d[xKey1])))
-                      .attr("y", (d) => yScale2(d[yKey2]))
-                      .attr("width", 30)
-                      .attr("height", (d) => (height - margin.bottom) - yScale2(d[yKey2]))
-                      .style("opacity", 1)
-                      .style("fill", function(d){ 
-                        if (d[yKey2] <= 5.510370517) {
-                          return 'black'; 
-                        } else if (d[yKey2] >= 5.53633218 && d[yKey2] < 6.218866798) {
-                          return '#cab558';
-                        } else {
-                          return '#6aaa64';
-                        }})
-                      .on("mouseover", mouseover) 
-                      .on("mousemove", mousemove)
-                      .on("mouseleave", mouseleave);
-  }
 
  //////////////////////////////////////////////////////////////////////////
  /////////////////////////* WORD CLOUD *///////////////////////////////////
  //////////////////////////////////////////////////////////////////////////
 
-  {
+  // {
+  //   const height = 1000 - margin.top - margin.bottom;
+  //   let words = []
 
-    let words = []
+  //   for(let i = 0; i < data.length; i++) {
+  //       words.push({
+  //         word: data[i].word,
+  //         size: data[i].rarity * 20});
+  //   }
 
-    for(let i = 0; i < data.length; i++) {
-        words.push({
-          word: data[i].word,
-          size: data[i].rarity * 10});
-    }
-
-    // append the svg object to the page
-    let svg = d3.select("#vis3-container")
-        .append("svg")
+  //   // append the svg object to the page
+  //   let svg = d3.select("#vis3-container")
+  //       .append("svg")
         
-        .attr("width", width - margin.left - margin.right)
-        .attr("height", height - margin.top - margin.bottom)
-        .attr("viewBox", [0, 0, width, height])
-        .append("g")
-        .attr("transform",
-              `translate(${margin.left},${margin.top})`);
+  //       .attr("width", width - margin.left - margin.right)
+  //       .attr("height", height - margin.top - margin.bottom)
+  //       .attr("viewBox", [0, 0, width, height])
+  //       .append("g")
+  //       .attr("transform",
+  //             `translate(${margin.left},${margin.top})`);
 
-    let layout = d3.layout.cloud()
-        .size([width,height])
-        .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
-        .padding(5)
-        .rotate(function() { return 0;})
-        .fontSize(function(d) { return d.size; })
-        .on("end", draw);
+  //   let layout = d3.layout.cloud()
+  //       .size([width,height])
+  //       .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
+  //       .padding(5)
+  //       .rotate(function() { return 0;})
+  //       .fontSize(function(d) { return d.size; })
+  //       .on("end", draw);
 
-    layout.start();
+  //   layout.start();
 
-    function draw(words) {
-      svg.append("g")
-        .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
-        .selectAll("text")
-        .data(words)
-        .enter().append("text")
-        .style("font-size", function(d) {return d.size;})
-        .style("fill", function(d,i){ 
-          if (data[i].rarity == 1) {
-            return '#000000'; 
-          } else if (data[i].rarity == 2) {
-            return '#cab558';
-          } else {
-            return '#6aaa64';
-          }
-        })
-        .attr("text-anchor", "middle")
-        .style("font-family", "Open Sans")
-        .attr("transform", function(d) {
-          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-        })
-        .text(function(d) {return d.text});
-    }
-  }
+  //   function draw(words) {
+  //     svg.append("g")
+  //       .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+  //       .selectAll("text")
+  //       .data(words)
+  //       .enter().append("text")
+  //       .style("font-size", function(d) {return d.size;})
+  //       .style("fill", function(d,i){ 
+  //         if (data[i].rarity == 1) {
+  //           return '#000000'; 
+  //         } else if (data[i].rarity == 2) {
+  //           return '#cab558';
+  //         } else {
+  //           return '#6aaa64';
+  //         }
+  //       })
+  //       .attr("text-anchor", "middle")
+  //       .style("font-family", "Open Sans")
+  //       .attr("transform", function(d) {
+  //         return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+  //       })
+  //       .text(function(d) {return d.text});
+  //   }
+  // }
 
  //////////////////////////////////////////////////////////////////////////
  //////////////////////* STACKED BAR CHART *///////////////////////////////
