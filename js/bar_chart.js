@@ -1,6 +1,6 @@
 d3.csv("data/composite_wordle_data.csv").then((data) => {
     {
-        const height = 500 - margin.top - margin.bottom;
+        const height = 1000 - margin.top - margin.bottom;
         
         // attach a new svg canvas to the respective div
         const svg = d3.select("#bar-chart")
@@ -70,8 +70,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         // Mouseover event handler
         let mouseover = function(event, d) {
                 activeWord = d["word"]
-                tooltip.html("Word: " + activeWord
-                        + "<br> Date: " + d[xKey2] 
+                tooltip.html("Date: " + d[xKey2] 
                         + "<br> Average Number of Tries: " + d["avg_num_of_tries"] 
                         + "<br> Rarity: " + d["word_rarity"] 
                         + "<br> Part of Speech: " + d["part_of_speech"])
