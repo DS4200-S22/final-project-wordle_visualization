@@ -1,14 +1,28 @@
-var activeWord;
+let activeWord;
+let rarity = false;
 d3.csv("data/composite_wordle_data.csv").then((data) => {
     {
         const height = 800 - margin.top - margin.bottom;
-        let words = []
+
+        // Create an array of sizes based off number of tries
+        num_tries = data.map(function(d) {return d.avg_num_of_tries});
+        let min_tries = d3.min(num_tries);
+        let max_tries = d3.max(num_tries);
+        let tries_size_scale = d3.scaleSqrt()
+          .domain([min_tries, max_tries])
+          .range([15, 100]);
+        tries_sizes = num_tries.map(function(d) {
+          return Math.ceil(tries_size_scale(d) / 10) * 10;
+        });
     
+        // Create an array of JSON for the word and the size
+        // according to rarity or performance
+        let words = [];
         for(let i = 0; i < data.length; i++) {
+            let current_size = rarity ? data[i].rarity * 20 : tries_sizes[i];
             words.push({
-              // id: data[i].wordle_id,
               word: data[i].word,
-              size: data[i].rarity * 20});
+              size: current_size});
         }
 
         const yTooltipOffset = 15; 
