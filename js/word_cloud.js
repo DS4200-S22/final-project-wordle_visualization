@@ -1,5 +1,6 @@
+let drawWordCloud = function(rarity) {
+
 let activeWord;
-let rarity = false;
 d3.csv("data/composite_wordle_data.csv").then((data) => {
     {
         const height = 800 - margin.top - margin.bottom;
@@ -60,6 +61,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         // append the svg object to the page
         let svg = d3.select("#word-cloud")
             .append("svg")
+            .attr("id", "word-cloud-svg")
             .attr("width", width - margin.left - margin.right)
             .attr("height", height)
             .attr("viewBox", [0, 0, width, height])
@@ -106,3 +108,5 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         }
       }
 })
+
+}

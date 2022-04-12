@@ -9,6 +9,29 @@ const height = 500 - margin.top - margin.bottom;
 // Initialize brush for linechart1 and points. So that they are global. 
 let myLine1; 
 
+// Rarity and Attempts Button logic
+let rarity_toggle = function() {
+  console.log("rarity was chosen");
+}
+
+let attempts_toggle = function() {
+  console.log("attempts was chosen");
+}
+
+d3.selectAll("input").on("change", function(d) {
+  d3.select("#word-cloud-svg").remove();
+
+  let selection = this.value;
+  if(selection === "Rarity") {
+    drawWordCloud(true);
+  }
+  else {
+    drawWordCloud(false);
+  }
+  
+});
+
+
 d3.csv("data/composite_wordle_data.csv").then((data) => {
   
 
