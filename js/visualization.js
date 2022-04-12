@@ -9,6 +9,9 @@ const height = 500 - margin.top - margin.bottom;
 // Initialize brush for linechart1 and points. So that they are global. 
 let myLine1; 
 
+//draw the word cloud on page load
+drawWordCloud(true);
+
 // Rarity and Attempts Button logic
 let rarity_toggle = function() {
   console.log("rarity was chosen");
