@@ -130,10 +130,9 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         // Call when Scatterplot1 is brushed 
         function updateChart(brushEvent) {
 
-                // Finds coordinates of brushed region 
-
                 // let selection = d3.brushSelection(this);
                 let extent = brushEvent.selection;
+                console.log('the extent is:' +extent);
 
                 // Gives bold outline to all points within the brush region in Scatterplot1
                 myPoints.classed("selected", function(d) {
