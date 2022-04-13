@@ -79,12 +79,5 @@ label.radio input:checked + span {
 
 .selected{
   opacity: 1 !important;
-  stroke: blueviolet;
-  stroke-width: 5px;
-}
-
-.select{
-  opacity: 1 !important;
-  fill: black;
-  stroke-width: 5px;
+  fill: blueviolet;
 }

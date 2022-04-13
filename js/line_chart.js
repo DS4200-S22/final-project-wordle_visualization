@@ -1,4 +1,5 @@
 d3.csv("data/composite_wordle_data.csv").then((data) => {
+
         // Append svg object to the body of the page to house linechart1
         svg = d3.select("#line-chart")
           .append("svg")
@@ -55,19 +56,48 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                           .attr("text-anchor", "end")
                           .text(yKey1));
     
+        // to make sure there is an offset with the tooltip
+        const yTooltipOffset1 = 15; 
+    
+        // Adds a tooltip with the information
+        let tooltip1 = d3.select("#line-chart") 
+                        .append("div") 
+                        .attr('id', "tooltip") 
+                        .style("opacity", 0) 
+                        .attr("class", "tooltip");
+    
+        // Mouseover event handler
+        let mouseover = function(event, d) {
+                tooltip1.html("Date: " + d[xKey1] + "<br> Number of Players: " + d[yKey1] + "<br>")
+                        .style("opacity", 1);
+        };
+    
+        // Mouse moving event handler
+        let mousemove = function(event) {
+                tooltip1.style("left", (event.pageX)+"px") 
+                        .style("top", (event.pageY + yTooltipOffset1) +"px");
+        };
+    
+        // Mouseout event handler
+        let mouseleave = function() { 
+                tooltip1.style("opacity", 0);
+        };
+    
         // Add points
         myPoints = svg.selectAll("circle")
                         .data(data)
                         .enter()
                         .append("circle")
-                        .attr("class", "select")
                         .attr("id", (d) => d.wordle_id)
                         .attr("cx", (d) => x1(parseTime(d[xKey1])))
                         .attr("cy", (d) => y1(d[yKey1]))
                         .attr("r", 10)
-                        .attr("color", "black")
-                        .style("opacity", 1);
-
+                        .style("fill", "black")
+                        .style("opacity", 0.5)
+                        .on("mouseover", mouseover) 
+                        .on("mousemove", mousemove)
+                        .on("mouseleave", mouseleave);
+    
         // adding a line's curve to the line chart
         line = d3.line()
                 .x((d) => x1(parseTime(d[xKey1]))) 
@@ -82,8 +112,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                 .style("fill", "none")
                 .style("stroke", "#000000")
                 .style("stroke-width", "2");
-        
-        
+
         // Initialize brush for linechart.
         let brush; 
         brush = d3.brush().extent([[0, 0], [width, height]]);
@@ -102,11 +131,13 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         function updateChart(brushEvent) {
 
                 // Finds coordinates of brushed region 
-                let selection = d3.brushSelection(this);
-        
+
+                // let selection = d3.brushSelection(this);
+                let extent = brushEvent.selection;
+
                 // Gives bold outline to all points within the brush region in Scatterplot1
                 myPoints.classed("selected", function(d) {
-                        return isBrushed(selection, d[xKey1], d[yKey1])
+                        return isBrushed(extent, x1(parseTime(d[xKey1])), y1(d[yKey1]))
                 })
         }
 
