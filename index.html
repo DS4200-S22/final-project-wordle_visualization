@@ -32,63 +32,65 @@
 
 <!-- Writeup -->
 <div class='content-column'>
-    <h1>Wordle Visualization</h1>
-        
-    <p>
-      <strong>Haleluya Asfaw</strong>, <strong>Bayden Ibrahim</strong>, <strong>Vedanshi Shah</strong>, <strong>Isobelle Lim</strong>, <strong>Luca Sharbani</strong>
-    </p>
-        
-    <p>Course Project as part of
-    	<a href='https://northeastern.instructure.com/courses/18721'>DS4200 S22: Information Visualization</a>, taught by 
-      <a href='https://www.khoury.northeastern.edu/home/amosca/'>Prof. Ab Mosca</a>, 
-      <a href='https://visualization.khoury.northeastern.edu/'>Data Visualization @ Khoury</a>, 
-      <a href='https://www.khoury.northeastern.edu/'>Northeastern University</a>.
-    </p>
-        
-        
-    <h1>Abstract</h1>
-        
-    <p>
-      <i>Wordle</i> is a popular daily word-guessing game that has become a viral sensation for its simple premise of guessing a five letter word in six attempts. Despite its solo-style play, it has fostered a competitive community. The game provides individual scores but lacks overall game-wide statistics, so trends like overall performance and relative difficulty are not available. Our project aims to make these analyses possible in a visualization that not only captures data about the players, but also the game itself.<br>
-      <strong>Keywords:</strong> Linguistics, word puzzle, player performance.<br>
-      <a href='https://github.com/DS4200-S22/final-project-wordle_visualization'>https://github.com/DS4200-S22/final-project-wordle_visualization</a>
-    </p>
+  <h1>Wordle Visualization</h1>
+      
+  <p>
+    <strong>Haleluya Asfaw</strong>, <strong>Bayden Ibrahim</strong>, <strong>Vedanshi Shah</strong>, <strong>Isobelle Lim</strong>, <strong>Luca Sharbani</strong>
+  </p>
+      
+  <p>Course Project as part of
+    <a href='https://northeastern.instructure.com/courses/18721'>DS4200 S22: Information Visualization</a>, taught by 
+    <a href='https://www.khoury.northeastern.edu/home/amosca/'>Prof. Ab Mosca</a>, 
+    <a href='https://visualization.khoury.northeastern.edu/'>Data Visualization @ Khoury</a>, 
+    <a href='https://www.khoury.northeastern.edu/'>Northeastern University</a>.
+  </p>
+      
+      
+  <h1>Abstract</h1>
+      
+  <p>
+    <i>Wordle</i> is a popular daily word-guessing game that has become a viral sensation for its simple premise of guessing a five letter word in six attempts. Despite its solo-style play, it has fostered a competitive community. The game provides individual scores but lacks overall game-wide statistics, so trends like overall performance and relative difficulty are not available. Our project aims to make these analyses possible in a visualization that not only captures data about the players, but also the game itself.<br>
+    <strong>Keywords:</strong> Linguistics, word puzzle, player performance.<br>
+    <a href='https://github.com/DS4200-S22/final-project-wordle_visualization'>https://github.com/DS4200-S22/final-project-wordle_visualization</a>
+  </p>
+
+  <!-- Visualization -->   
+  <h1>Visualization</h1>
+  <p>Current line plot that user will be able to selectively highlight a range of dates from to model on the other views. This line plot shows number of players every day. 
+    <br> Current toggle to switch between word cloud by rarity and bar graph by performance or word cloud by performance and bar graph by rarity.
+    <br> Current word cloud that the user can choose to model word rarity or user performance for all the selected Wordle days. This currently maps by rarity, measured by log(10*frequency).
+    <br> Current bar chart that user will be able to choose to model word rarity or user performance every day. This currently maps the bars by performance, measured by (1/# of tries)^2 * 100.
+    <br> Below is the color scheme of the stacked bar chart that will be combined with the bar chart above, so the user will be able to see a breakdown of what proportion of players got it in
+    a certain number of tries. This currently maps the same metric as the bar graph above, performance.
+  </p>
 </div>
 
- 
-<!-- Visualization -->   
-<h1>Visualization</h1>
-<p>Current line plot that user will be able to selectively highlight a range of dates from to model on the other views. This line plot shows number of players every day. 
-  <br> Current toggle to switch between word cloud by rarity and bar graph by performance or word cloud by performance and bar graph by rarity.
-  <br> Current word cloud that the user can choose to model word rarity or user performance for all the selected Wordle days. This currently maps by rarity, measured by log(10*frequency).
-  <br> Current bar chart that user will be able to choose to model word rarity or user performance every day. This currently maps the bars by performance, measured by (1/# of tries)^2 * 100.
-  <br> Below is the color scheme of the stacked bar chart that will be combined with the bar chart above, so the user will be able to see a breakdown of what proportion of players got it in a certain number of tries. This currently maps the same metric as the bar graph above, performance.</p>
-   
-  <div class='vis-holder' id="line-chart"></div>
 
-  <div class='vis-holder' id="toggle">
-    <p>
-      <br>When Rarity is selected, the word cloud displays the size of the word proportionately
-      to the word's relative frequency, and the bar chart is sized by performance.
+<div class='vis-holder' id="line-chart"></div>
 
-      <br>When Performance is selected, the word cloud displays the size of the word proportionately
-      to the performance of twitter users solving that word, and the bar chart is sized by relative frequency.
-    </p>
-    <label class="radio">
-      <input type="radio" name="vis-type" value="Rarity">
-      <span>Rarity</span>
-    </label>
-    <label class="radio">
-      <input type="radio" name="vis-type" value="Attempts">
-      <span>Performance</span>
-    </label>
-  </div>
-  
-  <div class='vis-holder' id="word-cloud"></div>
+<div class='content-column' id="toggle">
+  <p>
+    <br>When Rarity is selected, the word cloud displays the size of the word proportionately
+    to the word's relative frequency, and the bar chart is sized by performance.
 
-  <div class='vis-holder' id="bar-chart"></div>
+    <br>When Performance is selected, the word cloud displays the size of the word proportionately
+    to the performance of twitter users solving that word, and the bar chart is sized by relative frequency.
+  </p>
+  <label class="radio">
+    <input type="radio" name="vis-type" value="Rarity">
+    <span>Rarity</span>
+  </label>
+  <label class="radio">
+    <input type="radio" name="vis-type" value="Attempts">
+    <span>Performance</span>
+  </label>
+</div>
 
-  <div class='vis-holder' id="vis5-container"></div>
+<div class='vis-holder' id="word-cloud"></div>
+
+<div class='vis-holder' id="bar-chart"></div>
+
+<div class='vis-holder' id="vis5-container"></div>
   
   
 <!-- More writeup -->

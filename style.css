@@ -27,6 +27,7 @@ p {
 .vis-holder {
   width: 100%;
   height: 100%;
+  text-align: center;
 }
 
 .word-highlighted {
@@ -51,7 +52,7 @@ p {
 
 /* TOGGLE STYLING */
 #toggle {
-  align-content: center;
+  text-align: center;
 }
 label.radio {
   cursor: pointer;
