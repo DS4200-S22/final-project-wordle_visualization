@@ -9,9 +9,29 @@ const height = 500 - margin.top - margin.bottom;
 // Initialize brush for linechart1 and points. So that they are global.
 let myLine1;
 
+// append the svg object to the page
+let word_cloud_svg = d3.select("#word-cloud")
+    .append("svg")
+    .attr("id", "word-cloud-svg")
+    .attr("width", width - margin.left - margin.right)
+    .attr("height", 700)
+    .attr("viewBox", [0, 0, width, 700])
+    .append("g")
+    .attr("transform",
+          `translate(${margin.left},${margin.top})`);
+
+// attach a new svg canvas to the respective div
+let bar_chart_svg = d3.select("#bar-chart")
+  .append("svg")
+  .attr("class", "charts")
+  .attr("id", "bar-chart-svg")
+  .attr("width", width - margin.left - margin.right)
+  .attr("height", 800 - margin.top - margin.bottom)
+  .attr("viewBox", [0, 0, width, 1000 - margin.top - margin.bottom]);
+
 //draw the word cloud on page load
-drawWordCloud(true);
-drawBarChart(false);
+drawWordCloud(true, word_cloud_svg);
+drawBarChart(false, bar_chart_svg);
 
 // Rarity and Attempts Button logic
 let rarity_toggle = function () {
@@ -23,18 +43,19 @@ let attempts_toggle = function () {
 };
 
 d3.selectAll("input").on("change", function (d) {
-  d3.select("#word-cloud-svg").remove();
-  d3.select("#bar-chart-svg").remove();
+  d3.select("#word-cloud-svg").selectAll("text").remove();
+  d3.select("#bar-chart-svg").selectAll("rect").remove();
+  d3.select("#bar-chart-svg").selectAll("g").remove();
 
   let selection = this.value;
   if (selection === "Rarity") {
     console.log("bar chart is false which is performance");
-    drawWordCloud(true);
-    drawBarChart(false); // false = performance
+    drawWordCloud(true, word_cloud_svg);
+    drawBarChart(false, bar_chart_svg); // false = performance
   } else {
     console.log("bar chart is true which is rarity");
-    drawWordCloud(false);
-    drawBarChart(true); // true = rarity
+    drawWordCloud(false, word_cloud_svg);
+    drawBarChart(true, bar_chart_svg); // true = rarity
   }
 });
 

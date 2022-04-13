@@ -1,4 +1,4 @@
-let drawWordCloud = function(rarity) {
+let drawWordCloud = function(rarity, word_cloud_svg) {
 
 let activeWord;
 d3.csv("data/composite_wordle_data.csv").then((data) => {
@@ -58,16 +58,9 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         };
 
     
-        // append the svg object to the page
-        let svg = d3.select("#word-cloud")
-            .append("svg")
-            .attr("id", "word-cloud-svg")
-            .attr("width", width - margin.left - margin.right)
-            .attr("height", height)
-            .attr("viewBox", [0, 0, width, height])
-            .append("g")
-            .attr("transform",
-                  `translate(${margin.left},${margin.top})`);
+        console.log(`Width: ${width - margin.left - margin.right}`);
+        console.log(`Height: ${height}`)
+
     
         let layout = d3.layout.cloud()
             .size([width,height])
@@ -80,7 +73,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         layout.start();
     
         function draw(words) {
-          svg.append("g")
+          word_cloud_svg.append("g")
             .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
             .selectAll("text")
             .data(words)
@@ -107,6 +100,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
             .on("mouseleave", mouseleave);
         }
       }
-})
+});
 
-}
+};
