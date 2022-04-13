@@ -12,7 +12,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
         // initializing the x and y axes keys
         xKey2 = "date";
-        yKey2 = "performance";
+        yKey2 = "avg_num_of_tries";
 
         // Find max x
         let parseTime = d3.timeParse("%m/%d/%Y");
@@ -38,8 +38,8 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         .text(xKey2));
 
         // TODO: get rid of hard coding
-        maxY2 = 8.5;
-        minY2 = 4.0;
+        maxY2 = 5.0;
+        minY2 = 3.5;
 
         // Create Y scale
         let yScale2 = d3.scaleLinear()
@@ -107,12 +107,12 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         .attr("height", (d) => (height - margin.bottom) - yScale2(d[yKey2]))
                         .style("opacity", 1)
                         .style("fill", function(d){ 
-                            if (d[yKey2] <= 5.510370517) {
-                            return 'black'; 
-                            } else if (d[yKey2] >= 5.53633218 && d[yKey2] < 6.218866798) {
+                            if (d[yKey2] < 4.0) {
+                            return '#6aaa64'; 
+                            } else if (d[yKey2] >= 4.0 && d[yKey2] < 4.5) {
                             return '#cab558';
                             } else {
-                            return '#6aaa64';
+                            return 'black';
                             }})
                         .on("mouseover", mouseover) 
                         .on("mousemove", mousemove)
