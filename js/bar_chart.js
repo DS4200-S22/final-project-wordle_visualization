@@ -1,5 +1,22 @@
 let drawBarChart = function (rarity, bar_chart_svg) {
   // true = rarity, false = performance
+  let legendSvg = d3.select("#bar-legend");
+  legendSvg.selectAll("*").remove();
+  let keys;
+
+  if (rarity) {
+    keys = ["Common", "Middle","Rare"];
+  } else {
+    keys = ["Good", "Ok", "Bad"];
+  }
+  legendSvg.append("text").attr("x", 200).attr("y", 15).text("Bar Chart Legend").style("font-size", "25px").attr("alignment-baseline","middle");
+  legendSvg.append("rect").attr("x",200).attr("y",35).attr("width", 10).attr("height", 10).style("fill", "#6aaa64");
+  legendSvg.append("rect").attr("x",200).attr("y",55).attr("width", 10).attr("height", 10).style("fill", "#cab558");
+  legendSvg.append("rect").attr("x",200).attr("y",75).attr("width", 10).attr("height", 10).style("fill", "black");
+  legendSvg.append("text").attr("x", 220).attr("y", 40).text(keys[0]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","#6aaa64");
+  legendSvg.append("text").attr("x", 220).attr("y", 60).text(keys[1]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","#cab558");
+  legendSvg.append("text").attr("x", 220).attr("y", 80).text(keys[2]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","black");
+
 
   d3.csv("data/composite_wordle_data.csv").then((data) => {
     const height = 1000 - margin.top - margin.bottom;
