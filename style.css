@@ -76,3 +76,14 @@ label.radio input:checked + span {
   border-color: #009BA2;
   color:rgb(2, 66, 47);
 }
+
+.selected{
+  opacity: 1 !important;
+  stroke: blueviolet;
+  stroke-width: 5px;
+}
+
+.circle{
+  opacity: 1;
+  stroke: black;
+}

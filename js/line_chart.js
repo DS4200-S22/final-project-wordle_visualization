@@ -1,7 +1,7 @@
 d3.csv("data/composite_wordle_data.csv").then((data) => {
     {
         // Append svg object to the body of the page to house linechart1
-        const svg = d3.select("#line-chart")
+        svg = d3.select("#line-chart")
           .append("svg")
           .attr("class", "charts")
           .attr("width", width - margin.left - margin.right)
@@ -34,10 +34,11 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                           .attr("fill", "black")
                           .attr("text-anchor", "end")
                           .text(xKey1));
+        
         // TODO: get rid of hard coding                  
         maxY1 = 18000;
         minY1 = 0;
-    
+
         // Create Y scale
         y1 = d3.scaleLinear()
                 .domain([minY1, maxY1])
@@ -67,7 +68,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     
         // Mouseover event handler
         let mouseover = function(event, d) {
-        let rarity = "word_rarity"
         tooltip1.html("Date: " + d[xKey1] + "<br> Number of Players: " + d[yKey1] + "<br>")
                 .style("opacity", 1);
         };
@@ -84,31 +84,69 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         };
     
         // Add points
-        myLine1 = svg.selectAll("circle")
-                                .data(data)
-                                .enter()
-                                  .append("circle")
-                                  .attr("id", (d) => d.wordle_id)
-                                  .attr("cx", (d) => x1(parseTime(d[xKey1])))
-                                  .attr("cy", (d) => y1(d[yKey1]))
-                                  .attr("r", 1)
-                                  .style("opacity", 1)
-                                  .on("mouseover", mouseover) 
-                                  .on("mousemove", mousemove)
-                                  .on("mouseleave", mouseleave);
+        myPoints = svg.selectAll("circle")
+                        .data(data)
+                        .enter()
+                        .append("circle")
+                        .attr("id", (d) => d.wordle_id)
+                        .attr("cx", (d) => x1(parseTime(d[xKey1])))
+                        .attr("cy", (d) => y1(d[yKey1]))
+                        .attr("r", 5)
+                        .style("opacity", 1)
+                        .on("mouseover", mouseover) 
+                        .on("mousemove", mousemove)
+                        .on("mouseleave", mouseleave);
     
         // adding a line's curve to the line chart
-        let line = d3.line()
-                      .x((d) => x1(parseTime(d[xKey1]))) 
-                      .y((d) => y1(d[yKey1])) 
-                      .curve(d3.curveMonotoneX)
+        line = d3.line()
+                .x((d) => x1(parseTime(d[xKey1]))) 
+                .y((d) => y1(d[yKey1])) 
+                .curve(d3.curveMonotoneX)
         
+        // Create a line chart
         svg.append("path")
-        .datum(data) 
-        .attr("class", "line") 
-        .attr("d", line)
-        .style("fill", "none")
-        .style("stroke", "#000000")
-        .style("stroke-width", "2");
-      }
+                .datum(data) 
+                .attr("class", "line") 
+                .attr("d", line)
+                .style("fill", "none")
+                .style("stroke", "#000000")
+                .style("stroke-width", "2");
+        }
+
+        // Initialize brush for linechart.
+        let brush; 
+        brush = d3.brush().extent([[0, 0], [width, height]]);
+
+        // Add brush1 to svg1
+        svg.call(brush
+                .on("start", clear)
+                .on("brush", updateChart));
+
+        // Call to removes existing brushes 
+        function clear() {
+                svg.call(brush.move, null);
+        }
+
+        // Call when Scatterplot1 is brushed 
+        function updateChart(brushEvent) {
+        
+                // Finds coordinates of brushed region 
+                let selection = d3.brushSelection(this);
+        
+                // Gives bold outline to all points within the brush region in Scatterplot1
+                myPoints.classed("selected", function(d) {
+                        return isBrushed(selection, x1(d[xKey1]), y1(d[yKey1]))
+                })
+        }
+
+        //Finds dots within the brushed region
+        function isBrushed(brush_coords, cx, cy) {
+                if (brush_coords === null) return;
+        
+                var x0 = brush_coords[0][0],
+                x1 = brush_coords[1][0],
+                y0 = brush_coords[0][1],
+                y1 = brush_coords[1][1];
+                return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1; // This return TRUE or FALSE depending on if the points is in the selected area
+        }
 })
