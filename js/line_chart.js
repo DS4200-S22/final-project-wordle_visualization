@@ -11,6 +11,12 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         // initializing the x and y axes keys
         xKey1 = "date";
         yKey1 = "number_of_players";
+        yKey2 = "wins_in_1";
+        yKey3 = "wins_in_2";
+        yKey4 = "wins_in_3";
+        yKey5 = "wins_in_4";
+        yKey6 = "wins_in_5";
+        yKey7 = "wins_in_6";
     
         // Find max and min x
         let parseTime = d3.timeParse("%m/%d/%Y");
@@ -82,7 +88,31 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         let mouseleave = function() { 
                 tooltip1.style("opacity", 0);
         };
-    
+
+        // List of groups = header of the csv files
+        let keys = data.columns.slice(14)
+        console.log(keys);
+
+        // color palette
+        // let color = d3.scaleOrdinal()
+        //                 .domain(keys)
+        //                 .range(['#6aaa64','#88bb82','#a6cca0','#c4ddbf','#e1eedf','#ffffff'])
+
+        //stack the data
+        let stackedData = d3.stack().keys(keys)(data)
+
+        // Add the area
+        svg.append("path")
+                .datum(stackedData)
+                .enter()
+                .style("fill", "#a6cca0")
+                .attr("fill-opacity", 1)
+                .attr("g", d3.area()
+                        .x(function(d) { return x1(parseTime(d[xKey1])) })
+                        .y0(function(d) {0})
+                        .y1(function(d) { return y1(d[yKey1]) }))
+                .attr("stroke", "black");
+
         // Add points
         myPoints = svg.selectAll("circle")
                         .data(data)
@@ -93,7 +123,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         .attr("cy", (d) => y1(d[yKey1]))
                         .attr("r", 10)
                         .style("fill", "black")
-                        .style("opacity", 0.5)
+                        .style("opacity", 0.40)
                         .on("mouseover", mouseover) 
                         .on("mousemove", mousemove)
                         .on("mouseleave", mouseleave);
@@ -144,7 +174,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         function isBrushed(brush_coords, cx, cy) {
                 if (brush_coords === null) return;
         
-                var x0 = brush_coords[0][0],
+                let x0 = brush_coords[0][0],
                 x1 = brush_coords[1][0],
                 y0 = brush_coords[0][1],
                 y1 = brush_coords[1][1];

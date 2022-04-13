@@ -77,7 +77,7 @@ label.radio input:checked + span {
   color:rgb(2, 66, 47);
 }
 
-.selected{
+.selected {
   opacity: 1 !important;
   fill: blueviolet;
 }
