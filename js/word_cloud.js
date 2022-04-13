@@ -57,10 +57,6 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     };
 
 
-    console.log(`Width: ${width - margin.left - margin.right}`);
-    console.log(`Height: ${height}`)
-
-
     let layout = d3.layout.cloud()
       .size([width,height])
       .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
@@ -73,7 +69,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
     function draw(words) {
       word_cloud_svg.append("g")
-        .attr("transform", "translate(" + (layout.size()[0] / 2 - 20) + "," + layout.size()[1] / 2 + ")")
+        .attr("transform", "translate(" + (layout.size()[0] / 2 - 100) + "," + (layout.size()[1] / 2 - 75) + ")")
         .selectAll("text")
         .data(words)
         .enter().append("text")

@@ -14,8 +14,8 @@ let word_cloud_svg = d3.select("#word-cloud")
     .append("svg")
     .attr("id", "word-cloud-svg")
     .attr("width", width - margin.left - margin.right)
-    .attr("height", 700)
-    .attr("viewBox", [0, 0, width, 700])
+    .attr("height", 600)
+    .attr("viewBox", [0, 0, width, 600])
     .append("g")
     .attr("transform",
           `translate(${margin.left},${margin.top})`);
@@ -51,11 +51,9 @@ d3.selectAll("input").on("change", function (d) {
 
   let selection = this.value;
   if (selection === "Rarity") {
-    console.log("bar chart is false which is performance");
     drawWordCloud(true, word_cloud_svg);
     drawBarChart(false, bar_chart_svg); // false = performance
   } else {
-    console.log("bar chart is true which is rarity");
     drawWordCloud(false, word_cloud_svg);
     drawBarChart(true, bar_chart_svg); // true = rarity
   }

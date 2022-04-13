@@ -82,3 +82,18 @@ label.radio input:checked + span {
   opacity: 1 !important;
   fill: blueviolet;
 }
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#word-cloud {
+  flex: 1;
+}
+
+#bar-chart {
+  flex: 1;
+}
