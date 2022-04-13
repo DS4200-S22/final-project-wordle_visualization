@@ -83,7 +83,8 @@ label.radio input:checked + span {
   stroke-width: 5px;
 }
 
-.circle{
-  opacity: 1;
-  stroke: black;
+.select{
+  opacity: 1 !important;
+  fill: black;
+  stroke-width: 5px;
 }
