@@ -44,8 +44,10 @@ let attempts_toggle = function () {
 
 d3.selectAll("input").on("change", function (d) {
   d3.select("#word-cloud-svg").selectAll("text").remove();
+  d3.select("#word-cloud").selectAll("div").remove();
   d3.select("#bar-chart-svg").selectAll("rect").remove();
   d3.select("#bar-chart-svg").selectAll("g").remove();
+  d3.select("#bar-chart").selectAll("div").remove();
 
   let selection = this.value;
   if (selection === "Rarity") {

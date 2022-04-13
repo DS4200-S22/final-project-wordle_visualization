@@ -29,7 +29,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
     // Adds a tooltip with the information
     let tooltip = d3.select("#word-cloud") 
-                    .append("div3") 
+                    .append("div") 
                     .attr('id', "tooltip3") 
                     .style("opacity", 0) 
                     .attr("class", "tooltip");
@@ -73,7 +73,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
     function draw(words) {
       word_cloud_svg.append("g")
-        .attr("transform", "translate(" + (layout.size()[0] / 2) + "," + layout.size()[1] / 2 + ")")
+        .attr("transform", "translate(" + (layout.size()[0] / 2 - 20) + "," + layout.size()[1] / 2 + ")")
         .selectAll("text")
         .data(words)
         .enter().append("text")

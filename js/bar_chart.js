@@ -83,7 +83,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
     // Adds a tooltip with the information
     let tooltip = d3
       .select("#bar-chart")
-      .append("div3")
+      .append("div")
       .attr("id", "tooltip3")
       .style("opacity", 0)
       .attr("class", "tooltip");
