@@ -25,9 +25,9 @@ let bar_chart_svg = d3.select("#bar-chart")
   .append("svg")
   .attr("class", "charts")
   .attr("id", "bar-chart-svg")
-  .attr("width", width - margin.left - margin.right)
-  .attr("height", 800 - margin.top - margin.bottom)
-  .attr("viewBox", [0, 0, width, 1000 - margin.top - margin.bottom]);
+  .attr("width", 500)
+  .attr("height", 500)
+  .attr("viewBox", [0, 0, 500, 500]);
 
 //draw the word cloud on page load
 drawWordCloud(true, word_cloud_svg);

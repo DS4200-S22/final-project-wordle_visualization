@@ -86,7 +86,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     let layout = d3.layout.cloud()
       .size([width,height])
       .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
-      .padding(12)
+      .padding(6)
       .rotate(function() { return 0;})
       .fontSize(function(d) { return d.size; })
       .on("end", draw);
