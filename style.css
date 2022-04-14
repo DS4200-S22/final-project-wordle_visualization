@@ -34,34 +34,34 @@ p {
 #line-chart {
   /* background-color: #009BA2; */
 
-  outline: solid;
+  /* outline: solid; */
 }
 
 #placeholder {
   /* background-color: lightgreen; */
 
-  outline: solid;
+  /* outline: solid; */
 }
 
 #title-and-annotation {
   /* background-color: rgb(231, 212, 158); */
   flex-direction: row;
   flex: 2;
-  outline: solid;
+  /* outline: solid; */
 }
 
 #legends {
   flex-direction: column;
   column-gap: 50px;
   /* background-color: lightcoral; */
-  outline: solid;
+  /* outline: solid; */
 }
 
 #main-charts {
   flex-direction: row;
   height: 800px;
 
-  outline: solid;
+  /* outline: solid; */
   /* background-color: gray; */
 }
 #word-cloud {
@@ -70,7 +70,7 @@ p {
   max-width: 580px;
   /* background-color: black; */
 
-  outline: solid;
+  /* outline: solid; */
 }
 
 #bar-chart {
@@ -79,7 +79,7 @@ p {
   max-width: 580px;
   /* background-color: beige; */
 
-  outline: solid;
+  /* outline: solid; */
 }
 
 /* TOGGLE STYLING */
@@ -87,9 +87,9 @@ p {
   flex-direction: row;
 }
 
+
 .word-highlighted {
   outline: 2px;
-  outline-color: aqua;
 }
 
 /* Tooltip class styling goes here */

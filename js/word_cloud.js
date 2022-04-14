@@ -10,14 +10,13 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     keys = ["Good Performance", "Ok Performance", "Bad Performance"];
   }
   legendSvg.append("text").attr("x", 0).attr("y", 15).text("Word Cloud Size Legend").style("font-size", "25px").attr("alignment-baseline","middle");
-  legendSvg.append("text").attr("x", 0).attr("y", 40).text("A").style("font-size", "15px").attr("alignment-baseline","middle");
-  legendSvg.append("text").attr("x", 0).attr("y", 60).text("Rare").style("font-size", "15px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 5).attr("y", 40).text("A").style("font-size", "15px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 3).attr("y", 70).text("A").style("font-size", "20px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 0).attr("y", 100).text("A").style("font-size", "30px").attr("alignment-baseline","middle");
 
-  legendSvg.append("text").attr("x", 50).attr("y", 40).text("A").style("font-size", "20px").attr("alignment-baseline","middle");
-  legendSvg.append("text").attr("x", 50).attr("y", 60).text("Less").style("font-size", "15px").attr("alignment-baseline","middle");
-
-  legendSvg.append("text").attr("x", 100).attr("y", 40).text("A").style("font-size", "30px").attr("alignment-baseline","middle");
-  legendSvg.append("text").attr("x", 100).attr("y", 60).text("Common").style("font-size", "15px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 25).attr("y", 40).text(keys[1]).style("font-size", "15px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 25).attr("y", 70).text(keys[0]).style("font-size", "15px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 25).attr("y", 100).text(keys[2]).style("font-size", "15px").attr("alignment-baseline","middle");
 
 
   let activeWord;
@@ -58,10 +57,11 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
     // Mouseover event handler
     let mouseover = function(event, d) {
-      activeWord = d.text
+      activeWord = d.text;
+      let wordObject = d3.select(["[class^='word_", d.text].join(""));
 
       if (rarity) {
-        tooltip.html("Rarity: " + d["rarity"])
+        tooltip.html("Rarity: " + wordObject["rarity"])
           .style("opacity", 1);
       } else {
         tooltip.html(
@@ -71,7 +71,9 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       }
 
       d3.selectAll(".bar_"+activeWord)
-      .transition().style('outline','solid')
+      .transition().style("outline", "0.5px solid black");
+
+      updateAnnotation(d.text);
     };
 
     // Mouse moving event handler
@@ -128,3 +130,14 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     }
   });
 };
+
+function updateAnnotation(word) {
+  let wordObject = d3.select(["[class^='word_", word].join(""))
+  let annotation = d3.select("#annotationBox");
+
+  let displayAnnotation = "";
+  displayAnnotation += ("Word: " + word);
+  displayAnnotation += ("<br>Part of Speech:");
+  annotation.html(displayAnnotation)
+    .style("opacity", 1);
+}
