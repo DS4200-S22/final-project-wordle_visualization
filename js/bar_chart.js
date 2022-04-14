@@ -135,6 +135,8 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       d3.selectAll(".word_" + activeWord)
         .transition()
         .style("text-shadow", "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000");
+
+      updateAnnotationFor(activeWord);
     };
 
     // Mouse moving event handler

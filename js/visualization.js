@@ -1,4 +1,4 @@
-/*
+/*visualization.js
 Margin set up with width and height
 */
 // Set margins and dimensions
