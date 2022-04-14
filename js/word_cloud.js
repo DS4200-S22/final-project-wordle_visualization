@@ -72,22 +72,21 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
         return d["word"].localeCompare(activeWord) == 0 })[0];
 
       if (rarity) {
-        tooltip.html("Frequency: " + wordObject.frequency
-        + "<br> Word Rarity: " + wordObject.rarity)
+        tooltip.html("Relative Frequency: " + wordObject.frequency
+        + "<br> Word Rarity: " + wordObject.word_rarity)
           .style("opacity", 1);
       } else {
         tooltip.html(
-          "Average Number of Tries: " + wordObject.avg_num_of_tries
-        + "<br> % Wins in 2 tries: " + wordObject.wins_in_2
-        + "<br> % Wins in 3 tries: " + wordObject.wins_in_3
-        + "<br> % Wins in 4 tries: " + wordObject.wins_in_4
-        + "<br> % Wins in 5 tries: " + wordObject.wins_in_5
-        + "<br> % Wins in 6 tries: " + wordObject.wins_in_6)
+          "Date: " + wordObject.date
+          + "<br> Average Number of Tries: " + wordObject.avg_num_of_tries)
           .style("opacity", 1);
       }
 
       d3.selectAll(".bar_"+activeWord)
       .transition().style("outline", "0.5px solid black");
+
+      d3.selectAll(".word_"+activeWord)
+      .transition().style("text-shadow", "-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000");
 
       updateAnnotation(d.text, data[wordToNum.get(d.text)]);
     };
@@ -103,6 +102,9 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     tooltip.style("opacity", 0);
     d3.selectAll(".bar_"+activeWord)
     .transition().style('outline','none')
+
+    d3.selectAll(".word_"+activeWord)
+    .transition().style("text-shadow", "none");
     };
 
 

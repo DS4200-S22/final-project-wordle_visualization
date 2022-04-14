@@ -6,7 +6,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
   let barKeys;
 
   if (rarity) {
-    barKeys = ["Common Word", "Somewhat Common Word","Rare Word"];
+    barKeys = ["Rare Word", "Somewhat Common Word","Common Word"];
   } else {
     barKeys = ["Good Performance", "Ok Performance", "Bad Performance"];
   }
@@ -83,7 +83,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
 
     // Add y axis with correct labels
 
-    let correct_label = rarity ? "Rarity" : "Attempts";
+    let correct_label = rarity ? "Frequency" : "Attempts";
 
     // Append the correct y scale and label
     bar_chart_svg
@@ -137,6 +137,9 @@ let drawBarChart = function (rarity, bar_chart_svg) {
         .transition()
         .style("text-shadow", "-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000");
 
+      d3.selectAll(".bar_"+activeWord)
+        .transition().style("outline", "0.5px solid black");
+
       updateAnnotationFor(activeWord);
     };
 
@@ -153,6 +156,9 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       d3.selectAll(".word_" + activeWord)
         .transition()
         .style("text-shadow", "none");
+
+      d3.selectAll(".bar_"+activeWord)
+        .transition().style("outline", "none");
     };
 
     // Add points

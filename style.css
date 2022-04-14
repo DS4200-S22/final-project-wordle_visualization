@@ -62,7 +62,7 @@ p2 {
   /* background-color: lightcoral; */
   outline: solid;
   align-items: center;
-  max-width: 450px;
+  max-width: 300px;
   max-height: 350px;
   border-radius: 5px;
   /* justify-content: space-evenly; */
@@ -70,7 +70,7 @@ p2 {
 
 #main-charts {
   flex-direction: row;
-  height: 800px;
+  height: fit-content;
 
   /* outline: solid; */
   /* background-color: gray; */

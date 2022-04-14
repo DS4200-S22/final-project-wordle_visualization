@@ -98,11 +98,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         let keys = data.columns.slice(14)
         console.log(keys);
 
-        // color palette
-        // let color = d3.scaleOrdinal()
-        //                 .domain(keys)
-        //                 .range(['#6aaa64','#88bb82','#a6cca0','#c4ddbf','#e1eedf','#ffffff'])
-
         //stack the data
         let stackedData = d3.stack().keys(keys)(data)
 
