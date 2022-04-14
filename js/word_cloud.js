@@ -39,11 +39,13 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     // Create an array of JSON for the word and the size
     // according to rarity or performance
     let words = [];
+    let wordToNum = new Map();
     for(let i = 0; i < data.length; i++) {
       let current_size = rarity ? data[i].rarity * 10 : tries_sizes[i];
       words.push({
         word: data[i].word,
         size: current_size});
+      wordToNum.set(data[i].word, i);
     }
 
     const yTooltipOffset = 15; 
@@ -58,22 +60,24 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     // Mouseover event handler
     let mouseover = function(event, d) {
       activeWord = d.text;
+      let dataRow = data[wordToNum.get(d.text)];
       let wordObject = d3.select(["[class^='word_", d.text].join(""));
+      let percentWinIn2 = Math.ceil(dataRow.wins_in_2/dataRow.number_of_players * 1000) / 10;
 
       if (rarity) {
-        tooltip.html("Rarity: " + d["avg_num_of_tries"])
+        tooltip.html("Frequency: " + dataRow.rarity)
           .style("opacity", 1);
       } else {
         tooltip.html(
-          "<br> Average Number of Tries: " + d["avg_num_of_tries"]
-        + "<br> % Wins in 2 tries: " + d["wins_in_2"]/d["number_of_players"])
+          "<br> Average Number of Tries: " + dataRow.avg_num_of_tries
+        + "<br> % Wins in 2 tries: " + percentWinIn2)
           .style("opacity", 1);
       }
 
       d3.selectAll(".bar_"+activeWord)
       .transition().style("outline", "0.5px solid black");
 
-      updateAnnotation(d.text);
+      updateAnnotation(d.text, data[wordToNum.get(d.text)]);
     };
 
     // Mouse moving event handler
@@ -131,13 +135,3 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
   });
 };
 
-function updateAnnotation(word) {
-  let wordObject = d3.select(["[class^='word_", word].join(""))
-  let annotation = d3.select("#annotationBox");
-
-  let displayAnnotation = "";
-  displayAnnotation += ("Word: " + word);
-  displayAnnotation += ("<br>Part of Speech:");
-  annotation.html(displayAnnotation)
-    .style("opacity", 1);
-}

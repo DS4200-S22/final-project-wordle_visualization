@@ -23,7 +23,11 @@ let drawBarChart = function (rarity, bar_chart_svg) {
     const height = 400;
     const width = 525;
 
-  
+    // Create a map of word to index
+    let wordToNum = new Map();
+    for(let i = 0; i < data.length; i++) {
+      wordToNum.set(data[i].word, i);
+    }
 
     // initializing the x and y axes keys
     xKey2 = "date";
@@ -136,7 +140,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
         .transition()
         .style("text-shadow", "-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000");
 
-      updateAnnotationFor(activeWord);
+      updateAnnotation(activeWord, data[wordToNum.get(activeWord)]);
     };
 
     // Mouse moving event handler
