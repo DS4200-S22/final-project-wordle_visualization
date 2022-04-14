@@ -173,12 +173,3 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
   }
 });
 
-function updateAnnotationFor(word){
-  let annotation = d3.select("#annotationBox");
-
-  let displayAnnotation = "";
-  displayAnnotation += ("Word: " + word);
-  displayAnnotation += ("<br>Part of Speech:");
-  annotation.html(displayAnnotation)
-        .style("opacity", 1);
-}

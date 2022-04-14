@@ -7,6 +7,9 @@
 
   <!-- Title -->
   <title>DS4200 F21 Final Project</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/lib/wordlegame.png">
   
   <!-- CSS Styling -->
   <link rel='stylesheet' href='style.css'>
@@ -73,7 +76,7 @@
       <img src="lib/wordle_title.png" height = 180>
     </div>
     
-    <div>
+    <div class = 'vis-holder' id = "annotation">
       <!-- <svg width="600" height="200">
         <rect width="600" height="200" style="fill:lightgreen" />
       </svg> -->
@@ -163,7 +166,7 @@
 </div>
   
   <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
-  
+  <script src='js/updateAnnotation.js'></script>
   <script src='js/line_chart.js'></script>
   <script src='js/bar_chart.js'></script>
   <script src='js/word_cloud.js'></script>
