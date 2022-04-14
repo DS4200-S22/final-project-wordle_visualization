@@ -1,3 +1,5 @@
+// const width = 1650 - margin.left - margin.right;
+// const height = 500 - margin.top - margin.bottom;
 d3.csv("data/composite_wordle_data.csv").then((data) => {
 
         // Append svg object to the body of the page to house linechart1
@@ -89,29 +91,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                 tooltip1.style("opacity", 0);
         };
 
-        // List of groups = header of the csv files
-        let keys = data.columns.slice(14)
-        console.log(keys);
-
-        // color palette
-        // let color = d3.scaleOrdinal()
-        //                 .domain(keys)
-        //                 .range(['#6aaa64','#88bb82','#a6cca0','#c4ddbf','#e1eedf','#ffffff'])
-
-        //stack the data
-        let stackedData = d3.stack().keys(keys)(data)
-
-        // Add the area
-        svg.append("path")
-                .datum(stackedData)
-                .enter()
-                .style("fill", "#a6cca0")
-                .attr("fill-opacity", 1)
-                .attr("g", d3.area()
-                        .x(function(d) { return x1(parseTime(d[xKey1])) })
-                        .y0(function(d) {0})
-                        .y1(function(d) { return y1(d[yKey1]) }))
-                .attr("stroke", "black");
 
         // Add points
         myPoints = svg.selectAll("circle")
@@ -143,6 +122,36 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                 .style("stroke", "#000000")
                 .style("stroke-width", "2");
 
+        // List of groups = header of the csv files
+        let keys = data.columns.slice(14)
+        console.log(keys);
+ 
+        // color palette
+        let color = d3.scaleOrdinal()
+                         .domain(keys)
+                         .range(['#6aaa64','#88bb82','#a6cca0','#c4ddbf','#e1eedf','#ffffff'])
+ 
+        //stack the data
+        //  console.log(stackedData);
+        let stackedData = d3.stack().keys(keys)(data)
+        console.log(stackedData);
+ 
+        // .style("fill", function(d) { console.log(d.key) ; return color(d.key); })
+ 
+        // Add the area
+        //  svg.append("line-chart")
+        //          .datum(stackedData)
+        //          .enter()
+        //          .append("path")
+        //          .style("fill", "#a6cca0")
+        //          .attr("fill-opacity", 1)
+        //          .attr("class", "line") 
+        //          .attr("d", d3.area()
+        //                  .x(function(d, i) { return x1(parseTime(d[xKey1])) })
+        //                  .y0(function(d) { return y1(d[0]); })
+        //                  .y1(function(d) { return y1(d[1]); }))
+        //          .attr("stroke", "black");
+
         // Initialize brush for linechart.
         let brush; 
         brush = d3.brush().extent([[0, 0], [width, height]]);
@@ -162,7 +171,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
                 // let selection = d3.brushSelection(this);
                 let extent = brushEvent.selection;
-                console.log('the extent is:' +extent);
+                console.log('the extent is:' + extent);
 
                 // Gives bold outline to all points within the brush region in Scatterplot1
                 myPoints.classed("selected", function(d) {
@@ -180,4 +189,39 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                 y1 = brush_coords[1][1];
                 return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1; // This return TRUE or FALSE depending on if the points is in the selected area
         }
+
+        // // append the svg object to the body of the page
+        // let svg1 = d3.select("#my_dataviz")
+        //         .append("svg")
+        //         .attr("width", width + margin.left + margin.right)
+        //         .attr("height", height + margin.top + margin.bottom)
+        //         .append("g")
+        //         .attr("transform",
+        //         "translate(" + margin.left + "," + margin.top + ")");
+
+        // // List of groups = header of the csv files
+        // let keys = data.columns.slice(14)
+
+        // // color palette
+        // let color = d3.scaleOrdinal()
+        //                 .domain(keys)
+        //                 .range(['#6aaa64','#88bb82','#a6cca0','#c4ddbf','#e1eedf','#ffffff'])
+
+        // //stack the data?
+        // let stackedData = d3.stack()
+        // .keys(keys)
+        // (data)
+
+        // // Show the areas
+        // svg1
+        // .selectAll("mylayers")
+        // .data(stackedData)
+        // .enter()
+        // .append("path")
+        // .style("fill", function(d) { console.log(d.key) ; return color(d.key); })
+        // .attr("d", d3.area()
+        //         .x(function(d, i) { return x1(parseTime(d[xKey1])); })
+        //         .y0(function(d) { return y1(d[0]); })
+        //         .y1(function(d) { return y1(d[1]); })
+        // )
 })
