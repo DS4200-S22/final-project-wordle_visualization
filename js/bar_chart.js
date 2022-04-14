@@ -1,18 +1,22 @@
 let drawBarChart = function (rarity, bar_chart_svg) {
   // true = rarity, false = performance
+
   let legendSvg = d3.select("#legend");
   legendSvg.selectAll("*").remove();
-  let colorKeys, sizeKeys;
-  colorKeys = ["Common Word", "Somewhat Common Word","Rare Word"];
-  sizeKeys = ["Good Performance", "Ok Performance", "Bad Performance"];
+  let barKeys;
 
+  if (rarity) {
+    barKeys = ["Common Word", "Somewhat Common Word","Rare Word"];
+  } else {
+    barKeys = ["Good Performance", "Ok Performance", "Bad Performance"];
+  }
   legendSvg.append("text").attr("x", 0).attr("y", 15).text("Color Legend").style("font-size", "20px").style("font-weight", "bold").attr("alignment-baseline","middle");
   legendSvg.append("rect").attr("x",0).attr("y",35).attr("width", 10).attr("height", 10).style("fill", "#6aaa64");
   legendSvg.append("rect").attr("x",0).attr("y",65).attr("width", 10).attr("height", 10).style("fill", "#cab558");
   legendSvg.append("rect").attr("x",0).attr("y",95).attr("width", 10).attr("height", 10).style("fill", "black");
-  legendSvg.append("text").attr("x",25).attr("y", 40).text(colorKeys[0]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","#6aaa64");
-  legendSvg.append("text").attr("x",25).attr("y", 70).text(colorKeys[1]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","#cab558");
-  legendSvg.append("text").attr("x",25).attr("y", 100).text(colorKeys[2]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","black");
+  legendSvg.append("text").attr("x",25).attr("y", 40).text(barKeys[0]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","#6aaa64");
+  legendSvg.append("text").attr("x",25).attr("y", 70).text(barKeys[1]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","#cab558");
+  legendSvg.append("text").attr("x",25).attr("y", 100).text(barKeys[2]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","black");
 
   d3.csv("data/composite_wordle_data.csv").then((data) => {
     const margin = { top: 50, right: 50, bottom: 50, left: 50 };
