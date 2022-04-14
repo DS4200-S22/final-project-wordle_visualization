@@ -29,7 +29,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       .domain([min_tries, max_tries])
       .range([15, 90]);
     tries_sizes = num_tries.map(function(d) {
-      return Math.ceil(tries_size_scale(d) / 10) * 10;
+      return Math.ceil(tries_size_scale(d) / 10) * 4;
     });
 
     // Create an array of JSON for the word and the size

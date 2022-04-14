@@ -20,8 +20,8 @@ let drawBarChart = function (rarity, bar_chart_svg) {
 
   d3.csv("data/composite_wordle_data.csv").then((data) => {
     const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-    const height = 500;
-    const width = 500;
+    const height = 450;
+    const width = 450;
 
   
 

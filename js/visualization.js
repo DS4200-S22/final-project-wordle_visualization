@@ -15,7 +15,7 @@ let word_cloud_svg = d3.select("#word-cloud")
     .attr("id", "word-cloud-svg")
     .attr("width", width - margin.left - margin.right)
     .attr("height", 600)
-    .attr("viewBox", [0, 0, width, 600])
+    .attr("viewBox", [0, 0, 500, 500])
     .append("g")
     .attr("transform",
           `translate(${margin.left},${margin.top})`);
