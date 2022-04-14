@@ -1,15 +1,15 @@
 let drawBarChart = function (rarity, bar_chart_svg) {
   // true = rarity, false = performance
-  let legendSvg = d3.select("#bar-legend");
+  let legendSvg = d3.select("#legend");
   legendSvg.selectAll("*").remove();
   let keys;
 
   if (rarity) {
-    keys = ["Common", "Middle","Rare"];
+    keys = ["Common Word", "Somewhat Common Word","Rare Word"];
   } else {
-    keys = ["Good", "Ok", "Bad"];
+    keys = ["Good Performance", "Ok Performance", "Bad Performance"];
   }
-  legendSvg.append("text").attr("x", 200).attr("y", 15).text("Bar Chart Legend").style("font-size", "25px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 200).attr("y", 15).text("Color Legend").style("font-size", "25px").attr("alignment-baseline","middle");
   legendSvg.append("rect").attr("x",200).attr("y",35).attr("width", 10).attr("height", 10).style("fill", "#6aaa64");
   legendSvg.append("rect").attr("x",200).attr("y",55).attr("width", 10).attr("height", 10).style("fill", "#cab558");
   legendSvg.append("rect").attr("x",200).attr("y",75).attr("width", 10).attr("height", 10).style("fill", "black");
