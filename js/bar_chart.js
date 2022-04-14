@@ -65,7 +65,6 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       );
 
     // TODO: get rid of hard coding
-    // finding maxY
 
     if (rarity) {
       maxY2 = 4.6;

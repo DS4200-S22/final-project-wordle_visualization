@@ -128,8 +128,17 @@
   <p>
     TODO: link presentation slides.
   </p>
-  <p>Our final visualization tool contains a word cloud, a temporal bar graph including daily breakdowns of what proportion of people won in each level, and the ability to specify a range of dates to model. A user can choose what the word cloud and bar graph will each model, between word rarity and performance. The word cloud would model the words by size based on the specified metric, such as by rarity, but doubly model the other metric by the secondary channel, the color scale. Likewise for the bar graph, the height of the bar being the most prominent part of a bar graph would model the specified metric, such as performance, but doubly model the other metric by its secondary channel, the color scale. The bar graph shows information about the word there, such as part of speech, average number of tries, etc. Each bar is also broken down into the distribution for the number of tries. The number of bars and words shown depends on the date range. The user can choose the range of time to display for the visualization. There is also the ability to hover, which highlights the word in the word map, and also highlights the word on the graph. If the mouse were to hover over the graph, they would also both highlight. 
-  </p>
+  <p>Our final visualization tool contains a line graph showing number of players every day, 
+    a word cloud that shows every day’s word, and a temporal bar graph. A user can choose whether 
+    or not to form the word cloud based on word rarity or player performance. While the word cloud 
+    responds to whatever the user chooses, say rarity, the bar graph also responds by forming to be 
+    based on the opposite, in this case performance. Both of these views individually stand with a 
+    basic tooltip that allows the user to see details upon hovering. However, these two views are 
+    also linked, such that the user can hover over any part and see its corresponding bar metric or 
+    word in the other view. There is a dynamic legend that also aids to discern what the different 
+    channels mean, and additionally, when the user hovers, an additional blub appears above with 
+    more details about that days’ statistics. Wrapping this entire thing is a brushing capability 
+    in the line graph where highlighting a certain area narrows the focus of all of the other views, correspondingly.   </p>
   
   
   <h1>Acknowledgments</h1>
@@ -139,17 +148,9 @@
   </p>
 
   <ul>
-    <li><a href='https://d3js.org/'>
-      D3: Data-Driven Documents</a>
-      by Mike Bostock is used for manipulating the DOM to create visualizations.
-    </li>
-    <li><a href='https://codepo8.github.io/css-fork-on-github-ribbon/#'>
-      Pure CSS responsive 'Fork me on GitHub' ribbon</a>
-      by Chris Heilmann is used to create the banner that links back to the source code repository.
-    </li>
-    <li><a href='https://github.com/NEU-DS-4200-F20-Staff/Project'>
-      Project</a>
-      by Cody Dunne is used to create this assignment.
+    <li><a href='https://github.com/jasondavies/d3-cloud'>
+      Word Cloud Layout</a>
+      by Jason Davies was used in part to create the word cloud.
     </li>
   </ul>
 </div>
