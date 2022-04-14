@@ -2,6 +2,7 @@ let startDate = "1/15/2022"
 let endDate = "2/28/2022"
 
 d3.csv("data/composite_wordle_data.csv").then((data) => {
+        const height = 600 - margin.top - margin.bottom;
 
         // Append svg object to the body of the page to house linechart1
         svg = d3.select("#line-chart")
