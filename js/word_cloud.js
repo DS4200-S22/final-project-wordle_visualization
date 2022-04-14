@@ -10,16 +10,21 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     keys = ["Good Performance", "Ok Performance", "Bad Performance"];
   }
   legendSvg.append("text").attr("x", 0).attr("y", 15).text("Word Cloud Size Legend").style("font-size", "25px").attr("alignment-baseline","middle");
-  legendSvg.append("text").attr("x", 0).attr("y", 40).text("Small = " + keys[0]).style("font-size", "15px").attr("alignment-baseline","middle");
-  legendSvg.append("text").attr("x", 0).attr("y", 60).text("Medium = " + keys[1]).style("font-size", "15px").attr("alignment-baseline","middle");
-  legendSvg.append("text").attr("x", 0).attr("y", 80).text("Large = " + keys[2]).style("font-size", "15px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 0).attr("y", 40).text("A").style("font-size", "15px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 0).attr("y", 60).text("Rare").style("font-size", "15px").attr("alignment-baseline","middle");
+
+  legendSvg.append("text").attr("x", 50).attr("y", 40).text("A").style("font-size", "20px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 50).attr("y", 60).text("Less").style("font-size", "15px").attr("alignment-baseline","middle");
+
+  legendSvg.append("text").attr("x", 100).attr("y", 40).text("A").style("font-size", "30px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 100).attr("y", 60).text("Common").style("font-size", "15px").attr("alignment-baseline","middle");
 
 
   let activeWord;
   d3.csv("data/composite_wordle_data.csv").then((data) => {
     const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-    const height = 500;
-    const width = 500;
+    const height = 400;
+    const width = 450;
 
     // Create an array of sizes based off number of tries
     num_tries = data.map(function(d) {return d.avg_num_of_tries});
