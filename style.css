@@ -60,11 +60,12 @@ p2 {
   flex-direction: column;
   column-gap: 50px;
   /* background-color: lightcoral; */
-  outline: solid;
+  outline: dotted;
   align-items: center;
-  max-width: 300px;
+  max-width: 500px;
   max-height: 350px;
   border-radius: 5px;
+  padding:10px;
   /* justify-content: space-evenly; */
 }
 

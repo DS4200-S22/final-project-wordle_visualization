@@ -88,7 +88,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       d3.selectAll(".word_"+activeWord)
       .transition().style("text-shadow", "-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000");
 
-      updateAnnotation(d.text, data[wordToNum.get(d.text)]);
+      updateAnnotation(d.text);
     };
 
     // Mouse moving event handler

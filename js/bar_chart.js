@@ -140,7 +140,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       d3.selectAll(".bar_"+activeWord)
         .transition().style("outline", "0.5px solid black");
 
-      updateAnnotationFor(activeWord);
+      updateAnnotation(activeWord);
     };
 
     // Mouse moving event handler
