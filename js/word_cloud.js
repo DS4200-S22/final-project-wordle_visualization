@@ -17,7 +17,9 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
   let activeWord;
   d3.csv("data/composite_wordle_data.csv").then((data) => {
-    const height = 800 - margin.top - margin.bottom;
+    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
+    const height = 500;
+    const width = 500;
 
     // Create an array of sizes based off number of tries
     num_tries = data.map(function(d) {return d.avg_num_of_tries});
@@ -34,7 +36,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     // according to rarity or performance
     let words = [];
     for(let i = 0; i < data.length; i++) {
-      let current_size = rarity ? data[i].rarity * 20 : tries_sizes[i];
+      let current_size = rarity ? data[i].rarity * 10 : tries_sizes[i];
       words.push({
         word: data[i].word,
         size: current_size});
@@ -52,8 +54,17 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     // Mouseover event handler
     let mouseover = function(event, d) {
       activeWord = d.text
-      tooltip.html("Word: " + activeWord)
-              .style("opacity", 1);
+
+      if (rarity) {
+        tooltip.html("Rarity: " + d["rarity"])
+          .style("opacity", 1);
+      } else {
+        tooltip.html(
+          "<br> Average Number of Tries: " + d["avg_num_of_tries"]
+        + "<br> % Wins in 2 tries: " + d["wins_in_2"]/d["number_of_players"])
+          .style("opacity", 1);
+      }
+
       d3.selectAll(".bar_"+activeWord)
       .transition().style('outline','solid')
     };
@@ -75,7 +86,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     let layout = d3.layout.cloud()
       .size([width,height])
       .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
-      .padding(10)
+      .padding(12)
       .rotate(function() { return 0;})
       .fontSize(function(d) { return d.size; })
       .on("end", draw);
@@ -101,7 +112,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
         })
         .attr("text-anchor", "middle")
         .style("font-family", "Open Sans")
-        .style("text-transform", "uppercase")
+        .style("font-weight", 900)
         .attr("transform", function(d) {
           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
         })

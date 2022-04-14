@@ -19,7 +19,11 @@ let drawBarChart = function (rarity, bar_chart_svg) {
 
 
   d3.csv("data/composite_wordle_data.csv").then((data) => {
-    const height = 1000 - margin.top - margin.bottom;
+    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
+    const height = 500;
+    const width = 500;
+
+  
 
     // initializing the x and y axes keys
     xKey2 = "date";
@@ -49,7 +53,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       .append("g")
       .attr("transform", `translate(0,${height - margin.bottom})`)
       .call(d3.axisBottom(xScale2).tickFormat(d3.timeFormat("%m/%d")))
-      .attr("font-size", "20px")
+      .attr("font-size", "10px")
       .call((g) =>
         g
           .append("text")
@@ -79,14 +83,14 @@ let drawBarChart = function (rarity, bar_chart_svg) {
 
     // Add y axis with correct labels
 
-    let correct_label = rarity ? "Rarity" : "Attemps";
+    let correct_label = rarity ? "Rarity" : "Attempts";
 
     // Append the correct y scale and label
     bar_chart_svg
       .append("g")
       .attr("transform", `translate(${margin.left}, 0)`)
       .call(d3.axisLeft(yScale2))
-      .attr("font-size", "20px")
+      .attr("font-size", "10px")
       .call((g) =>
         g.append("text")
         .attr("x", 0)
@@ -108,22 +112,29 @@ let drawBarChart = function (rarity, bar_chart_svg) {
     // Mouseover event handler
     let mouseover = function (event, d) {
       activeWord = d["word"];
-      tooltip
+      if (rarity) {
+        tooltip
         .html(
           "Date: " +
             d[xKey2] +
-            "<br> Average Number of Tries: " +
-            d["avg_num_of_tries"] +
             "<br> Rarity: " +
             d["word_rarity"] +
             "<br> Part of Speech: " +
-            d["part_of_speech"]
-        )
+            d["part_of_speech"])
         .style("opacity", 1);
+        } else {
+          tooltip
+          .html(
+            "Date: " +
+              d[xKey2] +
+              "<br> Average Number of Tries: " +
+              d["avg_num_of_tries"])
+          .style("opacity", 1);
+        }
 
       d3.selectAll(".word_" + activeWord)
         .transition()
-        .style("outline", "solid");
+        .style("text-shadow", "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000");
     };
 
     // Mouse moving event handler
@@ -138,7 +149,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       tooltip.style("opacity", 0);
       d3.selectAll(".word_" + activeWord)
         .transition()
-        .style("outline", "none");
+        .style("text-shadow", "none");
     };
 
     // Add points
@@ -148,10 +159,9 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       .enter()
       .append("rect")
       .attr("class", (d) => "bar_" + d["word"])
-      // .attr("id", (d) => d.wordle_id)
-      .attr("x", (d, i) => x1(parseTime(d[xKey1])))
+      .attr("x", (d, i) => xScale2(parseTime(d[xKey1])))
       .attr("y", (d) => yScale2(d[yKey2]))
-      .attr("width", 28)
+      .attr("width", 10)
       .attr("height", (d) => height - margin.bottom - yScale2(d[yKey2]))
       .style("opacity", 1)
       .style("fill", function (d) {

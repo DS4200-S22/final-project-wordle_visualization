@@ -34,13 +34,13 @@ drawWordCloud(true, word_cloud_svg);
 drawBarChart(false, bar_chart_svg);
 
 // Rarity and Attempts Button logic
-let rarity_toggle = function () {
-  console.log("rarity was chosen");
-};
+// let rarity_toggle = function () {
+//   console.log("rarity was chosen");
+// };
 
-let attempts_toggle = function () {
-  console.log("attempts was chosen");
-};
+// let attempts_toggle = function () {
+//   console.log("attempts was chosen");
+// };
 
 d3.selectAll("input").on("change", function (d) {
   d3.select("#word-cloud-svg").selectAll("text").remove();
