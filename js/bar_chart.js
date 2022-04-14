@@ -19,8 +19,8 @@ let drawBarChart = function (rarity, bar_chart_svg) {
   legendSvg.append("text").attr("x",25).attr("y", 100).text(barKeys[2]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","black");
 
   d3.csv("data/composite_wordle_data.csv").then((data) => {
-    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-    const height = 400;
+    const margin = { top: 80, right: 50, bottom: 50, left: 50 };
+    const height = 500;
     const width = 525;
 
   
@@ -107,7 +107,8 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       .append("div")
       .attr("id", "tooltip3")
       .style("opacity", 0)
-      .attr("class", "tooltip");
+      .attr("class", "tooltip")
+      .attr("viewBox", [0, 0, width, height]); 
 
     // Mouseover event handler
     let mouseover = function (event, d) {

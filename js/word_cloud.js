@@ -2,27 +2,26 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
   let legendSvg = d3.select("#cloud-legend");
   legendSvg.selectAll("*").remove();
-  let keys;
+  let cloudKeys;
 
   if (rarity) {
-    keys = ["Rare Word", "Somewhat Common Word","Common Word"];
+    cloudKeys = ["Rare Word", "Somewhat Common Word","Common Word"];
   } else {
-    keys = ["Good Performance", "Ok Performance", "Bad Performance"];
+    cloudKeys = ["Good Performance", "Ok Performance", "Bad Performance"];
   }
   legendSvg.append("text").attr("x", 0).attr("y", 15).text("Word Cloud Size Legend").style("font-size", "20px").style("font-weight", "bold").attr("alignment-baseline","middle");
   legendSvg.append("text").attr("x", 5).attr("y", 40).text("A").style("font-size", "15px").attr("alignment-baseline","middle");
   legendSvg.append("text").attr("x", 3).attr("y", 70).text("A").style("font-size", "20px").attr("alignment-baseline","middle");
   legendSvg.append("text").attr("x", 0).attr("y", 100).text("A").style("font-size", "30px").attr("alignment-baseline","middle");
 
-  legendSvg.append("text").attr("x", 25).attr("y", 40).text(keys[1]).style("font-size", "15px").attr("alignment-baseline","middle");
-  legendSvg.append("text").attr("x", 25).attr("y", 70).text(keys[0]).style("font-size", "15px").attr("alignment-baseline","middle");
-  legendSvg.append("text").attr("x", 25).attr("y", 100).text(keys[2]).style("font-size", "15px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 25).attr("y", 40).text(cloudKeys[1]).style("font-size", "15px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 25).attr("y", 70).text(cloudKeys[0]).style("font-size", "15px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 25).attr("y", 100).text(cloudKeys[2]).style("font-size", "15px").attr("alignment-baseline","middle");
 
 
   let activeWord;
   d3.csv("data/composite_wordle_data.csv").then((data) => {
-    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-    const height = 400;
+    const height = 350;
     const width = 450;
 
     // Create an array of sizes based off number of tries
@@ -53,15 +52,17 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
                     .append("div") 
                     .attr('id', "tooltip3") 
                     .style("opacity", 0) 
-                    .attr("class", "tooltip");
+                    .attr("class", "tooltip")
+                    .attr("viewBox", [0, 0, width, height]); ;
 
     // Mouseover event handler
-    let mouseover = function(event, d) {
+    let mouseover = function(d) {
       activeWord = d.text;
+      console.log(d)
       let wordObject = d3.select(["[class^='word_", d.text].join(""));
 
       if (rarity) {
-        tooltip.html("Rarity: " + d["avg_num_of_tries"])
+        tooltip.html("Rarity: " + d.data["avg_num_of_tries"])
           .style("opacity", 1);
       } else {
         tooltip.html(
