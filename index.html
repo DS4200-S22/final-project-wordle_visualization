@@ -65,48 +65,51 @@
   </p>
 </div>
 
+<div id="entire-holder">
+  <div class='vis-holder' id="line-chart"></div>
 
-<div class='vis-holder' id="line-chart"></div>
-
-<div class='vis-holder' id="title-and-annotation">
-  <div class='vis-holder' id = "title">
-    <img src="lib/wordle_title.png" height = 200>
-  </div>
-  
-  <div>
-    <!-- <svg width="600" height="200">
-      <rect width="600" height="200" style="fill:lightgreen" />
-    </svg> -->
-    <p id="annotationBox"></p>
-  </div>
-</div>
-
-<div class = 'vis-holder' id="main-charts">
-  <div class = 'vis-holder' id="legends">
-
-    <div class = 'vis-holder' id="toggle">
-      <label class="radio">
-        <input type="radio" name="vis-type" value="Rarity">
-        <span>Rarity</span>
-      </label>
-      <label class="radio">
-        <input type="radio" name="vis-type" value="Attempts">
-        <span>Performance</span>
-      </label>
+  <div class='vis-holder' id="title-and-annotation">
+    <div class='vis-holder' id = "title">
+      <img src="lib/wordle_title.png" height = 200>
     </div>
     
-    <div class = 'vis-holder'>
-      <svg id="legend" height=100 width=250></svg>
-    </div>
-    <div class = 'vis-holder'>
-      <svg id="cloud-legend" height=200 width=300></svg>
+    <div>
+      <!-- <svg width="600" height="200">
+        <rect width="600" height="200" style="fill:lightgreen" />
+      </svg> -->
+      <p class = 'vis-holder' id="annotationBox"></p>
     </div>
   </div>
 
-  <div class='vis-holder' id="bar-chart"></div>
-  
-  <div class='vis-holder' id="word-cloud"></div> 
+  <div class = 'vis-holder' id="main-charts">
+    <div class = 'vis-holder' id="legends">
+
+      <p>Toggle the word cloud!</p>
+      <div class = 'vis-holder' id="toggle">
+        <label class="radio">
+          <input type="radio" name="vis-type" value="Rarity" checked="checked">
+          <span>Rarity</span>
+        </label>
+        <label class="radio">
+          <input type="radio" name="vis-type" value="Attempts">
+          <span>Performance</span>
+        </label>
+      </div>
+      
+      <div class = 'vis-holder'>
+        <svg id="legend" height=140 width=250></svg>
+      </div>
+      <div class = 'vis-holder'>
+        <svg id="cloud-legend" height=140 width=250></svg>
+      </div>
+    </div>
+
+    <div class='vis-holder' id="word-cloud"></div> 
+    <div class='vis-holder' id="bar-chart"></div>
+    
+  </div>
 </div>
+
 
 
 

@@ -31,16 +31,8 @@ p {
   flex: 1;
 }
 
-#line-chart {
-  /* background-color: #009BA2; */
-
-  /* outline: solid; */
-}
-
-#placeholder {
-  /* background-color: lightgreen; */
-
-  /* outline: solid; */
+#entire-holder {
+  /* background-color: beige; */
 }
 
 #title-and-annotation {
@@ -54,7 +46,11 @@ p {
   flex-direction: column;
   column-gap: 50px;
   /* background-color: lightcoral; */
-  /* outline: solid; */
+  outline: solid;
+  align-items: center;
+  max-width: 450px;
+  border-radius: 5px;
+  /* justify-content: space-evenly; */
 }
 
 #main-charts {

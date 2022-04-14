@@ -9,7 +9,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
   } else {
     keys = ["Good Performance", "Ok Performance", "Bad Performance"];
   }
-  legendSvg.append("text").attr("x", 0).attr("y", 15).text("Word Cloud Size Legend").style("font-size", "25px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 0).attr("y", 15).text("Word Cloud Size Legend").style("font-size", "20px").style("font-weight", "bold").attr("alignment-baseline","middle");
   legendSvg.append("text").attr("x", 5).attr("y", 40).text("A").style("font-size", "15px").attr("alignment-baseline","middle");
   legendSvg.append("text").attr("x", 3).attr("y", 70).text("A").style("font-size", "20px").attr("alignment-baseline","middle");
   legendSvg.append("text").attr("x", 0).attr("y", 100).text("A").style("font-size", "30px").attr("alignment-baseline","middle");
@@ -61,7 +61,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       let wordObject = d3.select(["[class^='word_", d.text].join(""));
 
       if (rarity) {
-        tooltip.html("Rarity: " + wordObject["rarity"])
+        tooltip.html("Rarity: " + d["avg_num_of_tries"])
           .style("opacity", 1);
       } else {
         tooltip.html(

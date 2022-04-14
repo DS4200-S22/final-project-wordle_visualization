@@ -44,7 +44,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                           .attr("y", margin.bottom - 4)
                           .attr("fill", "black")
                           .attr("text-anchor", "end")
-                          .text(xKey1));
+                          .text("Date"));
         
         // TODO: get rid of hard coding                  
         maxY1 = 18000;
@@ -65,7 +65,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                           .attr("y", margin.top - 20)
                           .attr("fill", "black")
                           .attr("text-anchor", "end")
-                          .text(yKey1));
+                          .text("Number of Players"));
     
         // to make sure there is an offset with the tooltip
         const yTooltipOffset1 = 15; 
