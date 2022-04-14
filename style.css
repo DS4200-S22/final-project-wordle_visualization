@@ -83,6 +83,11 @@ label.radio input:checked + span {
   fill: blueviolet;
 }
 
+.notSelected {
+  opacity: 0.5 !important;
+  fill: blueviolet;
+}
+
 .flex-container {
   display: flex;
   align-items: center;

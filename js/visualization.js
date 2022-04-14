@@ -66,13 +66,13 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
   {
     // append the svg canvas to the page
-    let svg = d3
-      .select("#vis5-container")
-      .append("svg")
-      .attr("class", "charts")
-      .attr("width", width - margin.left - margin.right)
-      .attr("height", height - margin.top - margin.bottom)
-      .attr("viewBox", [0, 0, width, height]);
+    // let svg = d3
+    //   .select("#vis5-container")
+    //   .append("svg")
+    //   .attr("class", "charts")
+    //   .attr("width", width - margin.left - margin.right)
+    //   .attr("height", height - margin.top - margin.bottom)
+    //   .attr("viewBox", [0, 0, width, height]);
 
     // Parse the Data
     d3.csv("data/bar_gradient_data.csv").then(function (data) {
@@ -154,21 +154,21 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
       const stackedData = d3.stack().keys(subgroups)(data);
 
       // Show the bars
-      svg
-        .append("g")
-        .selectAll("g")
-        // Enter in the stack data = loop key per key = group per group
-        .data(stackedData)
-        .join("g")
-        .attr("fill", (d, i) => colorBar(d, i))
-        .selectAll("rect")
-        // enter a second time = loop subgroup per subgroup to add all rectangles
-        .data((d) => d)
-        .join("rect")
-        .attr("x", (d) => x(d.data.date))
-        .attr("y", (d) => y(d[1]))
-        .attr("height", (d) => y(d[0]) - y(d[1]))
-        .attr("width", x.bandwidth());
+      // svg
+      //   .append("g")
+      //   .selectAll("g")
+      //   // Enter in the stack data = loop key per key = group per group
+      //   .data(stackedData)
+      //   .join("g")
+      //   .attr("fill", (d, i) => colorBar(d, i))
+      //   .selectAll("rect")
+      //   // enter a second time = loop subgroup per subgroup to add all rectangles
+      //   .data((d) => d)
+      //   .join("rect")
+      //   .attr("x", (d) => x(d.data.date))
+      //   .attr("y", (d) => y(d[1]))
+      //   .attr("height", (d) => y(d[0]) - y(d[1]))
+      //   .attr("width", x.bandwidth());
     });
   }
 });

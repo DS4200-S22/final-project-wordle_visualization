@@ -104,6 +104,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
         })
         .attr("text-anchor", "middle")
         .style("font-family", "Open Sans")
+        .style("text-transform", "uppercase")
         .attr("transform", function(d) {
           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
         })

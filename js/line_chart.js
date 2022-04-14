@@ -1,3 +1,6 @@
+let startDate = "1/15/2022"
+let endDate = "2/28/2022"
+
 d3.csv("data/composite_wordle_data.csv").then((data) => {
 
         // Append svg object to the body of the page to house linechart1
@@ -10,6 +13,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
     
         // initializing the x and y axes keys
         xKey1 = "date";
+        wordKey = "word";
         yKey1 = "number_of_players";
         yKey2 = "wins_in_1";
         yKey3 = "wins_in_2";
@@ -160,13 +164,28 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         // Call when Scatterplot1 is brushed 
         function updateChart(brushEvent) {
 
-                // let selection = d3.brushSelection(this);
                 let extent = brushEvent.selection;
-                console.log('the extent is:' +extent);
+                d3.selectAll("[class^='bar_")
+                .style("opacity", 0.25);
+
+                d3.selectAll("[class^='word_")
+                .style("opacity", 0.25);
 
                 // Gives bold outline to all points within the brush region in Scatterplot1
                 myPoints.classed("selected", function(d) {
-                        return isBrushed(extent, x1(parseTime(d[xKey1])), y1(d[yKey1]))
+                        
+                        if (isBrushed(extent, x1(parseTime(d[xKey1])), y1(d[yKey1]))) {
+                                let searchBarQuery = ["[class^='bar_", d[wordKey], "']"];
+                                console.log(searchBarQuery.join(""));
+                                d3.selectAll(searchBarQuery.join(""))
+                                .style("opacity", 1.0);
+
+                                let searchCloudQuery = ["[class^='word_", d[wordKey], "']"];
+                                console.log(searchCloudQuery.join(""));
+                                d3.selectAll(searchCloudQuery.join(""))
+                                .style("opacity", 1.0);
+                                return true
+                        }
                 })
         }
 
@@ -178,6 +197,10 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                 x1 = brush_coords[1][0],
                 y0 = brush_coords[0][1],
                 y1 = brush_coords[1][1];
+                startDate = x0;
+                endDate = x1;
                 return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1; // This return TRUE or FALSE depending on if the points is in the selected area
         }
+
+        
 })
