@@ -1,5 +1,7 @@
 let drawBarChart = function (rarity, bar_chart_svg) {
   // true = rarity, false = performance
+
+  // Add a legend for the both visualization's color scheme's
   let legendSvg = d3.select("#legend");
   legendSvg.selectAll("*").remove();
   let keys;

@@ -1,5 +1,5 @@
 let drawWordCloud = function(rarity, word_cloud_svg) {
-
+  // Add a legend for the word cloud sizes
   let legendSvg = d3.select("#cloud-legend");
   legendSvg.selectAll("*").remove();
   let keys;
@@ -59,7 +59,14 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
     // Mouseover event handler
     let mouseover = function(event, d) {
-      activeWord = d.text
+      activeWord = d.text;
+      let annotation = d3.select("#annotationBox");
+
+      let displayAnnotation = "";
+      displayAnnotation += ("Word: " + activeWord);
+      displayAnnotation += ("<br>Part of Speech:");
+      annotation.html(displayAnnotation)
+        .style("opacity", 1);
 
       if (rarity) {
         tooltip.html("Rarity: " + d["rarity"])
