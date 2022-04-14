@@ -54,9 +54,11 @@ p {
 #toggle {
   text-align: center;
 }
+
 label.radio {
   cursor: pointer;
 }
+
 label.radio input {
   position:absolute;
   top: 0;
@@ -64,6 +66,7 @@ label.radio input {
   visibility: hidden;
   pointer-events: none;
 }
+
 label.radio span {
   padding: 7px 14px;
   border: 2px solid #EEE;
@@ -73,6 +76,7 @@ label.radio span {
   text-transform: uppercase;
   font-family: "Open Sans";
 }
+
 label.radio input:checked + span {
   border-color: #009BA2;
   color:rgb(2, 66, 47);
@@ -93,6 +97,16 @@ label.radio input:checked + span {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+#legends {
+  display: flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 300px;
 }
 
 #word-cloud {

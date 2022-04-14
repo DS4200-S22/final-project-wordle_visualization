@@ -23,8 +23,6 @@ let drawBarChart = function (rarity, bar_chart_svg) {
     const height = 500;
     const width = 500;
 
-  
-
     // initializing the x and y axes keys
     xKey2 = "date";
     if (rarity) {

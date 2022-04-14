@@ -78,14 +78,8 @@
   </p>
   </label>
 </div>
-<div class = "flex-container">
-  <div>
-    <svg id="legend" height=100 width=250></svg>
-  </div>
-  <div>
-    <svg id="cloud-legend" height=100 width=300></svg>
-  </div>
-  <div>
+<div class = "flex-container" id = "legends">
+  <div height=100 width=300>
     <label class="radio">
       <input type="radio" name="vis-type" value="Rarity">
       <span>Rarity</span>
@@ -94,6 +88,14 @@
       <input type="radio" name="vis-type" value="Attempts">
       <span>Performance</span>
     </label>
+  </div>
+
+  <div>
+    <svg id="cloud-legend" height=90 width=300></svg>
+  </div>
+  
+  <div>
+    <svg id="legend" height=90 width=250></svg>
   </div>
 </div>
 
