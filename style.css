@@ -97,8 +97,10 @@ label.radio input:checked + span {
 
 #word-cloud {
   flex: 1;
+  max-width: 1200px;
 }
 
 #bar-chart {
   flex: 1;
+  max-width: 1200px;
 }
