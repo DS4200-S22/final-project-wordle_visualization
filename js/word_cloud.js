@@ -21,6 +21,13 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
   let activeWord;
   d3.csv("data/composite_wordle_data.csv").then((data) => {
+
+
+    let dateTest = data.filter(function(d) { 
+      return d["word"] === "choke" })[0];
+    console.log("wins_in_2", dateTest.wins_in_5);
+
+
     const height = 350;
     const width = 450;
 
@@ -58,18 +65,24 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
                     .attr("viewBox", [0, 0, width, height]); ;
 
     // Mouseover event handler
-    let mouseover = function(d) {
+    let mouseover = function(event, d) {
       activeWord = d.text;
-      let dataRow = data[wordToNum.get(d.text)];
-      let percentWinIn2 = Math.ceil(dataRow.wins_in_2/dataRow.number_of_players * 1000) / 10;
-      let wordObject = data.filter(function(d) { return d["word"] === "panic" })[0];
+      console.log("active word is", d.text);
+      let wordObject = data.filter(function(d) { 
+        return d["word"].localeCompare(activeWord) == 0 })[0];
+
       if (rarity) {
-        tooltip.html("Frequency: " + wordObject.rarity)
+        tooltip.html("Frequency: " + wordObject.frequency
+        + "<br> Word Rarity: " + wordObject.rarity)
           .style("opacity", 1);
       } else {
         tooltip.html(
-          "<br> Average Number of Tries: " + wordObject.avg_num_of_tries
-        + "<br> % Wins in 2 tries: " + percentWinIn2)
+          "Average Number of Tries: " + wordObject.avg_num_of_tries
+        + "<br> % Wins in 2 tries: " + wordObject.wins_in_2
+        + "<br> % Wins in 3 tries: " + wordObject.wins_in_3
+        + "<br> % Wins in 4 tries: " + wordObject.wins_in_4
+        + "<br> % Wins in 5 tries: " + wordObject.wins_in_5
+        + "<br> % Wins in 6 tries: " + wordObject.wins_in_6)
           .style("opacity", 1);
       }
 

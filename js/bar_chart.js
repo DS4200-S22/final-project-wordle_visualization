@@ -20,14 +20,10 @@ let drawBarChart = function (rarity, bar_chart_svg) {
 
   d3.csv("data/composite_wordle_data.csv").then((data) => {
     const margin = { top: 80, right: 50, bottom: 50, left: 50 };
-    const height = 500;
+    const height = 350;
     const width = 525;
 
-    // Create a map of word to index
-    let wordToNum = new Map();
-    for(let i = 0; i < data.length; i++) {
-      wordToNum.set(data[i].word, i);
-    }
+  
 
     // initializing the x and y axes keys
     xKey2 = "date";
@@ -141,7 +137,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
         .transition()
         .style("text-shadow", "-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000");
 
-      updateAnnotation(activeWord, data[wordToNum.get(activeWord)]);
+      updateAnnotationFor(activeWord);
     };
 
     // Mouse moving event handler

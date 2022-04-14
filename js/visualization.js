@@ -173,3 +173,22 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
   }
 });
 
+function configureToolTip() {
+  let wordObject = data.filter(function(d) { 
+    return d["word"].localeCompare(activeWord) == 0 })[0];
+
+  if (rarity) {
+    tooltip.html("Frequency: " + wordObject.frequency
+    + "<br> Word Rarity: " + wordObject.rarity)
+      .style("opacity", 1);
+  } else {
+    tooltip.html(
+      "Average Number of Tries: " + wordObject.avg_num_of_tries
+    + "<br> % Wins in 2 tries: " + wordObject.wins_in_2
+    + "<br> % Wins in 3 tries: " + wordObject.wins_in_3
+    + "<br> % Wins in 4 tries: " + wordObject.wins_in_4
+    + "<br> % Wins in 5 tries: " + wordObject.wins_in_5
+    + "<br> % Wins in 6 tries: " + wordObject.wins_in_6)
+      .style("opacity", 1);
+  }
+}

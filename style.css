@@ -17,6 +17,10 @@ p {
   align-content: center;
 }
 
+p2 {
+  font-size: 15px;
+}
+
 /* Narrow Column */
 .content-column {
   max-width: 65%;
@@ -48,7 +52,8 @@ p {
 }
 
 #annotation {
-  max-width: 200px;
+  max-width: 400px;
+  font-size: 20px;
 }
 
 #legends {
