@@ -28,7 +28,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
     // initializing the x and y axes keys
     xKey2 = "date";
     if (rarity) {
-      yKey2 = "word_rarity";
+      yKey2 = "rarity";
     } else {
       yKey2 = "avg_num_of_tries";
     }
@@ -169,7 +169,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       .attr("class", (d) => "bar_" + d["word"])
       .attr("x", (d, i) => xScale2(parseTime(d[xKey1])))
       .attr("y", (d) => yScale2(d[yKey2]))
-      .attr("width", 7.5)
+      .attr("width", 2)
       .attr("height", (d) => height - margin.bottom - yScale2(d[yKey2]))
       .style("opacity", 1)
       .style("fill", function (d) {

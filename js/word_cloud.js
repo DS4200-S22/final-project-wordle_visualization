@@ -14,8 +14,8 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
   legendSvg.append("text").attr("x", 3).attr("y", 70).text("A").style("font-size", "20px").attr("alignment-baseline","middle");
   legendSvg.append("text").attr("x", 0).attr("y", 100).text("A").style("font-size", "30px").attr("alignment-baseline","middle");
 
-  legendSvg.append("text").attr("x", 25).attr("y", 40).text(cloudKeys[1]).style("font-size", "15px").attr("alignment-baseline","middle");
-  legendSvg.append("text").attr("x", 25).attr("y", 70).text(cloudKeys[0]).style("font-size", "15px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 25).attr("y", 40).text(cloudKeys[0]).style("font-size", "15px").attr("alignment-baseline","middle");
+  legendSvg.append("text").attr("x", 25).attr("y", 70).text(cloudKeys[1]).style("font-size", "15px").attr("alignment-baseline","middle");
   legendSvg.append("text").attr("x", 25).attr("y", 100).text(cloudKeys[2]).style("font-size", "15px").attr("alignment-baseline","middle");
 
 
@@ -127,9 +127,9 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
         .attr("class", (d) => "word_" + d.text)
         .style("font-size", (d) => d.size)
         .style("fill", function(d,i){ 
-          if (data[i].rarity == 1) {
+          if (data[i].rarity_size == 1) {
             return '#000000'; 
-          } else if (data[i].rarity == 2) {
+          } else if (data[i].rarity_size == 2) {
             return '#cab558';
           } else {
             return '#6aaa64';

@@ -1,46 +1,94 @@
-date,wordle_id,word,part_of_speech,frequency,percentile_word,avg_yellow_squares,avg_green_squares,avg_b/w_squares,avg_num_of_tries,number_of_players,performance,word_rarity,rarity,wins_in_1,wins_in_2,wins_in_3,wins_in_4,wins_in_5,wins_in_6
-1/15/2022,210,panic,n,19.023,0.711,2.956,8.185,7.943,3.815,2829,6.870392375,2.279289464,3,0,222,895,1060,488,164
-1/16/2022,211,solar,adj,28.934,0.800,4.178,8.609,6.691,3.897,2882,6.583756549,2.461412064,3,0,194,900,1011,562,215
-1/17/2022,212,shire,n,1.649,0.289,3.024,9.758,6.428,3.842,2392,6.77324552,1.21720696,2,0,191,783,818,412,188
-1/18/2022,213,proxy,n,6.166,0.533,1.885,10.220,10.945,4.613,2110,4.699714368,1.790034158,2,0,51,258,627,695,479
-1/19/2022,214,point,n,538.817,0.956,2.020,8.536,7.313,3.569,2693,7.849557634,3.731441084,4,0,379,1009,820,363,122
-1/20/2022,215,robot,n,9.344,0.600,2.973,8.052,8.392,3.884,2937,6.630421819,1.970545007,2,0,246,874,1017,576,224
-1/21/2022,216,prick,n,2.125,0.333,1.608,9.469,8.222,3.860,6066,6.711451988,1.327300071,2,0,457,1947,2063,1186,413
-1/22/2022,217,wince,v,0.753,0.178,2.721,9.951,8.871,4.308,2941,5.388114539,0.8766438408,1,0,100,563,1026,835,417
-1/23/2022,218,crimp,n,0.586,0.133,2.316,9.223,8.129,3.930,3464,6.475123821,0.7675617602,1,0,169,1003,1379,728,185
-1/24/2022,219,knoll,n,1.714,0.311,3.353,8.040,11.644,4.608,2896,4.708633347,1.234019179,2,0,38,340,915,1028,575
-1/25/2022,220,sugar,n,55.389,0.889,4.072,8.228,8.055,4.072,6621,6.030803566,2.743425069,3,0,387,1620,2376,1605,633
-1/26/2022,221,whack,n,0.872,0.222,1.790,9.297,9.470,4.111,6610,5.91605021,0.9405822218,1,0,273,1520,2616,1600,601
-1/27/2022,222,mount,n,31.737,0.822,2.067,9.174,8.111,3.869,6721,6.680169405,2.501563546,3,0,561,2001,2381,1313,465
-1/28/2022,223,perky,adj,0.386,0.111,2.946,9.769,9.104,4.364,15698,5.25179187,0.5868617461,1,0,595,2870,5066,4566,2601
-1/29/2022,224,could,v,45.439,0.844,2.060,9.104,8.364,3.906,6887,6.555229426,2.657432493,3,0,438,2085,2507,1402,455
-1/30/2022,225,wrung,v,1.561,0.267,2.033,9.734,9.466,4.247,6860,5.544696941,1.193479962,2,0,123,1296,2899,1849,693
-1/31/2022,226,light,n,340.002,0.933,2.766,8.387,8.249,3.879,6078,6.64744623,3.531481041,4,0,685,1798,1789,1182,624
-2/1/2022,227,those,n,587.175,0.978,3.240,8.598,6.289,3.626,6791,7.60589378,3.768767922,4,0,906,2427,2114,989,355
-2/2/2022,228,moist,adj,10.064,0.622,2.560,8.740,7.246,3.710,5980,7.266456112,2.002787501,3,0,767,1942,1919,964,388
-2/3/2022,229,shard,n,0.321,0.089,2.721,10.746,7.083,4.110,6463,5.919004516,0.5059106842,1,0,443,1599,2022,1600,799
-2/4/2022,230,pleat,n,0.231,0.022,4.172,8.931,6.220,3.863,6637,6.700505895,0.3630758312,1,0,685,1990,2078,1316,568
-2/5/2022,231,aloft,adv,3.001,0.378,3.755,9.131,7.784,4.134,7782,5.852404462,1.477259338,2,0,359,1826,2822,1966,809
-2/6/2022,232,skill,n,48.381,0.867,2.454,9.751,9.411,4.322,3307,5.35404941,2.684674921,3,0,87,631,1188,933,468
-2/7/2022,233,elder,n,20.061,0.756,4.148,9.531,9.201,4.576,6428,4.775122336,2.302346235,3,0,194,937,1756,2053,1488
-2/8/2022,234,frame,n,65.713,0.911,2.468,10.547,7.515,4.107,6194,5.929398267,2.817654553,3,0,664,1418,1626,1565,921
-2/9/2022,235,humor,n,20.768,0.778,4.264,7.819,8.833,4.182,6459,5.717643681,2.317394696,3,0,289,1423,2317,1683,747
-2/10/2022,236,pause,n,20.012,0.733,3.358,9.898,6.892,4.029,10004,6.159775248,2.301297395,3,0,786,2511,3395,2249,1063
-2/11/2022,237,ulcer,n,8.373,0.578,4.699,8.762,8.290,4.350,10115,5.283573138,1.922899141,2,0,381,1829,3276,3122,1507
-2/12/2022,238,ultra,adj,6.748,0.556,6.110,6.899,7.606,4.123,7048,5.881805808,1.829194832,2,0,399,1582,2549,1787,731
-2/13/2022,239,robin,n,12.072,0.644,3.517,8.152,8.330,4.000,5015,6.250623177,2.081775665,3,0,310,1379,1747,1160,419
-2/14/2022,240,cynic,n,1.124,0.244,3.070,8.082,11.525,4.534,6384,4.864168838,1.050845513,2,0,110,724,2235,2276,1039
-2/15/2022,241,aroma,n,2.980,0.356,3.400,8.450,8.553,4.080,6806,6.006647277,1.47424235,2,0,352,1779,2377,1567,731
-2/16/2022,242,caulk,v,0.267,0.067,2.792,9.166,9.109,4.213,3198,5.633312358,0.4270639437,1,0,156,736,1055,772,479
-2/17/2022,243,shake,v,17.994,0.689,2.247,12.126,7.207,4.316,2762,5.369017724,2.255119679,3,0,207,553,727,711,564
-2/18/2022,244,dodge,n,5.923,0.511,2.332,9.645,10.224,4.441,3337,5.070778231,1.772571501,2,0,96,537,1075,1058,571
-2/19/2022,245,swill,n,0.251,0.044,2.000,11.723,10.357,4.816,2919,4.311427743,0.3996218107,1,0,43,301,680,1021,874
-2/20/2022,246,tacit,adj,4.595,0.444,3.070,8.983,8.917,4.194,3312,5.684779625,1.66231661,2,0,137,753,1151,872,399
-2/21/2022,247,other,adj,2162.911,1.000,5.121,7.971,6.633,3.945,3505,6.425695167,4.335038549,5,0,328,961,1122,764,330
-2/22/2022,248,thorn,n,4.358,0.422,3.526,7.447,6.682,3.531,3582,8.021879351,1.639253442,2,0,475,1405,1158,414,130
-2/23/2022,249,trove,n,0.595,0.156,2.706,11.832,7.306,4.368,6186,5.241810165,0.7745133162,1,0,305,1227,1794,1608,1252
-2/24/2022,250,bloke,n,0.827,0.200,2.270,9.430,8.919,4.124,7076,5.879569688,0.9174477398,1,0,474,1596,2408,1774,824
-2/25/2022,251,vivid,adj,13.314,0.667,1.368,8.641,13.146,4.629,9013,4.666237813,2.124294102,3,0,242,977,2642,3171,1981
-2/26/2022,252,spill,n,5.003,0.489,2.397,9.104,8.804,4.060,6115,6.066587058,1.69923467,2,0,304,1642,2162,1397,610
-2/27/2022,253,chant,n,4.966,0.467,2.235,9.159,7.359,3.750,7356,7.109564629,1.696011088,2,0,695,2513,2528,1173,447
-2/28/2022,254,choke,v,3.149,0.400,1.882,9.149,8.100,3.826,7131,6.83050725,1.498186866,2,0,579,2198,2644,1303,407
+date,wordle_id,word,part_of_speech,frequency,rarity,rarity_size,definition,avg_num_of_tries,number_of_players,wins_in_1,wins_in_2,wins_in_3,wins_in_4,wins_in_5,wins_in_6
+1/15/2022,210,panic,n,19.023,2.279,3,an overwhelming feeling of fear and anxiety,3.815,2829,0,222,895,1060,488,164
+1/16/2022,211,solar,adj,28.934,2.461,3,relating to or derived from the sun or utilizing the energies of the sun,3.897,2882,0,194,900,1011,562,215
+1/17/2022,212,shire,n,1.649,1.217,2,British breed of large heavy draft horse,3.842,2392,0,191,783,818,412,188
+1/18/2022,213,proxy,n,6.166,1.790,2,a power of attorney document given by shareholders of a corporation authorizing a specific vote on their behalf at a corporate meeting,4.613,2110,0,51,258,627,695,479
+1/19/2022,214,point,n,538.817,3.731,4,sharp end,3.569,2693,0,379,1009,820,363,122
+1/20/2022,215,robot,n,9.344,1.971,2,a mechanism that can move automatically,3.884,2937,0,246,874,1017,576,224
+1/21/2022,216,prick,n,2.125,1.327,2,the act of puncturing with a small point,3.860,6066,0,457,1947,2063,1186,413
+1/22/2022,217,wince,v,0.753,0.877,1,a reflex response to sudden pain,4.308,2941,0,100,563,1026,835,417
+1/23/2022,218,crimp,n,0.586,0.768,1,a lock of hair that has been artificially waved or curled,3.930,3464,0,169,1003,1379,728,185
+1/24/2022,219,knoll,n,1.714,1.234,2,a small natural hill,4.608,2896,0,38,340,915,1028,575
+1/25/2022,220,sugar,n,55.389,2.743,3,a white crystalline carbohydrate used as a sweetener and preservative,4.072,6621,0,387,1620,2376,1605,633
+1/26/2022,221,whack,n,0.872,0.941,1,the sound made by a sharp swift blow,4.111,6610,0,273,1520,2616,1600,601
+1/27/2022,222,mount,n,31.737,2.502,3,mounting consisting of a piece of metal (as in a ring or other jewelry) that holds a gem in place,3.869,6721,0,561,2001,2381,1313,465
+1/28/2022,223,perky,adj,0.386,0.587,1,characterized by liveliness and light-heartedness,4.364,15698,0,595,2870,5066,4566,2601
+1/29/2022,224,could,v,45.439,2.657,3,definition unavailable,3.906,6887,0,438,2085,2507,1402,455
+1/30/2022,225,wrung,v,1.561,1.193,2,twist and compress,4.247,6860,0,123,1296,2899,1849,693
+1/31/2022,226,light,n,340.002,3.531,4,any device serving as a source of illumination,3.879,6078,0,685,1798,1789,1182,624
+2/1/2022,227,those,n,587.175,3.769,4,definition unavailable,3.626,6791,0,906,2427,2114,989,355
+2/2/2022,228,moist,adj,10.064,2.003,3,slightly wet,3.710,5980,0,767,1942,1919,964,388
+2/3/2022,229,shard,n,0.321,0.506,1,a broken piece of a brittle artifact,4.110,6463,0,443,1599,2022,1600,799
+2/4/2022,230,pleat,n,0.231,0.363,1,any of various types of fold formed by doubling fabric back upon itself and then pressing or stitching into shape,3.863,6637,0,685,1990,2078,1316,568
+2/5/2022,231,aloft,adv,3.001,1.477,2,in the higher atmosphere above the earth,4.134,7782,0,359,1826,2822,1966,809
+2/6/2022,232,skill,n,48.381,2.685,3,ability to produce solutions in some problem domain,4.322,3307,0,87,631,1188,933,468
+2/7/2022,233,elder,n,20.061,2.302,3,a person who is older than you are,4.576,6428,0,194,937,1756,2053,1488
+2/8/2022,234,frame,n,65.713,2.818,3,one of a series of still transparent photographs on a strip of film used in making movies,4.107,6194,0,664,1418,1626,1565,921
+2/9/2022,235,humor,n,20.768,2.317,3,the trait of appreciating (and being able to express) the humorous,4.182,6459,0,289,1423,2317,1683,747
+2/10/2022,236,pause,n,20.012,2.301,3,temporary inactivity,4.029,10004,0,786,2511,3395,2249,1063
+2/11/2022,237,ulcer,n,8.373,1.923,2,a circumscribed inflammatory and often suppurating lesion on the skin or an internal mucous surface resulting in necrosis of tissue,4.350,10115,0,381,1829,3276,3122,1507
+2/12/2022,238,ultra,adj,6.748,1.829,2,(used of opinions and actions) far beyond the norm,4.123,7048,0,399,1582,2549,1787,731
+2/13/2022,239,robin,n,12.072,2.082,3,large American thrush having a rust-red breast and abdomen,4.000,5015,0,310,1379,1747,1160,419
+2/14/2022,240,cynic,n,1.124,1.051,2,someone who is critical of the motives of others,4.534,6384,0,110,724,2235,2276,1039
+2/15/2022,241,aroma,n,2.980,1.474,2,a distinctive odor that is pleasant,4.080,6806,0,352,1779,2377,1567,731
+2/16/2022,242,caulk,v,0.267,0.427,1,seal with caulking,4.213,3198,0,156,736,1055,772,479
+2/17/2022,243,shake,v,17.994,2.255,3,grasping and shaking a person's hand (as to acknowledge an introduction or to agree on a contract),4.316,2762,0,207,553,727,711,564
+2/18/2022,244,dodge,n,5.923,1.773,2,a quick evasive movement,4.441,3337,0,96,537,1075,1058,571
+2/19/2022,245,swill,n,0.251,0.400,1,wet feed (especially for pigs) consisting of mostly kitchen waste mixed with water or skimmed or sour milk,4.816,2919,0,43,301,680,1021,874
+2/20/2022,246,tacit,adj,4.595,1.662,2,indicated by necessary connotation though not expressed directly,4.194,3312,0,137,753,1151,872,399
+2/21/2022,247,other,adj,2162.911,4.335,5,not the same one or ones already mentioned or implied,3.945,3505,0,328,961,1122,764,330
+2/22/2022,248,thorn,n,4.358,1.639,2,a Germanic character of runic origin,3.531,3582,0,475,1405,1158,414,130
+2/23/2022,249,trove,n,0.595,0.775,1,treasure of unknown ownership found hidden (usually in the earth),4.368,6186,0,305,1227,1794,1608,1252
+2/24/2022,250,bloke,n,0.827,0.917,1,a man who is (usually) old and/or eccentric,4.124,7076,0,474,1596,2408,1774,824
+2/25/2022,251,vivid,adj,13.314,2.124,3,having the clarity and freshness of immediate experience,4.629,9013,0,242,977,2642,3171,1981
+2/26/2022,252,spill,n,5.003,1.699,2,a sudden drop from an upright position,4.060,6115,0,304,1642,2162,1397,610
+2/27/2022,253,chant,n,4.966,1.696,2,a repetitive song in which as many syllables as necessary are assigned to a single tone,3.750,7356,0,695,2513,2528,1173,447
+2/28/2022,254,choke,v,3.149,1.498,2,check or slow down the action or effect of,3.810,10715,0,939,3292,3936,1959,589
+3/1/2022,255,rupee,n,1.792,1.253,2,the basic unit of money in India; equal to 100 paise,4.386,4562,0,112,753,1623,1412,662
+3/2/2022,256,nasty,adj,6.708,1.827,2,offensive or even (of persons) malicious,4.008,7099,0,528,1935,2336,1554,746
+3/3/2022,257,mourn,v,3.058,1.485,2,feel sadness,3.916,7400,0,584,2107,2640,1484,585
+3/4/2022,258,ahead,adv,67.016,2.826,3,at or in the front,4.233,7258,0,307,1479,2585,1992,895
+3/5/2022,259,brine,n,2.643,1.422,2,a strong solution of salt and water used for pickling,3.952,3630,0,341,989,1186,732,382
+3/6/2022,260,cloth,n,31.455,2.498,3,artifact made by weaving or felting or knitting or crocheting natural or synthetic fibers,3.816,7620,0,541,2570,2718,1335,456
+3/7/2022,261,hoard,n,2.283,1.358,2,a secret store of valuables or money,3.823,7489,0,670,2331,2602,1425,461
+3/8/2022,262,sweet,adj,48.644,2.687,3,pleasing to the senses,4.264,5883,0,316,1164,1900,1654,849
+3/9/2022,263,month,n,101.867,3.008,4,a time unit of 30 days,4.017,7534,0,393,1967,2873,1722,579
+3/10/2022,264,lapse,n,5.556,1.745,2,a break or intermission in the occurrence of something,3.862,3766,0,285,1204,1282,737,258
+3/11/2022,265,watch,v,75.127,2.876,3,a purposeful surveillance to guard or observe,4.361,5162,0,405,1035,1319,1097,1306
+3/12/2022,266,today,n,203.535,3.309,4,the day that includes the present moment (as opposed to yesterday or tomorrow),3.925,3715,0,292,1048,1322,751,302
+3/13/2022,267,focus,n,116.094,3.065,4,maximum clarity or distinctness of an image rendered by an optical system,4.193,3752,0,155,806,1337,1066,388
+3/14/2022,268,smelt,v,1.639,1.214,2,small trout-like silvery marine or freshwater food fishes of cold northern waters,4.218,3617,0,211,719,1203,1037,447
+3/15/2022,269,tease,v,2.771,1.443,2,the act of harassing someone playfully or maliciously (especially by ridicule); provoking someone with persistent annoyances,3.596,3718,0,614,1213,1149,544,198
+3/16/2022,270,cater,v,2.877,1.459,2,supply food ready to eat; for parties and banquets,4.168,2990,0,257,723,813,654,543
+3/17/2022,271,movie,n,31.379,2.497,3,a form of entertainment that enacts a story by a sequence of images giving the illusion of continuous movement,4.298,3567,0,192,679,1133,1000,563
+3/18/2022,272,saute,v,1.545,1.189,2,fry briefly over high heat,3.902,3782,0,266,1144,1366,707,299
+3/19/2022,273,allow,v,125.982,3.100,4,let have,4.294,3623,0,144,739,1212,963,565
+3/20/2022,274,renew,v,5.840,1.766,2,cause to appear in a new form,4.250,3737,0,165,799,1228,1028,517
+3/21/2022,275,their,n,9.567,1.981,2,definition unavailable,3.553,3702,0,545,1373,1129,502,153
+3/22/2022,276,slosh,v,0.153,0.185,1,spill or splash copiously or clumsily,4.240,3749,0,107,787,1389,1032,434
+3/23/2022,277,purge,n,4.289,1.632,2,an act of removing by cleansing; ridding of sediment or other undesired elements,4.171,3800,0,167,859,1354,997,423
+3/24/2022,278,chest,n,53.121697,2.725,3,box with a lid; used for storage; usually large and sturdy,0,0,0,0,0,0,0,0
+3/25/2022,279,depot,n,6.249,1.796,2,a depository for goods,3.935,3688,0,181,1105,1426,726,250
+3/26/2022,280,epoxy,n,3.651,1.562,2,a thermosetting resin; used chiefly in strong adhesives and coatings and laminates,4.547,3109,0,64,399,996,1072,578
+3/27/2022,281,nymph,n,1.708,1.232,2,a larva of an insect with incomplete metamorphosis (as the dragonfly or mayfly),4.183,3172,0,82,588,1422,828,252
+3/28/2022,282,found,v,675.945,3.830,4,set up or lay the groundwork for,4.347,2803,0,208,576,718,638,663
+3/29/2022,283,shall,n,8.697,1.939,2,definition unavailable,4.352,3436,0,135,693,1032,980,596
+3/30/2022,284,stove,n,10.101,2.004,3,any heating apparatus,4.392,3193,0,174,634,839,858,688
+3/31/2022,285,lowly,adj,2.988,1.475,2,used of unskilled work (especially domestic work),4.646,3255,0,61,389,943,1109,753
+4/1/2022,286,snout,n,2.002,1.301,2,a long projecting or anterior elongation of an animal's head; especially the nose,4.314,3251,0,141,690,993,861,566
+4/2/2022,287,trope,n,1.469,1.167,2,language used in a figurative or nonliteral sense,3.602,3480,0,573,1167,1015,522,203
+4/3/2022,288,fewer,adj,36.320482,2.560,3,(comparative of `few' used with count nouns) quantifier meaning a smaller number of,0,0,0,0,0,0,0,0
+4/4/2022,289,shawl,n,2.930,1.467,2,cloak consisting of an oblong piece of cloth used to cover the head and shoulders,4.384,3514,0,144,592,1126,1076,576
+4/5/2022,290,natal,n,6.091,1.785,2,a port city in northeastern Brazil,4.463,3518,0,86,503,1193,1169,567
+4/6/2022,291,comma,n,3.175,1.502,2,anglewing butterfly with a comma-shaped mark on the underside of each hind wing,4.499,7074,0,137,973,2366,2420,1178
+4/7/2022,292,foray,n,0.995,0.998,1,an initial attempt (especially outside your usual areas of competence),4.508,3546,0,86,506,1124,1179,651
+4/8/2022,293,scare,v,5.426,1.734,2,a sudden attack of fear,3.942,3388,0,434,883,949,688,434
+4/9/2022,294,stair,n,3.368,1.527,2,support consisting of a place to rest the foot while ascending or descending a stairway,3.415,3575,0,733,1329,949,425,139
+4/10/2022,295,black,adj,311.207,3.493,4,black clothing (worn as a sign of mourning),3.785,3765,0,392,1174,1295,660,244
+4/11/2022,296,squad,n,6.588,1.819,2,a smallest army unit,4.362,3614,0,118,672,1169,1094,561
+4/12/2022,297,royal,n,85.491,2.932,3,stag with antlers of 12 or more branches,4.088,3750,0,183,924,1390,885,368
+4/13/2022,298,chunk,n,2.730,1.436,2,a compact mass,3.897,3764,0,183,1129,1540,718,194
+4/14/2022,299,mince,n,0.872,0.940,1,food chopped into small bits,4.122,3809,0,206,887,1354,959,403
+4/15/2022,300,shame,n,24.066,2.381,3,a painful emotion resulting from an awareness of inadequacy or guilt,3.986,3358,0,415,849,926,703,465
+4/16/2022,301,cheek,n,16.623,2.221,3,either side of the face below the eyes,4.140,3820,0,131,819,1566,994,310
+4/17/2022,302,ample,adj,13.626,2.134,3,fairly large,4.187,3682,0,171,786,1306,1022,397
