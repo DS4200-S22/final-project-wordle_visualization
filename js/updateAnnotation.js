@@ -7,9 +7,11 @@ let updateAnnotation = function(word) {
   let annotation = d3.select("#annotationBox");
 
   let displayAnnotation = "";
-  displayAnnotation += ("Word: " + wordObject.word);
+  displayAnnotation += ("Date: " + wordObject.date);
+  displayAnnotation += ("<br>Word: " + wordObject.word);
   displayAnnotation += ("<br>Part of Speech: " + wordObject.part_of_speech);
-  displayAnnotation += ("<br>Rarity: " + wordObject.word_rarity);
+  displayAnnotation += ("<br>Definition: " + wordObject.definition);
+  displayAnnotation += ("<br>Rarity: " + wordObject.rarity);
   displayAnnotation += ("<br>Average Number of Tries: " + wordObject.avg_num_of_tries);
   displayAnnotation += ("<br>% wins in 2: " + Math.ceil(wordObject.wins_in_2/wordObject.number_of_players * 1000) / 10 + "%");
   displayAnnotation += ("<br>% wins in 3: " + Math.ceil(wordObject.wins_in_3/wordObject.number_of_players * 1000) / 10 + "%");

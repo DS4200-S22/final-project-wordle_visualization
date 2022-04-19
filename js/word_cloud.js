@@ -73,7 +73,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
       if (rarity) {
         tooltip.html("Relative Frequency: " + wordObject.frequency
-        + "<br> Word Rarity: " + wordObject.word_rarity)
+        + "<br> Word Rarity: " + wordObject.rarity)
           .style("opacity", 1);
       } else {
         tooltip.html(

@@ -121,7 +121,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         .attr("id", (d) => d.wordle_id)
                         .attr("cx", (d) => x1(parseTime(d[xKey1])))
                         .attr("cy", (d) => y1(d[yKey1]))
-                        .attr("r", 10)
+                        .attr("r", 5)
                         .style("fill", "black")
                         .style("opacity", 0.40)
                         .on("mouseover", mouseover) 

@@ -169,7 +169,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       .attr("class", (d) => "bar_" + d["word"])
       .attr("x", (d, i) => xScale2(parseTime(d[xKey1])))
       .attr("y", (d) => yScale2(d[yKey2]))
-      .attr("width", 2)
+      .attr("width", 4)
       .attr("height", (d) => height - margin.bottom - yScale2(d[yKey2]))
       .style("opacity", 1)
       .style("fill", function (d) {
