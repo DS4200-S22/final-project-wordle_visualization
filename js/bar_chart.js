@@ -6,24 +6,68 @@ let drawBarChart = function (rarity, bar_chart_svg) {
   let barKeys;
 
   if (rarity) {
-    barKeys = ["Rare Word", "Somewhat Common Word","Common Word"];
+    barKeys = ["Rare Word", "Somewhat Common Word", "Common Word"];
   } else {
     barKeys = ["Good Performance", "Ok Performance", "Bad Performance"];
   }
-  legendSvg.append("text").attr("x", 0).attr("y", 15).text("Color Legend").style("font-size", "20px").style("font-weight", "bold").attr("alignment-baseline","middle");
-  legendSvg.append("rect").attr("x",0).attr("y",35).attr("width", 10).attr("height", 10).style("fill", "#6aaa64");
-  legendSvg.append("rect").attr("x",0).attr("y",65).attr("width", 10).attr("height", 10).style("fill", "#cab558");
-  legendSvg.append("rect").attr("x",0).attr("y",95).attr("width", 10).attr("height", 10).style("fill", "black");
-  legendSvg.append("text").attr("x",25).attr("y", 40).text(barKeys[0]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","#6aaa64");
-  legendSvg.append("text").attr("x",25).attr("y", 70).text(barKeys[1]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","#cab558");
-  legendSvg.append("text").attr("x",25).attr("y", 100).text(barKeys[2]).style("font-size", "15px").attr("alignment-baseline","middle").attr("fill","black");
+  legendSvg
+    .append("text")
+    .attr("x", 0)
+    .attr("y", 15)
+    .text("Color Legend")
+    .style("font-size", "20px")
+    .style("font-weight", "bold")
+    .attr("alignment-baseline", "middle");
+  legendSvg
+    .append("rect")
+    .attr("x", 0)
+    .attr("y", 35)
+    .attr("width", 10)
+    .attr("height", 10)
+    .style("fill", "#6aaa64");
+  legendSvg
+    .append("rect")
+    .attr("x", 0)
+    .attr("y", 65)
+    .attr("width", 10)
+    .attr("height", 10)
+    .style("fill", "#cab558");
+  legendSvg
+    .append("rect")
+    .attr("x", 0)
+    .attr("y", 95)
+    .attr("width", 10)
+    .attr("height", 10)
+    .style("fill", "black");
+  legendSvg
+    .append("text")
+    .attr("x", 25)
+    .attr("y", 40)
+    .text(barKeys[0])
+    .style("font-size", "15px")
+    .attr("alignment-baseline", "middle")
+    .attr("fill", "#6aaa64");
+  legendSvg
+    .append("text")
+    .attr("x", 25)
+    .attr("y", 70)
+    .text(barKeys[1])
+    .style("font-size", "15px")
+    .attr("alignment-baseline", "middle")
+    .attr("fill", "#cab558");
+  legendSvg
+    .append("text")
+    .attr("x", 25)
+    .attr("y", 100)
+    .text(barKeys[2])
+    .style("font-size", "15px")
+    .attr("alignment-baseline", "middle")
+    .attr("fill", "black");
 
   d3.csv("data/composite_wordle_data.csv").then((data) => {
     const margin = { top: 80, right: 50, bottom: 50, left: 50 };
     const height = 350;
     const width = 525;
-
-  
 
     // initializing the x and y axes keys
     xKey2 = "date";
@@ -64,14 +108,25 @@ let drawBarChart = function (rarity, bar_chart_svg) {
           .text(xKey2)
       );
 
-    // TODO: get rid of hard coding
-
     if (rarity) {
-      maxY2 = 4.6;
-      minY2 = 0.2;
+      // added padding to make sure max and min show up
+      maxY2 =
+        d3.max(data, function (d) {
+          return +d[yKey2];
+        }) + 0.2;
+      minY2 =
+        d3.min(data, function (d) {
+          return +d[yKey2];
+        }) - 0.1;
     } else {
-      maxY2 = 5.0;
-      minY2 = 3.5;
+      maxY2 =
+        d3.max(data, function (d) {
+          return +d[yKey2];
+        }) + 0.2;
+      minY2 =
+        d3.min(data, function (d) {
+          return +d[yKey2];
+        }) + 3.2;
     }
 
     // Create Y scale
@@ -91,12 +146,14 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       .call(d3.axisLeft(yScale2))
       .attr("font-size", "10px")
       .call((g) =>
-        g.append("text")
-        .attr("x", 0)
-        .attr("y", margin.top - 20)
-        .attr("fill", "black")
-        .attr("text-anchor", "end")
-        .text(correct_label));
+        g
+          .append("text")
+          .attr("x", 0)
+          .attr("y", margin.top - 20)
+          .attr("fill", "black")
+          .attr("text-anchor", "end")
+          .text(correct_label)
+      );
 
     const yTooltipOffset = 15;
 
@@ -107,37 +164,43 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       .attr("id", "tooltip3")
       .style("opacity", 0)
       .attr("class", "tooltip")
-      .attr("viewBox", [0, 0, width, height]); 
+      .attr("viewBox", [0, 0, width, height]);
 
     // Mouseover event handler
     let mouseover = function (event, d) {
       activeWord = d["word"];
       if (rarity) {
         tooltip
-        .html(
-          "Date: " +
-            d[xKey2] +
-            "<br> Rarity: " +
-            d["word_rarity"] +
-            "<br> Part of Speech: " +
-            d["part_of_speech"])
-        .style("opacity", 1);
-        } else {
-          tooltip
+          .html(
+            "Date: " +
+              d[xKey2] +
+              "<br> Rarity: " +
+              d["word_rarity"] +
+              "<br> Part of Speech: " +
+              d["part_of_speech"]
+          )
+          .style("opacity", 1);
+      } else {
+        tooltip
           .html(
             "Date: " +
               d[xKey2] +
               "<br> Average Number of Tries: " +
-              d["avg_num_of_tries"])
+              d["avg_num_of_tries"]
+          )
           .style("opacity", 1);
-        }
+      }
 
       d3.selectAll(".word_" + activeWord)
         .transition()
-        .style("text-shadow", "-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000");
+        .style(
+          "text-shadow",
+          "-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000"
+        );
 
-      d3.selectAll(".bar_"+activeWord)
-        .transition().style("outline", "0.5px solid black");
+      d3.selectAll(".bar_" + activeWord)
+        .transition()
+        .style("outline", "0.5px solid black");
 
       updateAnnotation(activeWord);
     };
@@ -156,8 +219,9 @@ let drawBarChart = function (rarity, bar_chart_svg) {
         .transition()
         .style("text-shadow", "none");
 
-      d3.selectAll(".bar_"+activeWord)
-        .transition().style("outline", "none");
+      d3.selectAll(".bar_" + activeWord)
+        .transition()
+        .style("outline", "none");
     };
 
     // Add points

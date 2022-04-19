@@ -45,10 +45,17 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                           .attr("fill", "black")
                           .attr("text-anchor", "end")
                           .text("Date"));
+                      
+        maxY1 = 2302 + // added padding to make sure max shows up, and making max a nice number (18000)
+                d3.max(data, function (d) {
+                  return +d[yKey1];
+                });
+        minY1 = d3.min(data, function (d) {
+                  return +d[yKey1];
+                });
         
-        // TODO: get rid of hard coding                  
-        maxY1 = 18000;
-        minY1 = 0;
+        console.log("maxy1 " + maxY1)     
+        console.log("miny1 " + minY1)       
 
         // Create Y scale
         y1 = d3.scaleLinear()
