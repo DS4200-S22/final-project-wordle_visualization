@@ -1,13 +1,13 @@
 let updatePieChart = function(word) {
 
-    d3.select("#pie-chart").selectAll("*").remove();
-
     d3.csv("data/composite_wordle_data.csv").then((data) => {
         const width = 300,
         height = 300,
         margin = 70;
         const radius = Math.min(width, height) / 2 - margin;
 
+        let pieChart = d3.select("#pie-chart");
+        pieChart.selectAll("*").remove();
         pieChart = d3
             .select("#pie-chart")
             .append("svg")
