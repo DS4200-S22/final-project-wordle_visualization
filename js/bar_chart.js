@@ -155,41 +155,9 @@ let drawBarChart = function (rarity, bar_chart_svg) {
           .text(correct_label)
       );
 
-    const yTooltipOffset = 15;
-
-    // Adds a tooltip with the information
-    let tooltip = d3
-      .select("#bar-chart")
-      .append("div")
-      .attr("id", "tooltip3")
-      .style("opacity", 0)
-      .attr("class", "tooltip")
-      .attr("viewBox", [0, 0, width, height]);
-
     // Mouseover event handler
     let mouseover = function (event, d) {
       activeWord = d["word"];
-      if (rarity) {
-        tooltip
-          .html(
-            "Date: " +
-              d[xKey2] +
-              "<br> Rarity: " +
-              d["word_rarity"] +
-              "<br> Part of Speech: " +
-              d["part_of_speech"]
-          )
-          .style("opacity", 1);
-      } else {
-        tooltip
-          .html(
-            "Date: " +
-              d[xKey2] +
-              "<br> Average Number of Tries: " +
-              d["avg_num_of_tries"]
-          )
-          .style("opacity", 1);
-      }
 
       d3.selectAll(".word_" + activeWord)
         .transition()
@@ -207,16 +175,8 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       drawWordArt(activeWord);
     };
 
-    // Mouse moving event handler
-    let mousemove = function (event) {
-      tooltip
-        .style("left", event.pageX + "px")
-        .style("top", event.pageY + yTooltipOffset + "px");
-    };
-
     // Mouseout event handler
     let mouseleave = function () {
-      tooltip.style("opacity", 0);
       d3.selectAll(".word_" + activeWord)
         .transition()
         .style("text-shadow", "none");
@@ -227,7 +187,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
     };
 
     // Add points
-    let myRects = bar_chart_svg
+    bar_chart_svg
       .selectAll(".bar")
       .data(data)
       .enter()
@@ -265,7 +225,6 @@ let drawBarChart = function (rarity, bar_chart_svg) {
         }
       })
       .on("mouseover", mouseover)
-      .on("mousemove", mousemove)
       .on("mouseleave", mouseleave);
   });
 };

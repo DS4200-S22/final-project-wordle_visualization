@@ -64,33 +64,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                           .attr("fill", "black")
                           .attr("text-anchor", "end")
                           .text("Number of Players"));
-    
-        // to make sure there is an offset with the tooltip
-        const yTooltipOffset1 = 15; 
-    
-        // Adds a tooltip with the information
-        let tooltip1 = d3.select("#line-chart") 
-                        .append("div") 
-                        .attr('id', "tooltip") 
-                        .style("opacity", 0) 
-                        .attr("class", "tooltip");
-    
-        // Mouseover event handler
-        let mouseover = function(event, d) {
-                tooltip1.html("Date: " + d[xKey1] + "<br> Number of Players: " + d[yKey1] + "<br>")
-                        .style("opacity", 1);
-        };
-    
-        // Mouse moving event handler
-        let mousemove = function(event) {
-                tooltip1.style("left", (event.pageX)+"px") 
-                        .style("top", (event.pageY + yTooltipOffset1) +"px");
-        };
-    
-        // Mouseout event handler
-        let mouseleave = function() { 
-                tooltip1.style("opacity", 0);
-        };
         
         // Add points
         myPoints = svg.selectAll("circle")
@@ -102,10 +75,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         .attr("cy", (d) => y1(d[yKey1]))
                         .attr("r", 5)
                         .style("fill", "black")
-                        .style("opacity", 0.40)
-                        .on("mouseover", mouseover) 
-                        .on("mousemove", mousemove)
-                        .on("mouseleave", mouseleave);
+                        .style("opacity", 0.40);
 
         // adding a line's curve to the line chart
         line = d3.line()
