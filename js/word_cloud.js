@@ -27,14 +27,20 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
     // Create an array of sizes based off number of tries
     num_tries = data.map(function(d) {return d.avg_num_of_tries});
+    num_tries = num_tries.filter(tries => tries > 0);
     let min_tries = d3.min(num_tries);
     let max_tries = d3.max(num_tries);
-    let tries_size_scale = d3.scaleSqrt()
+
+    console.log("min tries: " + min_tries);
+    console.log("max tries: " + max_tries);
+    let tries_size_scale = d3.scaleLinear()
       .domain([min_tries, max_tries])
-      .range([15, 90]);
+      .range([15, 60]);
     tries_sizes = num_tries.map(function(d) {
       return Math.ceil(tries_size_scale(d) / 10) * 4;
     });
+
+    console.log(tries_sizes);  
 
     // Create an array of JSON for the word and the size
     // according to rarity or performance
@@ -42,38 +48,20 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     let wordToNum = new Map();
     for(let i = 0; i < data.length; i++) {
       let current_size = rarity ? data[i].rarity * 10 : tries_sizes[i];
+      current_size = current_size < 8 ? 8 : current_size;
       words.push({
         word: data[i].word,
         size: current_size});
       wordToNum.set(data[i].word, i);
     }
 
-    const yTooltipOffset = 15; 
-
-    // Adds a tooltip with the information
-    let tooltip = d3.select("#word-cloud") 
-                    .append("div") 
-                    .attr('id', "tooltip3") 
-                    .style("opacity", 0) 
-                    .attr("class", "tooltip")
-                    .attr("viewBox", [0, 0, width, height]); ;
+    console.log(words);
 
     // Mouseover event handler
     let mouseover = function(event, d) {
       activeWord = d.text;
       let wordObject = data.filter(function(d) { 
         return d["word"].localeCompare(activeWord) == 0 })[0];
-
-      if (rarity) {
-        tooltip.html("Relative Frequency: " + wordObject.frequency
-        + "<br> Word Rarity: " + wordObject.rarity)
-          .style("opacity", 1);
-      } else {
-        tooltip.html(
-          "Date: " + wordObject.date
-          + "<br> Average Number of Tries: " + wordObject.avg_num_of_tries)
-          .style("opacity", 1);
-      }
 
       d3.selectAll(".bar_"+activeWord)
       .transition().style("outline", "0.5px solid black");
@@ -86,25 +74,17 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       drawWordArt(d.text);
     };
 
-    // Mouse moving event handler
-    let mousemove = function(event) {
-    tooltip.style("left", (event.pageX)+"px") 
-            .style("top", (event.pageY + yTooltipOffset) +"px");
-    };
-
     // Mouseout event handler
     let mouseleave = function() { 
-    tooltip.style("opacity", 0);
-    d3.selectAll(".bar_"+activeWord)
-    .transition().style('outline','none')
-
-    d3.selectAll(".word_"+activeWord)
-    .transition().style("text-shadow", "none");
-    };
-
+      d3.selectAll(".bar_"+activeWord)
+      .transition().style('outline','none')
+  
+      d3.selectAll(".word_"+activeWord)
+      .transition().style("text-shadow", "none");
+    };  
 
     let layout = d3.layout.cloud()
-      .size([width,height])
+      .size([500,500])
       .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
       .padding(6)
       .rotate(function() { return 0;})
@@ -137,8 +117,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
         })
         .text(function(d) {return d.text})
-        .on("mouseover", mouseover) 
-        .on("mousemove", mousemove)
+        .on("mouseover", mouseover)
         .on("mouseleave", mouseleave);
     }
   });
