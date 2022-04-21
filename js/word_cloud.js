@@ -47,7 +47,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     let words = [];
     let wordToNum = new Map();
     for(let i = 0; i < data.length; i++) {
-      let current_size = rarity ? data[i].rarity * 10 : tries_sizes[i];
+      let current_size = rarity ? data[i].rarity * 10 : tries_sizes[i] * 2;
       current_size = current_size < 8 ? 8 : current_size;
       words.push({
         word: data[i].word,
