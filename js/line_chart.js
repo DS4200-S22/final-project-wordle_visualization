@@ -79,9 +79,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                 d = data[16];
                 yVal = d[yKey1];
                 xVal = d[xKey1];
-
-                console.log(d[yKey1]);
-                console.log("here it is");
                 myAcPoint = svg.selectAll("circles")
                                 .data(data)
                                 .enter()
@@ -138,12 +135,10 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         
                         if (isBrushed(extent, x1(parseTime(d[xKey1])), y1(d[yKey1]))) {
                                 let searchBarQuery = ["[class^='bar_", d[wordKey], "']"];
-                                // console.log(searchBarQuery.join(""));
                                 d3.selectAll(searchBarQuery.join(""))
                                 .style("opacity", 1.0);
 
                                 let searchCloudQuery = ["[class^='word_", d[wordKey], "']"];
-                                // console.log(searchCloudQuery.join(""));
                                 d3.selectAll(searchCloudQuery.join(""))
                                 .style("opacity", 1.0);
                                 return true
