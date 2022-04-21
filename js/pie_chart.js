@@ -1,7 +1,7 @@
 let updatePieChart = function(word) {
 
     d3.csv("data/composite_wordle_data.csv").then((data) => {
-        const width = 300,
+        const width = 350,
         height = 300,
         margin = 70;
         const radius = Math.min(width, height) / 2 - margin;
@@ -57,8 +57,29 @@ let updatePieChart = function(word) {
         .selectAll("slices")
         .data(data_ready)
         .join("text")
+        .attr("dy", "0em")
         .text(function (d) {
-            return d.data[1];
+            console.log(d.index);
+            return (d.index + 2) + " guesses:";
+        })
+        .attr("transform", function (d) {
+            let c = arcGenerator.centroid(d);
+            let x = c[0];
+            let y = c[1];
+            let h = Math.sqrt(x * x + y * y);
+            let labelr = radius + 20;
+            return "translate(" + (x / h) * labelr + "," + (y / h) * labelr + ")";
+        })
+        .style("text-anchor", "middle")
+        .style("font-size", 9);
+
+        pieChart
+        .selectAll("slices")
+        .data(data_ready)
+        .join("text")
+        .attr("dy", "1em")
+        .text(function (d) {
+            return Math.floor((d.data[1] / wordObject.number_of_players) * 100) + "%";
         })
         .attr("transform", function (d) {
             let c = arcGenerator.centroid(d);
