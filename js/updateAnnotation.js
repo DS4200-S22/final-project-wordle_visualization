@@ -12,7 +12,6 @@ updateAnnotation = function(word) {
   displayAnnotation += ("<br>Part of Speech: " + wordObject.part_of_speech);
   displayAnnotation += ("<br>Definition: " + wordObject.definition);
   displayAnnotation += ("<br>Rarity: " + wordObject.rarity);
-  displayAnnotation += ("<br>Average Number of Tries: " + wordObject.avg_num_of_tries);
   annotation.html(displayAnnotation)
     .style("opacity", 1);
   })
