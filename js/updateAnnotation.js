@@ -11,7 +11,7 @@ updateAnnotation = function(word) {
   displayAnnotation += ("<br>Date: " + wordObject.date);
   displayAnnotation += ("<br>Part of Speech: " + wordObject.part_of_speech);
   displayAnnotation += ("<br>Definition: " + wordObject.definition);
-  displayAnnotation += ("<br>Rarity: " + wordObject.rarity);
+  displayAnnotation += ("<br>Commonness (out of 5): " + wordObject.rarity);
   annotation.html(displayAnnotation)
     .style("opacity", 1);
   })
