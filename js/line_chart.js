@@ -72,10 +72,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         .attr("cy", (d) => y1(d[yKey1]))
                         .attr("r", 5)
                         .style("fill", "black")
-                        .style("opacity", 0.40)
-                        .on("mouseover", mouseover) 
-                        .on("mousemove", mousemove)
-                        .on("mouseleave", mouseleave);
+                        .style("opacity", 0.40);
             
         // Add new york times acquisition
         if ((d) => d.wordle_id == 226){
