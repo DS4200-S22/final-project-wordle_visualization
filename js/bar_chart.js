@@ -173,7 +173,6 @@ let drawBarChart = function (rarity, bar_chart_svg) {
 
       updateAnnotation(activeWord);
       updatePieChart(activeWord);
-      drawWordArt(activeWord);
     };
 
     // Mouseout event handler

@@ -30,9 +30,6 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     num_tries = num_tries.filter(tries => tries > 0);
     let min_tries = d3.min(num_tries);
     let max_tries = d3.max(num_tries);
-
-    console.log("min tries: " + min_tries);
-    console.log("max tries: " + max_tries);
     let tries_size_scale = d3.scaleLinear()
       .domain([min_tries, max_tries])
       .range([15, 60]);
@@ -40,14 +37,12 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       return Math.ceil(tries_size_scale(d) / 10) * 4;
     });
 
-    console.log(tries_sizes);  
-
     // Create an array of JSON for the word and the size
     // according to rarity or performance
     let words = [];
     let wordToNum = new Map();
     for(let i = 0; i < data.length; i++) {
-      let current_size = rarity ? data[i].rarity * 10 : tries_sizes[i];
+      let current_size = rarity ? data[i].rarity * 10 : tries_sizes[i] * 2;
       current_size = current_size < 8 ? 8 : current_size;
       words.push({
         word: data[i].word,
@@ -55,7 +50,6 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       wordToNum.set(data[i].word, i);
     }
 
-    console.log(words);
 
     // Mouseover event handler
     let mouseover = function(event, d) {
@@ -71,7 +65,6 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
       updateAnnotation(d.text);
       updatePieChart(d.text);
-      drawWordArt(d.text);
     };
 
     // Mouseout event handler
@@ -102,13 +95,36 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
         .attr("class", (d) => "word_" + d.text)
         .style("font-size", (d) => d.size)
         .style("fill", function(d,i){ 
-          if (data[i].rarity_size == 1) {
-            return '#000000'; 
-          } else if (data[i].rarity_size == 2) {
-            return '#cab558';
+          dataRow = data[wordToNum.get(d.text)];
+          if (rarity) {
+            // Color by performance
+            let avgNumTries = dataRow.avg_num_of_tries;
+            console.log(d.text + " " + dataRow.word);
+            if (avgNumTries < 4.0) {
+              return "#6aaa64";
+            } else if (avgNumTries >= 4.0 && avgNumTries < 4.5) {
+              return "#cab558";
+            } else {
+              return "black";
+            }
           } else {
-            return '#6aaa64';
+            // Color by rarity
+            let wordRarity = dataRow.rarity;
+            if (wordRarity < 1.5) {
+              return "#6aaa64";
+            } else if (wordRarity >= 1.5 && wordRarity < 2.75) {
+              return "#cab558";
+            } else {
+              return "black";
+            }
           }
+          // if (data[i].rarity_size == 1) {
+          //   return '#000000'; 
+          // } else if (data[i].rarity_size == 2) {
+          //   return '#cab558';
+          // } else {
+          //   return '#6aaa64';
+          // }
         })
         .attr("text-anchor", "middle")
         .style("font-family", "Open Sans")
