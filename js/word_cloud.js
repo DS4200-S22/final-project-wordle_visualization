@@ -74,6 +74,15 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       drawWordArt(d.text);
     };
 
+    // Mouseout event handler
+    let mouseleave = function() { 
+      d3.selectAll(".bar_"+activeWord)
+      .transition().style('outline','none')
+  
+      d3.selectAll(".word_"+activeWord)
+      .transition().style("text-shadow", "none");
+    };  
+
     let layout = d3.layout.cloud()
       .size([500,500])
       .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
@@ -108,8 +117,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
         })
         .text(function(d) {return d.text})
-        .on("mouseover", mouseover) 
-        .on("mousemove", mousemove)
+        .on("mouseover", mouseover)
         .on("mouseleave", mouseleave);
     }
   });

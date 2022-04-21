@@ -61,7 +61,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                           .attr("fill", "black")
                           .attr("text-anchor", "end")
                           .text("Number of Players"));
-  
         
         // Add points
         myPoints = svg.selectAll("circle")
@@ -73,10 +72,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         .attr("cy", (d) => y1(d[yKey1]))
                         .attr("r", 5)
                         .style("fill", "black")
-                        .style("opacity", 0.40)
-                        .on("mouseover", mouseover) 
-                        .on("mousemove", mousemove)
-                        .on("mouseleave", mouseleave);
+                        .style("opacity", 0.40);
 
         // adding a line's curve to the line chart
         line = d3.line()
