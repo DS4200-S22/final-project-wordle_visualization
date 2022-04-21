@@ -1,4 +1,4 @@
-let updateAnnotation = function(word) {
+updateAnnotation = function(word) {
   
   d3.csv("data/composite_wordle_data.csv").then((data) => {
   let wordObject = data.filter(function(d) { 
