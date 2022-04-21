@@ -203,6 +203,8 @@ let drawBarChart = function (rarity, bar_chart_svg) {
         .style("outline", "0.5px solid black");
 
       updateAnnotation(activeWord);
+      updatePieChart(activeWord);
+      drawWordArt(activeWord);
     };
 
     // Mouse moving event handler

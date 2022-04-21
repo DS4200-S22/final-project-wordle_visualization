@@ -54,8 +54,8 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                   return +d[yKey1];
                 });
         
-        console.log("maxy1 " + maxY1)     
-        console.log("miny1 " + minY1)       
+        // console.log("maxy1 " + maxY1)     
+        // console.log("miny1 " + minY1)       
 
         // Create Y scale
         y1 = d3.scaleLinear()
@@ -103,7 +103,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
 
         // List of groups = header of the csv files
         let keys = data.columns.slice(14)
-        console.log(keys);
+        // console.log(keys);
 
         //stack the data
         let stackedData = d3.stack().keys(keys)(data)
@@ -179,12 +179,12 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         
                         if (isBrushed(extent, x1(parseTime(d[xKey1])), y1(d[yKey1]))) {
                                 let searchBarQuery = ["[class^='bar_", d[wordKey], "']"];
-                                console.log(searchBarQuery.join(""));
+                                // console.log(searchBarQuery.join(""));
                                 d3.selectAll(searchBarQuery.join(""))
                                 .style("opacity", 1.0);
 
                                 let searchCloudQuery = ["[class^='word_", d[wordKey], "']"];
-                                console.log(searchCloudQuery.join(""));
+                                // console.log(searchCloudQuery.join(""));
                                 d3.selectAll(searchCloudQuery.join(""))
                                 .style("opacity", 1.0);
                                 return true

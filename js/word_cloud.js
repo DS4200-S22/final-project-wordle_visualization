@@ -22,12 +22,6 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
   let activeWord;
   d3.csv("data/composite_wordle_data.csv").then((data) => {
 
-
-    let dateTest = data.filter(function(d) { 
-      return d["word"] === "choke" })[0];
-    console.log("wins_in_2", dateTest.wins_in_5);
-
-
     const height = 350;
     const width = 450;
 
@@ -67,7 +61,6 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     // Mouseover event handler
     let mouseover = function(event, d) {
       activeWord = d.text;
-      console.log("active word is", d.text);
       let wordObject = data.filter(function(d) { 
         return d["word"].localeCompare(activeWord) == 0 })[0];
 
@@ -89,6 +82,8 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       .transition().style("text-shadow", "-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000");
 
       updateAnnotation(d.text);
+      updatePieChart(d.text);
+      drawWordArt(d.text);
     };
 
     // Mouse moving event handler

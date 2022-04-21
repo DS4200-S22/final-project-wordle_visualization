@@ -52,8 +52,6 @@ p2 {
 }
 
 #annotation {
-  max-width: 400px;
-  min-height: 400px;
   max-height: 400px;
   font-size: 20px;
 }
@@ -94,6 +92,19 @@ p2 {
   /* background-color: beige; */
 
   /* outline: solid; */
+}
+
+#pie-chart {
+  flex: 1;
+  max-height: 550px;
+  max-width: 580px;
+  align-items: center;
+}
+
+#word-art {
+  flex: 1;
+  align-items: center;
+  outline: solid;
 }
 
 /* TOGGLE STYLING */
