@@ -16,13 +16,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         xKey1 = "date";
         wordKey = "word";
         yKey1 = "number_of_players";
-        yKey2 = "wins_in_1";
-        yKey3 = "wins_in_2";
-        yKey4 = "wins_in_3";
-        yKey5 = "wins_in_4";
-        yKey6 = "wins_in_5";
-        yKey7 = "wins_in_6";
-    
+
         // Find max and min x
         let parseTime = d3.timeParse("%m/%d/%Y");
         let maxX1 = d3.max(data, (d) => { return parseTime(d[xKey1]); });
@@ -54,9 +48,6 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                   return +d[yKey1];
                 });
         
-        // console.log("maxy1 " + maxY1)     
-        // console.log("miny1 " + minY1)       
-
         // Create Y scale
         y1 = d3.scaleLinear()
                 .domain([minY1, maxY1])
@@ -100,26 +91,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         let mouseleave = function() { 
                 tooltip1.style("opacity", 0);
         };
-
-        // List of groups = header of the csv files
-        let keys = data.columns.slice(14)
-        // console.log(keys);
-
-        //stack the data
-        let stackedData = d3.stack().keys(keys)(data)
-
-        // Add the area
-        svg.append("path")
-                .datum(stackedData)
-                .enter()
-                .style("fill", "#a6cca0")
-                .attr("fill-opacity", 1)
-                .attr("g", d3.area()
-                        .x(function(d) { return x1(parseTime(d[xKey1])) })
-                        .y0(function(d) {0})
-                        .y1(function(d) { return y1(d[yKey1]) }))
-                .attr("stroke", "black");
-
+        
         // Add points
         myPoints = svg.selectAll("circle")
                         .data(data)
@@ -134,7 +106,7 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         .on("mouseover", mouseover) 
                         .on("mousemove", mousemove)
                         .on("mouseleave", mouseleave);
-    
+
         // adding a line's curve to the line chart
         line = d3.line()
                 .x((d) => x1(parseTime(d[xKey1]))) 
