@@ -27,14 +27,20 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
     // Create an array of sizes based off number of tries
     num_tries = data.map(function(d) {return d.avg_num_of_tries});
+    num_tries = num_tries.filter(tries => tries > 0);
     let min_tries = d3.min(num_tries);
     let max_tries = d3.max(num_tries);
-    let tries_size_scale = d3.scaleSqrt()
+
+    console.log("min tries: " + min_tries);
+    console.log("max tries: " + max_tries);
+    let tries_size_scale = d3.scaleLinear()
       .domain([min_tries, max_tries])
-      .range([15, 90]);
+      .range([15, 60]);
     tries_sizes = num_tries.map(function(d) {
       return Math.ceil(tries_size_scale(d) / 10) * 4;
     });
+
+    console.log(tries_sizes);  
 
     // Create an array of JSON for the word and the size
     // according to rarity or performance
@@ -42,11 +48,14 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     let wordToNum = new Map();
     for(let i = 0; i < data.length; i++) {
       let current_size = rarity ? data[i].rarity * 10 : tries_sizes[i];
+      current_size = current_size < 8 ? 8 : current_size;
       words.push({
         word: data[i].word,
         size: current_size});
       wordToNum.set(data[i].word, i);
     }
+
+    console.log(words);
 
     // Mouseover event handler
     let mouseover = function(event, d) {
@@ -76,7 +85,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
 
     let layout = d3.layout.cloud()
-      .size([width,height])
+      .size([500,500])
       .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
       .padding(6)
       .rotate(function() { return 0;})
