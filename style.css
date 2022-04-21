@@ -55,12 +55,10 @@ p2 {
   max-height: 400px;
   font-size: 20px;
   min-width:  265px;
+  max-width: 265px;;
   text-align: left;
 }
 
-#annotation {
-  min-width: 265px;
-}
 
 #legends {
   flex-direction: column;
@@ -103,7 +101,7 @@ p2 {
 #pie-chart {
   flex: 1;
   max-height: 550px;
-  max-width: 580px;
+  max-width: 250px;
   align-items: center;
 }
 
