@@ -236,7 +236,14 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       .attr("x", (d, i) => xScale2(parseTime(d[xKey1])))
       .attr("y", (d) => yScale2(d[yKey2]))
       .attr("width", 4)
-      .attr("height", (d) => height - margin.bottom - yScale2(d[yKey2]))
+      .attr("height", function (d) {
+        let barHeight = height - margin.bottom - yScale2(d[yKey2]);
+        if (barHeight > 0) {
+          return barHeight;
+        } else {
+          return 0;
+        }
+      })
       .style("opacity", 1)
       .style("fill", function (d) {
         if (!rarity) {
