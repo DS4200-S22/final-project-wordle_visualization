@@ -38,7 +38,7 @@ let updatePieChart = function(word) {
         }).sort(null);
         const data_ready = pie(Object.entries(pieData));
 
-        const arcGenerator = d3.arc().innerRadius(0).outerRadius(radius);
+        const arcGenerator = d3.arc().innerRadius(50).outerRadius(radius);
 
         pieChart
         .selectAll('slices')
@@ -70,5 +70,17 @@ let updatePieChart = function(word) {
         })
         .style("text-anchor", "middle")
         .style("font-size", 9);
+
+        pieChart
+        .append("text")
+        .attr("text-anchor", "middle")
+        .attr("dy", "0em")
+        .text("Average:");
+
+        pieChart
+        .append("text")
+        .attr("text-anchor", "middle")
+        .attr("dy", "1em")
+        .text(wordObject.avg_num_of_tries);
     })
 }
