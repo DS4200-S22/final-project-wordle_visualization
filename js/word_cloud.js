@@ -29,7 +29,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
     num_tries = data.map(function(d) {return d.avg_num_of_tries});
     let min_tries = d3.min(num_tries);
     let max_tries = d3.max(num_tries);
-    let tries_size_scale = d3.scaleSqrt()
+    let tries_size_scale = d3.scaleLinear()
       .domain([min_tries, max_tries])
       .range([15, 90]);
     tries_sizes = num_tries.map(function(d) {
