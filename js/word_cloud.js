@@ -1,5 +1,7 @@
 let drawWordCloud = function(rarity, word_cloud_svg) {
 
+
+  // Word cloud legend
   let legendSvg = d3.select("#cloud-legend");
   legendSvg.selectAll("*").remove();
   let cloudKeys;
@@ -19,7 +21,10 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
   legendSvg.append("text").attr("x", 25).attr("y", 100).text(cloudKeys[2]).style("font-size", "15px").attr("alignment-baseline","middle");
 
 
+  // the current hovered word for brushing
   let activeWord;
+
+  // Read the data from the local csv file
   d3.csv("data/composite_wordle_data.csv").then((data) => {
 
     const height = 350;
@@ -76,6 +81,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       .transition().style("text-shadow", "none");
     };  
 
+    // Call the d3 cloud api to get position and size data
     let layout = d3.layout.cloud()
       .size([500,500])
       .words(words.map(function(d) { return {text: d.word, size:d.size}; }))
@@ -86,6 +92,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
     layout.start();
 
+    // Use the cloud api results to draw the words
     function draw(words) {
       word_cloud_svg.append("g")
         .attr("transform", "translate(" + (layout.size()[0] / 2 - 100) + "," + (layout.size()[1] / 2 - 75) + ")")
@@ -99,7 +106,6 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
           if (rarity) {
             // Color by performance
             let avgNumTries = dataRow.avg_num_of_tries;
-            console.log(d.text + " " + dataRow.word);
             if (avgNumTries < 4.0) {
               return "#6aaa64";
             } else if (avgNumTries >= 4.0 && avgNumTries < 4.5) {

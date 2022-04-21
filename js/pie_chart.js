@@ -1,13 +1,16 @@
 let updatePieChart = function(word) {
-
+    // Read in the data from the local csv file
     d3.csv("data/composite_wordle_data.csv").then((data) => {
         const width = 350,
         height = 300,
         margin = 70;
         const radius = Math.min(width, height) / 2 - margin;
 
+        // remove the previous pie chart
         let pieChart = d3.select("#pie-chart");
         pieChart.selectAll("*").remove();
+
+        // append a new pie chart
         pieChart = d3
             .select("#pie-chart")
             .append("svg")
@@ -26,6 +29,7 @@ let updatePieChart = function(word) {
             in5: wordObject.wins_in_5,
             in6: wordObject.wins_in_6};
 
+
         const color = d3.scaleOrdinal()
                         .range(["#6aaa64",
                         "#90bf89",
@@ -33,6 +37,7 @@ let updatePieChart = function(word) {
                         "#daead7",
                         "#ffffff"]);
 
+        // call the d3 pie API to get the sizing  data
         const pie = d3.pie().value(function(d) {
             return d[1];
         }).sort(null);
@@ -40,6 +45,7 @@ let updatePieChart = function(word) {
 
         const arcGenerator = d3.arc().innerRadius(50).outerRadius(radius);
 
+        // draw the pie chart
         pieChart
         .selectAll('slices')
         .data(data_ready)
@@ -52,7 +58,7 @@ let updatePieChart = function(word) {
         .style("stroke-width", "0.5px")
         .style("opacity", 1.0);
 
-
+        // add annotations for the chart
         pieChart
         .selectAll("slices")
         .data(data_ready)
@@ -72,6 +78,7 @@ let updatePieChart = function(word) {
         .style("text-anchor", "middle")
         .style("font-size", 9);
 
+        // add the percent of players
         pieChart
         .selectAll("slices")
         .data(data_ready)

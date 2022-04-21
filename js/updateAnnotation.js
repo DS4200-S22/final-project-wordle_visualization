@@ -1,3 +1,4 @@
+// This updates the annotation with statistics for the given word
 updateAnnotation = function(word) {
   
   d3.csv("data/composite_wordle_data.csv").then((data) => {
