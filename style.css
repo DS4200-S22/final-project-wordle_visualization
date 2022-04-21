@@ -51,9 +51,15 @@ p2 {
   max-width: 600px;
 }
 
-#annotation {
+#annotationBox {
   max-height: 400px;
   font-size: 20px;
+  min-width:  265px;
+  text-align: left;
+}
+
+#annotation {
+  min-width: 265px;
 }
 
 #legends {

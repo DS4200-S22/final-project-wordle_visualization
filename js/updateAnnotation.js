@@ -4,7 +4,7 @@ let updateAnnotation = function(word) {
   let wordObject = data.filter(function(d) { 
     return d["word"].localeCompare(word) == 0 })[0];
 
-  let annotation = d3.select("#annotationBox");
+  let annotation = d3.select("#annotation");
 
   let displayAnnotation = "";
   displayAnnotation += ("Date: " + wordObject.date);
