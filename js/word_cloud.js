@@ -55,36 +55,13 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       wordToNum.set(data[i].word, i);
     }
 
-<<<<<<< HEAD
     console.log(words);
-=======
-    const yTooltipOffset = 15; 
-
-    // Adds a tooltip with the information
-    let tooltip = d3.select("#word-cloud") 
-                    .append("div") 
-                    .attr('id', "tooltip3") 
-                    .style("opacity", 0) 
-                    .attr("class", "tooltip")
-                    .attr("viewBox", [0, 0, width, height]); ;
->>>>>>> cfd65779193eb159aeac218e49baef7c3673a7e8
 
     // Mouseover event handler
     let mouseover = function(event, d) {
       activeWord = d.text;
       let wordObject = data.filter(function(d) { 
         return d["word"].localeCompare(activeWord) == 0 })[0];
-
-      if (rarity) {
-        tooltip.html("Relative Frequency: " + wordObject.frequency
-        + "<br> Word Rarity: " + wordObject.rarity)
-          .style("opacity", 1);
-      } else {
-        tooltip.html(
-          "Date: " + wordObject.date
-          + "<br> Average Number of Tries: " + wordObject.avg_num_of_tries)
-          .style("opacity", 1);
-      }
 
       d3.selectAll(".bar_"+activeWord)
       .transition().style("outline", "0.5px solid black");
@@ -96,23 +73,6 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       updatePieChart(d.text);
       drawWordArt(d.text);
     };
-
-    // Mouse moving event handler
-    let mousemove = function(event) {
-    tooltip.style("left", (event.pageX)+"px") 
-            .style("top", (event.pageY + yTooltipOffset) +"px");
-    };
-
-    // Mouseout event handler
-    let mouseleave = function() { 
-    tooltip.style("opacity", 0);
-    d3.selectAll(".bar_"+activeWord)
-    .transition().style('outline','none')
-
-    d3.selectAll(".word_"+activeWord)
-    .transition().style("text-shadow", "none");
-    };
-
 
     let layout = d3.layout.cloud()
       .size([500,500])
