@@ -91,8 +91,8 @@ p2 {
 
 #bar-chart {
   flex: 1;
-  max-height: 550px;
   max-width: 580px;
+  min-height: 600px;
   /* background-color: beige; */
 
   /* outline: solid; */
