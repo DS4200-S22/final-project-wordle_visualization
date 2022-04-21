@@ -59,7 +59,6 @@ let updatePieChart = function(word) {
         .join("text")
         .attr("dy", "0em")
         .text(function (d) {
-            console.log(d.index);
             return (d.index + 2) + " guesses:";
         })
         .attr("transform", function (d) {

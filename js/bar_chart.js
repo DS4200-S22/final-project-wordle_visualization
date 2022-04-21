@@ -173,7 +173,6 @@ let drawBarChart = function (rarity, bar_chart_svg) {
 
       updateAnnotation(activeWord);
       updatePieChart(activeWord);
-      drawWordArt(activeWord);
     };
 
     // Mouseout event handler
@@ -193,7 +192,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
       .data(data)
       .enter()
       .append("rect")
-      .attr("class", (d) => "bar_" + d["word"])
+      .attr("id", (d) => "bar_" + d["word"])
       .attr("x", (d, i) => xScale2(parseTime(d[xKey1])))
       .attr("y", (d) => yScale2(d[yKey2]))
       .attr("width", 4)
