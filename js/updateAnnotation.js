@@ -7,7 +7,7 @@ updateAnnotation = function(word) {
   let annotation = d3.select("#annotationBox");
 
   let displayAnnotation = "";
-  displayAnnotation += ("Word: " + wordObject.word);
+  displayAnnotation += (`Word: <b>${wordObject.word}</b>`);
   displayAnnotation += ("<br>Date: " + wordObject.date);
   displayAnnotation += ("<br>Part of Speech: " + wordObject.part_of_speech);
   displayAnnotation += ("<br>Definition: " + wordObject.definition);
