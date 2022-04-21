@@ -83,11 +83,11 @@
       <p>Toggle the word cloud!</p>
       <div class = 'vis-holder' id="toggle">
         <label class="radio">
-          <input type="radio" name="vis-type" value="Rarity" checked="checked">
+          <input id="rarity-button" type="radio" name="vis-type" value="Rarity" checked="checked">
           <span>Rarity</span>
         </label>
         <label class="radio">
-          <input type="radio" name="vis-type" value="Attempts">
+          <input id="performance-button" type="radio" name="vis-type" value="Attempts">
           <span>Performance</span>
         </label>
       </div>
@@ -102,9 +102,17 @@
       </div>
     </div>
 
-    <div class='vis-holder' id="word-cloud"></div> 
-    <div class='vis-holder' id="bar-chart"></div>
-    <!-- <div class='vis-holder' id="word-art"></div> -->
+    <div class="container">
+      <div id="word-cloud-title">How common is my word?</div>
+      <br>
+      <div class='vis-holder' id="word-cloud"></div>
+    </div>
+    
+    <div class="container">
+      <div id="bar-chart-title">How well did people perform with this word?</div>
+      <br>
+      <div class='vis-holder' id="bar-chart"></div>
+    </div>
 
     <div class='vis-holder' id="pie-chart"></div>
   </div>

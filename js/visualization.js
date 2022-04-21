@@ -69,3 +69,13 @@ function configureToolTip() {
       .style("opacity", 1);
   }
 }
+
+// titles of word cloud/bar chart
+document.getElementById("rarity-button").onclick = function() {
+  document.getElementById("word-cloud-title").innerHTML = "How common is my word?"
+  document.getElementById("bar-chart-title").innerHTML = "How well did people perform with this word?"
+}
+document.getElementById("performance-button").onclick = function() {
+  document.getElementById("word-cloud-title").innerHTML = "How well did people perform with this word?"
+  document.getElementById("bar-chart-title").innerHTML = "How common is my word?"
+}

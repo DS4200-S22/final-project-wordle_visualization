@@ -41,7 +41,7 @@ p2 {
 
 #title-and-annotation {
   /* background-color: rgb(231, 212, 158); */
-  display:flex;
+  display: flex;
   /* flex-direction: row; */
   /* flex: 2; */
   /* outline: solid; */
@@ -65,7 +65,7 @@ p2 {
   max-width: 500px;
   max-height: 350px;
   border-radius: 5px;
-  padding:10px;
+  padding: 10px;
   /* justify-content: space-evenly; */
 }
 
@@ -113,7 +113,6 @@ p2 {
   max-height: 60px;
 }
 
-
 .word-highlighted {
   outline: 2px;
 }
@@ -133,7 +132,7 @@ label.radio {
   cursor: pointer;
 }
 label.radio input {
-  position:absolute;
+  position: absolute;
   top: 0;
   left: 0;
   visibility: hidden;
@@ -141,16 +140,16 @@ label.radio input {
 }
 label.radio span {
   padding: 7px 14px;
-  border: 2px solid #EEE;
+  border: 2px solid #eee;
   display: inline-block;
-  color: #009BA2;
+  color: #009ba2;
   border-radius: 3px;
   text-transform: uppercase;
   font-family: "Open Sans";
 }
 label.radio input:checked + span {
-  border-color: #009BA2;
-  color:rgb(2, 66, 47);
+  border-color: #009ba2;
+  color: rgb(2, 66, 47);
 }
 
 .selected {
@@ -161,4 +160,9 @@ label.radio input:checked + span {
 .notSelected {
   opacity: 0.5 !important;
   fill: blueviolet;
+}
+
+.container {
+  position: relative;
+  text-align: center;
 }
