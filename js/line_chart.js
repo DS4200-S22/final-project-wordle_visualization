@@ -134,21 +134,21 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
         function updateChart(brushEvent) {
 
                 let extent = brushEvent.selection;
-                d3.selectAll("[class^='bar_")
+                d3.selectAll("[id^='bar_")
                 .style("opacity", 0.25);
 
-                d3.selectAll("[class^='word_")
+                d3.selectAll("[id^='word_")
                 .style("opacity", 0.25);
 
                 // Gives bold outline to all points within the brush region in Scatterplot1
                 myPoints.classed("selected", function(d) {
                         
                         if (isBrushed(extent, x1(parseTime(d[xKey1])), y1(d[yKey1]))) {
-                                let searchBarQuery = ["[class^='bar_", d[wordKey], "']"];
+                                let searchBarQuery = ["[id^='bar_", d[wordKey], "']"];
                                 d3.selectAll(searchBarQuery.join(""))
                                 .style("opacity", 1.0);
 
-                                let searchCloudQuery = ["[class^='word_", d[wordKey], "']"];
+                                let searchCloudQuery = ["[id^='word_", d[wordKey], "']"];
                                 d3.selectAll(searchCloudQuery.join(""))
                                 .style("opacity", 1.0);
                                 return true
