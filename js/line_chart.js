@@ -73,6 +73,23 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         .attr("r", 5)
                         .style("fill", "black")
                         .style("opacity", 0.40);
+            
+        // Add new york times acquisition
+        if ((d) => d.wordle_id == 226){
+                d = data[16];
+                yVal = d[yKey1];
+                xVal = d[xKey1];
+                myAcPoint = svg.selectAll("circles")
+                                .data(data)
+                                .enter()
+                                .append("circle")
+                                .attr("id", (d) => d.wordle_id)
+                                .attr("cx", x1(parseTime(xVal)))
+                                .attr("cy", y1(yVal))
+                                .attr("r", 7)
+                                .style("stroke", "red")
+                                .style("opacity", 1);
+        }
 
         // adding a line's curve to the line chart
         line = d3.line()
@@ -118,12 +135,10 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                         
                         if (isBrushed(extent, x1(parseTime(d[xKey1])), y1(d[yKey1]))) {
                                 let searchBarQuery = ["[class^='bar_", d[wordKey], "']"];
-                                // console.log(searchBarQuery.join(""));
                                 d3.selectAll(searchBarQuery.join(""))
                                 .style("opacity", 1.0);
 
                                 let searchCloudQuery = ["[class^='word_", d[wordKey], "']"];
-                                // console.log(searchCloudQuery.join(""));
                                 d3.selectAll(searchCloudQuery.join(""))
                                 .style("opacity", 1.0);
                                 return true
