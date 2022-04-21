@@ -48,11 +48,32 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       wordToNum.set(data[i].word, i);
     }
 
+    const yTooltipOffset = 15; 
+
+    // Adds a tooltip with the information
+    let tooltip = d3.select("#word-cloud") 
+                    .append("div") 
+                    .attr('id', "tooltip3") 
+                    .style("opacity", 0) 
+                    .attr("class", "tooltip")
+                    .attr("viewBox", [0, 0, width, height]); ;
+
     // Mouseover event handler
     let mouseover = function(event, d) {
       activeWord = d.text;
       let wordObject = data.filter(function(d) { 
         return d["word"].localeCompare(activeWord) == 0 })[0];
+
+      if (rarity) {
+        tooltip.html("Relative Frequency: " + wordObject.frequency
+        + "<br> Word Rarity: " + wordObject.rarity)
+          .style("opacity", 1);
+      } else {
+        tooltip.html(
+          "Date: " + wordObject.date
+          + "<br> Average Number of Tries: " + wordObject.avg_num_of_tries)
+          .style("opacity", 1);
+      }
 
       d3.selectAll(".bar_"+activeWord)
       .transition().style("outline", "0.5px solid black");
@@ -65,8 +86,15 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       drawWordArt(d.text);
     };
 
+    // Mouse moving event handler
+    let mousemove = function(event) {
+    tooltip.style("left", (event.pageX)+"px") 
+            .style("top", (event.pageY + yTooltipOffset) +"px");
+    };
+
     // Mouseout event handler
     let mouseleave = function() { 
+    tooltip.style("opacity", 0);
     d3.selectAll(".bar_"+activeWord)
     .transition().style('outline','none')
 
@@ -109,7 +137,8 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
         })
         .text(function(d) {return d.text})
-        .on("mouseover", mouseover)
+        .on("mouseover", mouseover) 
+        .on("mousemove", mousemove)
         .on("mouseleave", mouseleave);
     }
   });

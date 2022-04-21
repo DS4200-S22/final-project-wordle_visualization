@@ -35,10 +35,6 @@ p2 {
   flex: 1;
 }
 
-#entire-holder {
-  /* background-color: beige; */
-}
-
 #title-and-annotation {
   /* background-color: rgb(231, 212, 158); */
   display: flex;
@@ -51,14 +47,10 @@ p2 {
   max-width: 600px;
 }
 
-#annotationBox {
+#annotation {
   max-height: 400px;
   font-size: 20px;
-  min-width:  265px;
-  max-width: 265px;;
-  text-align: left;
 }
-
 
 #legends {
   flex-direction: column;
@@ -101,7 +93,7 @@ p2 {
 #pie-chart {
   flex: 1;
   max-height: 550px;
-  max-width: 250px;
+  max-width: 580px;
   align-items: center;
 }
 
@@ -119,6 +111,17 @@ p2 {
 
 .word-highlighted {
   outline: 2px;
+}
+
+/* Tooltip class styling goes here */
+.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 10px;
+  font: 18px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
 }
 
 label.radio {

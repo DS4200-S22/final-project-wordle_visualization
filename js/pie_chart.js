@@ -11,7 +11,7 @@ let updatePieChart = function(word) {
         pieChart = d3
             .select("#pie-chart")
             .append("svg")
-            .attr("width", 200)
+            .attr("width", width)
             .attr("height", height)
             .attr("id", "pie-chart")
             .append("g")
