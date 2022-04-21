@@ -35,10 +35,6 @@ p2 {
   flex: 1;
 }
 
-#entire-holder {
-  /* background-color: beige; */
-}
-
 #title-and-annotation {
   /* background-color: rgb(231, 212, 158); */
   display: flex;
