@@ -57,10 +57,10 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
       let wordObject = data.filter(function(d) { 
         return d["word"].localeCompare(activeWord) == 0 })[0];
 
-      d3.selectAll(".bar_"+activeWord)
+      d3.selectAll("#bar_"+activeWord)
       .transition().style("outline", "0.5px solid black");
 
-      d3.selectAll(".word_"+activeWord)
+      d3.selectAll("#word_"+activeWord)
       .transition().style("text-shadow", "-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000");
 
       updateAnnotation(d.text);
@@ -69,10 +69,10 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
 
     // Mouseout event handler
     let mouseleave = function() { 
-      d3.selectAll(".bar_"+activeWord)
+      d3.selectAll("#bar_"+activeWord)
       .transition().style('outline','none')
   
-      d3.selectAll(".word_"+activeWord)
+      d3.selectAll("#word_"+activeWord)
       .transition().style("text-shadow", "none");
     };  
 
@@ -92,7 +92,7 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
         .selectAll("text")
         .data(words)
         .enter().append("text")
-        .attr("class", (d) => "word_" + d.text)
+        .attr("id", (d) => "word_" + d.text)
         .style("font-size", (d) => d.size)
         .style("fill", function(d,i){ 
           dataRow = data[wordToNum.get(d.text)];
@@ -118,13 +118,6 @@ let drawWordCloud = function(rarity, word_cloud_svg) {
               return "black";
             }
           }
-          // if (data[i].rarity_size == 1) {
-          //   return '#000000'; 
-          // } else if (data[i].rarity_size == 2) {
-          //   return '#cab558';
-          // } else {
-          //   return '#6aaa64';
-          // }
         })
         .attr("text-anchor", "middle")
         .style("font-family", "Open Sans")

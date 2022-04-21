@@ -160,14 +160,14 @@ let drawBarChart = function (rarity, bar_chart_svg) {
     let mouseover = function (event, d) {
       activeWord = d["word"];
 
-      d3.selectAll(".word_" + activeWord)
+      d3.select("#word_" + activeWord)
         .transition()
         .style(
           "text-shadow",
           "-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000"
         );
 
-      d3.selectAll(".bar_" + activeWord)
+      d3.select("#bar_" + activeWord)
         .transition()
         .style("outline", "0.5px solid black");
 
@@ -177,11 +177,11 @@ let drawBarChart = function (rarity, bar_chart_svg) {
 
     // Mouseout event handler
     let mouseleave = function () {
-      d3.selectAll(".word_" + activeWord)
+      d3.select("#word_" + activeWord)
         .transition()
         .style("text-shadow", "none");
 
-      d3.selectAll(".bar_" + activeWord)
+      d3.select("#bar_" + activeWord)
         .transition()
         .style("outline", "none");
     };
