@@ -187,7 +187,7 @@ let drawBarChart = function (rarity, bar_chart_svg) {
     };
 
     // Add points
-    bar_chart_svg
+    let myRects = bar_chart_svg
       .selectAll(".bar")
       .data(data)
       .enter()
