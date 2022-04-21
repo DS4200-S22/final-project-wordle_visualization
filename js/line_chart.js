@@ -115,6 +115,16 @@ d3.csv("data/composite_wordle_data.csv").then((data) => {
                 .on("start", clear)
                 .on("brush", updateChart));
 
+        // Add one dot in the legend for each name.
+        svg.selectAll("mylabels")
+                .append("text")
+                .attr("x", width)
+                .attr("y", height)
+                .style("fill", "red")
+                .text("1/31 NYT acquisition")
+                .attr("text-anchor", "middle")
+                .style("alignment-baseline", "right");
+        
         // Call to removes existing brushes 
         function clear() {
                 svg.call(brush.move, null);
