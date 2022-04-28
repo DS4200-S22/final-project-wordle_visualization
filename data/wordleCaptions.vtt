@@ -1,0 +1,85 @@
+WEBVTT
+Kind: captions
+Language: en
+
+1
+00:00:00.000 --> 00:00:07.000
+Hi everyone! Welcome to Wordle Wonders. 
+A visualization about Wordle users on Twitter.
+
+2
+00:00:08.000 --> 00:00:012.000
+As you’ll see here, this is our visualization
+
+3
+00:00:13.000 --> 00:00:17.000
+and at the top we have a line graph that shows
+the number of players with respect to each day. 
+
+4
+00:00:18.000 --> 00:00:23.000
+This line graph is brushable and it uses points
+and lines for the marks as well as height for the channels.
+
+5
+00:00:24.000 --> 00:00:29.000
+If we scroll down, we will see our two main 
+encodings which are a word cloud and a bar graph.
+
+6
+00:00:30.000 --> 00:00:36.000
+We chose a word cloud to pay homage to the Wordle 
+game and a bar graph to display trends over time.
+
+7
+00:00:37.000 --> 00:00:45.000
+On the left, you’ll see a toggle which shows what 
+the word cloud is currently displaying. 
+
+8
+00:00:46.000 --> 00:00:50.000
+And so, when you click rarity, the larger words 
+are the ones that are more frequent. 
+
+9
+00:00:51.000 --> 00:00:58.000
+So “other” is a very frequent word. And the bar graph 
+shows the average number of attempts for each day.
+
+10
+00:00:59.000 --> 00:01:06.000
+When you click the performance toggle, the word cloud 
+shows the average number of attempts with respect to size, 
+
+11
+00:01:07.000 --> 00:01:11.000
+and the bar graph shows the relative 
+word frequency with respect to time. 
+
+12
+00:01:12.000 --> 00:01:20.000
+If I hover over “swill” you’ll see its linked on the bar graph, 
+and this is a word that has a very high number of guesses because it’s quite large, 
+
+13
+00:01:21.000 --> 00:01:26.000
+and if you see the respective bar, 
+it has a very low relative word frequency. 
+
+14
+00:01:27.000 --> 00:01:35.000
+And on the top right, you’ll see a little annotation window, 
+describing a few statistics about the word you are currently hovering over,
+
+15
+00:01:36.000 --> 00:01:39.000
+such as the part of speech as well as the definition.
+
+16
+00:01:40.000 --> 00:01:45.000
+And what’s great about this visualization is that it allows you 
+to find different correlations about certain statistics 
+
+17
+00:01:46.000 --> 00:1:51.000
+about Wordle, and it allows you to learn more about the game! Thank you!
